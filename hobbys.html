@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <title>Thanh</title>
+</head>
+<body class="hobbys-page">
+    <!-- ===== NAV ===== -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                Thanh <span>Nguyen</span>
+            </div>
+
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-delay="100"><a href="index.html">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="200"><a href="profil.html">Profil</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="300"><a href="werdegang.html">Werdegang</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="400"><a href="hobbys.html">Hobbys</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="500"><a href="lernen.html">Lernen</a></div>
+            </div>
+
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="links">
+                <a href="index.html">Home</a>
+                <a href="profil.html">Profil</a>
+                <a href="werdegang.html">Werdegang</a>
+                <a href="hobbys.html">Hobbys</a>
+                <a href="lernen.html">Lernen</a>
+            </div>
+        </div>
+    </nav>
+
+        <!-- ===== HOBBYS ===== -->
+    <section class="hobbys-section">
+        <div class="hobbys-container">
+
+            <div class="hobbys-content">
+                <h1 class="hobbys-title" data-aos="fade-down" data-aos-delay="900">
+                    Meine <span>Hobbys</span>?
+                </h1>
+
+                <p class="hobbys-subtitle" data-aos="fade-up" data-aos-delay="1000">
+                    Klar!
+                </p>
+
+                <p class="hobbys-description" data-aos="fade-up" data-aos-delay="1500">
+                    Neuerdings habe ich HTML, CSS und JS für mich entdeckt und arbeite seit dem 10. April 2026 an dieser Seite.
+                    Aber das dokumentiere ich lieber dann bei „Lernen“.
+                    <br>
+                    Ich plane hier eine Galerie zu erstellen.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+        <!-- ===== SCRIPTS ===== -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 0
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
