@@ -744,7 +744,6 @@ nav::before {
     background: transparent;
 }
 
-/* optional: schöner Glow */
 .spotify-box iframe {
     box-shadow: 0 0 20px rgba(128, 0, 255, 0.25);
 }
@@ -785,7 +784,7 @@ nav::before {
     isolation: isolate;
 }
 
-/* atmender Rand */
+/* breath */
 .werdegang-container::before {
     content: "";
     position: absolute;
