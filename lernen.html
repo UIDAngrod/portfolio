@@ -15,6 +15,7 @@
             <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
                 Thanh <span>Nguyen</span>
             </div>
+
             <div class="links">
                 <div class="link" data-aos="fade-up" data-aos-delay="100"><a href="index.html">Home</a></div>
                 <div class="link" data-aos="fade-up" data-aos-delay="200"><a href="profil.html">Profil</a></div>
@@ -23,7 +24,7 @@
                 <div class="link" data-aos="fade-up" data-aos-delay="500"><a href="lernen.html">Lernen</a></div>
             </div>
 
-             <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -41,78 +42,128 @@
         </div>
     </nav>
 
-        <!-- ===== LERNEN ===== -->
+    <!-- ===== LERNEN ===== -->
     <section class="lernen-section">
         <div class="lernen-hero">
-            <h1 class="lernen-hero-title" data-aos="fade-down" data-aos-delay="900">
+            <h1 class="lernen-hero-title" data-aos="fade-down">
                 Gemeinsam <span>lernen</span>
             </h1>
-
-            <p class="lernen-hero-describe" data-aos="fade-up" data-aos-delay="1000">
+            <p class="lernen-hero-description" data-aos="fade-up">
                 Hier teste ich Funktionen in HTML, CSS und JS aus
             </p>
-
-            <p class="lernen-hero-subtitle" data-aos="fade-up" data-aos-delay="1500">
+            <p class="lernen-hero-subtitle" data-aos="fade-up">
                 Rausfinden, was HTML, CSS &amp; JS überhaupt ist.
             </p>
         </div>
-
         <div class="lernen-container">
 
+        <!-- HTML -->
+        <div class="lernen-box" data-aos="fade-up">
             <div class="lernen-row">
-                <div class="lernen-image" data-aos="zoom-in-right" data-aos-delay="300">
+                <div class="lernen-image">
                     <img src="images/img_html.png" alt="HTML Logo">
                 </div>
-                <div class="lernen-text" data-aos="fade-left" data-aos-delay="400">
+                <div class="lernen-text">
                     <h2 class="lernen-title">HTML</h2>
                     <p class="lernen-description">
                         HTML kann man sich wie das Skelett eines Menschen vorstellen.
-                        <br>
-                        Es bildet die grundlegende Struktur einer Webseite und definiert, welche Elemente vorhanden sind, zum Beispiel Überschriften, Texte und Bilder.
+                        Es bildet die grundlegende Struktur einer Webseite und definiert,
+                        welche Elemente vorhanden sind, zum Beispiel Überschriften, Texte und Bilder.
                     </p>
                 </div>
             </div>
+        </div>
 
+        <!-- CSS -->
+        <div class="lernen-box" data-aos="fade-up">
             <div class="lernen-row reverse">
-                <div class="lernen-text" data-aos="fade-right" data-aos-delay="400">
+                <div class="lernen-text">
                     <h2 class="lernen-title">CSS</h2>
                     <p class="lernen-description">
                         CSS ist für das Aussehen der Webseite zuständig.
-                        <br>
-                        Es bestimmt Farben, Abstände und Layout. Man könnte sagen: CSS ist wie die äussere Erscheinung oder das Design eines Körpers.
+                        Es bestimmt Farben, Abstände und Layout. Man könnte sagen:
+                        CSS ist wie die äussere Erscheinung oder das Design eines Körpers.
                     </p>
-                </div>
-                <div class="lernen-image" data-aos="zoom-in-left" data-aos-delay="300">
+                    </div>
+                <div class="lernen-image">
                     <img src="images/img_css.png" alt="CSS Logo">
                 </div>
             </div>
+        </div>
 
-            <div class="lernen-row">
-                <div class="lernen-image" data-aos="zoom-in-right" data-aos-delay="300">
-                    <img src="images/img_js.png" alt="JavaScript Logo">
+        <!-- JS -->
+        <div class="lernen-box" data-aos="fade-up">
+            <div class="lernen-row">                    <div class="lernen-image">
+                <img src="images/img_js.png" alt="JS Logo">
                 </div>
-                <div class="lernen-text" data-aos="fade-left" data-aos-delay="400">
+                <div class="lernen-text">
                     <h2 class="lernen-title">JavaScript</h2>
                     <p class="lernen-description">
-                        Was wäre also eine Fleischhülle ohne Reaktionen und Empfinden?
-                        <br>
-                        JavaScript bringt die Webseite zum Leben. Es sorgt für Interaktivität und Reaktionen, beispielsweise bei Klicks oder Animationen. Ohne JS wäre eine Webseite statisch.
+                         Was wäre also eine Fleischhülle ohne Reaktionen und Empfinden?
+                        JavaScript bringt die Webseite zum Leben. Es sorgt für Interaktivität
+                        und Reaktionen, beispielsweise bei Klicks oder Animationen.
+                        Ohne JS wäre eine Webseite statisch.
                     </p>
                 </div>
             </div>
+         </div>
+    </div>
+ </section>
 
-        </div>
+<section class="lernen-section">
 
-        <div class="lernen-animation-section">
-            <div class="profilanimation-box" data-aos="zoom-in" data-aos-delay="500">
-                <h2 class="profilanimation-box-h1">Erste Animation</h2>
+    <div class="lernen-hero">
+        <h1 class="lernen-hero-title">Ausprobieren und <span>lernen</span></h1>
+        <p class="lernen-hero-subtitle">Random stuff</p>
+    </div>
+
+    <div class="lernen-container">
+
+        <!-- ANIMATION BOX -->
+        <div class="lernen-box" data-aos="fade-up">
+            <div class="lernen-row reverse">
+                <div class="lernen-text">
+                    <h2 class="lernen-title">Rand animieren</h2>
+                    <p class="lernen-description">
+                        Mithilfe von CSS eine Animation am Rand erstellen.
+                    </p>
+                </div>
+                <div class="lernen-image lernen-image-animation">
+                    <div class="profilanimation-box">
+                        <h2 class="profilanimation-box-h1">Erste Animation</h2>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-    </section>
+        <!-- SPOTIFY -->
+        <div class="lernen-box" data-aos="fade-up">
+            <div class="lernen-row">
 
+                <div class="lernen-image">
+                    <i class="fa-brands fa-spotify spotify-icon"></i>
+                </div>
 
-        <!-- ===== SCRIPTS ===== -->
+                <div class="lernen-text">
+                    <h2 class="lernen-title">Spotify</h2>
+                    <p class="lernen-description">
+                        Ich habe mich gefragt, wie ich ein Spotify Widget einbinden kann.
+                    </p>
+
+                    <div class="spotify-box">
+                        <iframe src="https://open.spotify.com/embed/track/2usrT8QIbIk9y0NEtQwS4j"></iframe>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- ===== SCRIPTS ===== -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({
