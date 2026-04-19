@@ -119,49 +119,225 @@
 
     <div class="lernen-container">
 
-        <!-- ANIMATION BOX -->
-        <div class="lernen-box" data-aos="fade-up">
-            <div class="lernen-row reverse">
-                <div class="lernen-text">
-                    <h2 class="lernen-title">Rand animieren</h2>
-                    <p class="lernen-description">
-                        Mithilfe von CSS eine Animation am Rand erstellen.
-                    </p>
-                </div>
-                <div class="lernen-image lernen-image-animation">
-                    <div class="profilanimation-box">
-                        <h2 class="profilanimation-box-h1">Erste Animation</h2>
-                    </div>
-                </div>
+        <!-- ===== TABS NAV ===== -->
+<div class="lernen-tabs-wrapper">
 
+
+    <div class="lernen-tabs-scroll" id="lernenTabs">
+        <button class="lernen-tab active" onclick="switchTab(this, 0)">Animationen</button>
+        <button class="lernen-tab" onclick="switchTab(this, 1)">Testing</button>
+        <button class="lernen-tab" onclick="switchTab(this, 2)">Option</button>
+        <button class="lernen-tab" onclick="switchTab(this, 3)">Subnet</button>
+        <button class="lernen-tab" onclick="switchTab(this, 4)">Extras</button>
+        <button class="lernen-tab" onclick="switchTab(this, 5)">Projekt</button>
+    </div>
+
+
+</div>
+
+
+<div class="tab-slider">
+    <div class="tab-track" id="tabTrack">
+
+<!-- ===== TAB 1 ===== -->
+<div class="tab-slide active">
+
+    <div class="lernen-box">
+
+        <!-- ===== ANIMATION 1 ===== -->
+
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">Meine erste Animation</h2>
+                <pre class="code-block">
+Meine erste Animation mit dem Rand
+                </pre>
+            </div>
+
+            <div class="lernen-image">
+                <div class="profilanimation-box glow">
+                    <h2>Animation</h2>
+                </div>
+            </div>
+        </div>
+        <div class="lernen-divider"></div>
+
+        <!-- ===== HOVER 1 ===== -->
+
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">scale</h2>
+                <pre class="code-block">
+.container:hover{
+    transform: scale(1.25);
+}
+                </pre>
+                </p>
+            </div>
+
+            <div class="lernen-image">
+                <div class="profilanimation-box scale">
+                    <h2>Scale</h2>
+                </div>
+            </div>
+        </div>
+       <div class="lernen-divider"></div>
+
+        <!-- ===== HOVER 2 ===== -->
+
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">scaleX</h2>
+                <pre class="code-block">
+.container:hover {
+    transition: 2s ease;
+    transform: scaleX(1.4);
+}
+                </pre>
+            </div>
+            <div class="lernen-image">
+                <div class="profilanimation-box scaleX">
+                </div>
             </div>
         </div>
 
-        <!-- SPOTIFY -->
-        <div class="lernen-box" data-aos="fade-up">
-            <div class="lernen-row">
+        <div class="lernen-divider"></div>
 
-                <div class="lernen-image">
-                    <i class="fa-brands fa-spotify spotify-icon"></i>
+        <!-- ===== HOVER 3 ===== -->
+
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">scaleY</h2>
+                <pre class="code-block">
+.container:hover {
+    transition: 2s ease;
+    transform: scaleY(1.4);
+}
+                </pre>
+            </div>
+            <div class="lernen-image">
+                <div class="profilanimation-box scaleY">
                 </div>
+            </div>
+        </div>
+        <div class="lernen-divider"></div>
 
-                <div class="lernen-text">
-                    <h2 class="lernen-title">Spotify</h2>
-                    <p class="lernen-description">
-                        Ich habe mich gefragt, wie ich ein Spotify Widget einbinden kann.
-                    </p>
+        <!-- ===== HOVER 2 ===== -->
 
-                    <div class="spotify-box">
-                        <iframe src="https://open.spotify.com/embed/track/2usrT8QIbIk9y0NEtQwS4j"></iframe>
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">move</h2>
+                <pre class="code-block">
+container:hover{
+    transform: translateX(50px);
+    transition: 2s ease;
+}
+                </pre>
+            </div>
+
+            <div class="lernen-image">
+                <div class="profilanimation-box move">
+                </div>
+            </div>
+        </div>
+
+        <div class="lernen-divider"></div>
+
+        <!-- ===== HOVER 3 ===== -->
+
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">rotate</h2>
+                <pre class="code-block">
+.container:hover {
+    transition: 2s ease;
+    transform: rotate(360deg);
+}
+                    </pre>
+            </div>
+
+            <div class="lernen-image">
+                <div class="profilanimation-box rotate">
+                </div>
+            </div>
+        </div>
+
+        <div class="lernen-divider"></div>
+
+        <!-- ===== HOVER 4 ===== -->
+
+        <div class="lernen-row">
+            <div class="lernen-text">
+                <h2 class="lernen-title">tilt</h2>
+                <pre class="code-block">
+.container:hover {
+    transform: rotateY(25deg) rotateX(10deg);
+}
+                </pre>
+            </div>
+            <div class="lernen-image">
+                <div class="profilanimation-box tilt">
+                </div>
+            </div>
+        </div>
+    
+ 
+
+    </div>
+
+</div>
+
+        <!-- ===== TAB 2 ===== -->
+        <div class="tab-slide">
+            <div class="lernen-box">
+                <div class="lernen-row">
+                    <div class="lernen-text">
+                        <h2 class="lernen-title">Spotify</h2>
+                        <p class="lernen-description">
+                            Ich habe mich gefragt, ob ich ein Spotify Widget einbeten kann.
+                        </p>
+
+                        <div class="spotify-box">
+                            <iframe src="https://open.spotify.com/embed/track/2usrT8QIbIk9y0NEtQwS4j"></iframe>
+                        </div>
                     </div>
-
                 </div>
+            </div>
+        </div>
 
+        <!-- TAB 3 -->
+        <div class="tab-slide">
+            <div class="lernen-box">
+                <h2 class="lernen-title">Bald</h2>
+            </div>
+        </div>
+
+        <!-- TAB 4 -->
+        <div class="tab-slide">
+            <div class="lernen-box">
+                <h2 class="lernen-title">Bald</h2>
+            </div>
+        </div>
+
+        <!-- TAB 5 -->
+        <div class="tab-slide">
+            <div class="lernen-box">
+                <h2 class="lernen-title">Extras</h2>
+            </div>
+        </div>
+
+        <!-- TAB 6 -->
+        <div class="tab-slide">
+            <div class="lernen-box">
+                <h2 class="lernen-title">Bald</h2>
+                    <pre class="code-block">  </pre>
             </div>
         </div>
 
     </div>
+</div>
 </section>
+
 
     <!-- ===== SCRIPTS ===== -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

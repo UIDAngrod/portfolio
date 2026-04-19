@@ -52,3 +52,23 @@ function eraseText() {
 window.onload = function () {
     typeWriter();
 };
+
+let currentTab = 0;
+
+function switchTab(btn, index) {
+
+    const tabs = document.querySelectorAll('.lernen-tab');
+    const track = document.getElementById('tabTrack');
+
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    currentTab = index;
+
+    track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function scrollTabs(dir) {
+    const scroll = document.getElementById('lernenTabs');
+    scroll.scrollBy({ left: dir * 160, behavior: 'smooth' });
+}
