@@ -56,14 +56,11 @@ window.onload = function () {
 let currentTab = 0;
 
 function switchTab(btn, index) {
-
     const tabs = document.querySelectorAll('.lernen-tab');
     const track = document.getElementById('tabTrack');
 
     tabs.forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
-
-    currentTab = index;
 
     track.style.transform = `translateX(-${index * 100}%)`;
 }

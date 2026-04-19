@@ -267,7 +267,7 @@ nav::before {
 
 .home-section {
     width: 100%;
-    min-height: 100vh;
+    min-height: auto;
     padding: 40px var(--spacing-medium);
     display: flex;
     align-items: center;
@@ -442,7 +442,7 @@ nav::before {
     gap: 34px;
 }
 
-/* ===== GLASS BOX SHARED STYLES ===== */
+/* ===== GLASS BOX ===== */
 
 .lernen-box,
 .werdegang-language,
@@ -1689,27 +1689,22 @@ nav::before {
     width: 100%;
     margin: 0 auto 35px;
     padding: 0 20px;
+    overflow: hidden;
 }
+
 
 
 /* ===== SCROLL CONTAINER ===== */
 .lernen-tabs-scroll {
     display: flex;
+    width: 100%;
     gap: 18px;
-
     justify-content: center;
-    align-items: center;
-
-    max-width: 1100px;
-    margin: 0 auto;
-
     overflow-x: auto;
     scroll-behavior: smooth;
-    scrollbar-width: none;
+    padding: 14px 40px;
 
-    padding: 14px 0;
-
-    width: fit-content; 
+    scrollbar-width: none; 
 }
 
 .lernen-tabs-scroll::-webkit-scrollbar {
@@ -1797,27 +1792,20 @@ nav::before {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-
-    overflow: hidden; 
+    overflow: hidden;
 }
-
 
 .tab-track {
     display: flex;
-    width: 100%;
-    gap: 0;
-    align-items: flex-start; 
+    align-items: flex-start;
+    transition: transform 0.5s ease;
 }
 
 .tab-slide {
     flex: 0 0 100%;
     min-width: 100%;
-    max-width: 100%;
-
     display: flex;
     justify-content: center;
-
-    height: auto;   
     padding: 40px;
 }
 
