@@ -239,3 +239,16 @@ function calcEqual() {
 function updateDisplay() {
     document.getElementById("calcDisplay").value = calcExpression;
 }
+
+// ===== PAYWALL =====
+
+function calcUnlock() {
+    document.getElementById("calcPaywall").style.display = "none";
+    document.getElementById("calcApp").style.display     = "block";
+}
+
+function calcRelock() {
+    calcClear();
+    document.getElementById("calcApp").style.display     = "none";
+    document.getElementById("calcPaywall").style.display = "block";
+}

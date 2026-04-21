@@ -298,49 +298,68 @@ container:hover{
             </div>
         </div>
 
-        <!-- TAB 3 CALCULATOR -->
-
+        <!-- ===== TAB 3 CALCULATOR Paywall-Spass ===== -->
         <div class="tab-slide">
             <div class="lernen-box">
-                <div class="lernen-row">
-
-                    <div class="lernen-text">
-                        <h2 class="lernen-title">Rechner</h2>
-
-                        <div class="lernen-calc">
-                            <input type="text" id="calcDisplay" readonly>
-
-                                <div class="lernen-calc-grid">
-                                    <!-- ROW 1 -->
-                                    <button onclick="calcClear()">C</button>
-                                    <button onclick="calcBack()">⌫</button>
-                                    <button onclick="calcPercent()">%</button>
-                                    <button onclick="calcAdd('/')">÷</button>
-                                    <!-- ROW 2 -->
-                                    <button onclick="calcAdd('7')">7</button>
-                                    <button onclick="calcAdd('8')">8</button>
-                                    <button onclick="calcAdd('9')">9</button>
-                                    <button onclick="calcAdd('*')">×</button>
-                                    <!-- ROW 3 -->
-                                    <button onclick="calcAdd('4')">4</button>
-                                    <button onclick="calcAdd('5')">5</button>
-                                    <button onclick="calcAdd('6')">6</button>
-                                    <button onclick="calcAdd('-')">−</button>
-                                    <!-- ROW 4 -->
-                                    <button onclick="calcAdd('1')">1</button>
-                                    <button onclick="calcAdd('2')">2</button>
-                                    <button onclick="calcAdd('3')">3</button>
-                                    <button onclick="calcAdd('+')">+</button>
-                                    <!-- ROW 5 -->
-                                    <button onclick="calcAdd('0')">0</button>
-                                    <button onclick="calcAdd('.')">.</button>
-                                    <button class="equal" onclick="calcEqual()">=</button>
-                            </div>
+                <div class="lernen-text">
+                    <h2 class="lernen-title">Rechner</h2>
+                    <p class="lernen-description">Einfach mal einen Rechner hinter einer Paywall sperren.<br> <br>
+                    </p>
+                    <!-- PAYWALL OVERLAY -->
+                    <div class="calc-paywall" id="calcPaywall">
+                        <div class="calc-paywall-inner">
+                            <div class="calc-paywall-icon">🔒</div>
+                            <h3 class="calc-paywall-title">Premium Rechner</h3> 
+                            <p class="calc-paywall-desc">
+                                Dieser Rechner ist nur für zahlende Kunden verfügbar.<br>
+                                Bitte bezahle <strong>CHF 4.95</strong> um fortzufahren.
+                            </p>
+                            <a class="calc-paywall-btn" href="https://paypal.me/Angrod357" target="_blank">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="white" style="vertical-align:middle;margin-right:7px;"><path d="M7.144 19.532l1.049-5.751c.11-.606.691-1.002 1.304-.9 2.155.37 6.243.359 7.82-3.16 1.95-4.376-1.241-6.22-4.633-6.22H8.092c-.702 0-1.3.507-1.411 1.2L4.883 17.37a.85.85 0 0 0 .84.99h1.421z"/><path d="M9.433 8.089c.18-1.047.918-1.856 1.955-2.022 1.19-.187 2.256-.063 3.113.304 1.843.793 2.608 2.545 2.101 4.673-.572 2.383-2.485 3.495-5.037 3.495-.37 0-.753-.03-1.14-.088a1.172 1.172 0 0 1-.992-1.318l.813-4.607-.813.563z" opacity=".5"/></svg>
+                                Jetzt mit PayPal bezahlen
+                            </a>
+                            <button class="calc-paywall-skip" onclick="calcUnlock()">
+                                Ich habe bezahlt ✓
+                            </button>
+                            <p class="calc-paywall-hint">(Kleiner Spass, aber Spenden nehme ich trotzdem)</p>
                         </div>
+                    </div>
+
+                    <!-- RECHNER -->
+                    <div class="lernen-calc" id="calcApp" style="display:none;">
+                        <input type="text" id="calcDisplay" readonly>
+                        <div class="lernen-calc-grid">
+                            <!-- ROW 1 -->
+                            <button onclick="calcClear()">C</button>
+                            <button onclick="calcBack()">⌫</button>
+                            <button onclick="calcPercent()">%</button>
+                            <button onclick="calcAdd('/')">÷</button>
+                            <!-- ROW 2 -->
+                            <button onclick="calcAdd('7')">7</button>
+                            <button onclick="calcAdd('8')">8</button>
+                            <button onclick="calcAdd('9')">9</button>
+                            <button onclick="calcAdd('*')">×</button>
+                            <!-- ROW 3 -->
+                            <button onclick="calcAdd('4')">4</button>
+                            <button onclick="calcAdd('5')">5</button>
+                            <button onclick="calcAdd('6')">6</button>
+                            <button onclick="calcAdd('-')">−</button>
+                            <!-- ROW 4 -->
+                            <button onclick="calcAdd('1')">1</button>
+                            <button onclick="calcAdd('2')">2</button>
+                            <button onclick="calcAdd('3')">3</button>
+                            <button onclick="calcAdd('+')">+</button>
+                            <!-- ROW 5 -->
+                            <button onclick="calcAdd('0')">0</button>
+                            <button onclick="calcAdd('.')">.</button>
+                            <button class="equal" onclick="calcEqual()">=</button>
+                        </div>
+                        <button class="calc-relock-btn" onclick="calcRelock()">🔒 Rechner sperren</button>
                     </div>
 
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- ===== TAB 4 – SUBNET CALCULATOR ===== -->

@@ -2346,3 +2346,177 @@ nav::before {
 
     font-weight: bold;
 }
+
+/* ===== RECHNER ===== */
+
+.lernen-calc-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lernen-calc {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+#calcDisplay {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 15px;
+    border-radius: var(--radius-medium);
+    border: 1px solid var(--color-border);
+    background: rgba(10, 6, 20, 0.8);
+    color: white;
+    font-size: 1.4rem;
+    text-align: right;
+    padding: 12px;
+    font-family: monospace;
+    outline: none;
+}
+
+.lernen-calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.lernen-calc-grid button {
+    padding: 16px 0;
+    border-radius: var(--radius-small);
+    border: none;
+    background: rgba(128, 0, 255, 0.2);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.lernen-calc-grid button:hover {
+    background: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.equal {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-accent));
+    font-weight: bold;
+}
+
+/* Sperren-Button  */
+.calc-relock-btn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--radius-small);
+    border: 1px solid rgba(128, 0, 255, 0.3);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.calc-relock-btn:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(128, 0, 255, 0.6);
+    background: rgba(128, 0, 255, 0.1);
+}
+
+/* ===== PAYWALL ===== */
+
+.calc-paywall {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.calc-paywall-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: var(--radius-xl);
+    background: rgba(10, 6, 22, 0.85);
+    border: 1px solid rgba(128, 0, 255, 0.3);
+    box-shadow: 0 0 30px rgba(128, 0, 255, 0.15);
+    gap: 14px;
+}
+
+.calc-paywall-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 10px rgba(128, 0, 255, 0.6));
+}
+
+.calc-paywall-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    text-shadow: 0 0 10px var(--color-primary);
+    margin: 0;
+}
+
+.calc-paywall-desc {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.calc-paywall-desc strong {
+    color: white;
+}
+
+/* PayPal Button */
+.calc-paywall-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: var(--radius-small);
+    background: linear-gradient(135deg, #003087, #009cde);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition-base);
+    box-shadow: 0 0 16px rgba(0, 150, 220, 0.35);
+}
+
+.calc-paywall-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 24px rgba(0, 150, 220, 0.6);
+}
+
+/* "Ich habe bezahlt" Button */
+.calc-paywall-skip {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius-small);
+    border: 1px solid rgba(128, 0, 255, 0.4);
+    background: rgba(128, 0, 255, 0.12);
+    color: var(--color-primary-light);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.calc-paywall-skip:hover {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.02);
+}
+
+.calc-paywall-hint {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.28);
+    margin: 0;
+    font-style: italic;
+}
