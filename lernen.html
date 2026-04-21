@@ -125,7 +125,7 @@
 <div class="lernen-tabs-wrapper">
     <div class="lernen-tabs-scroll" id="lernenTabs">
         <button class="lernen-tab active" onclick="switchTab(this, 0)">Animationen</button>
-        <button class="lernen-tab" onclick="switchTab(this, 1)">Testing</button>
+        <button class="lernen-tab" onclick="switchTab(this, 1)">Spotify</button>
         <button class="lernen-tab" onclick="switchTab(this, 2)">Option</button>
         <button class="lernen-tab" onclick="switchTab(this, 3)">Subnet</button>
         <button class="lernen-tab" onclick="switchTab(this, 4)">Extras</button>
@@ -274,7 +274,7 @@ container:hover{
     </div>
 </div>
 
-        <!-- ===== TAB 2 ===== -->
+        <!-- ===== TAB 2 SPOTIFY TESTING ===== -->
 
         <div class="tab-slide">
             <div class="lernen-box">
@@ -282,11 +282,18 @@ container:hover{
                     <div class="lernen-text">
                         <h2 class="lernen-title">Spotify</h2>
                         <p class="lernen-description">
-                            Ich habe mich gefragt, ob ich ein Spotify Widget einbetten kann.
+                            Ich habe mich gefragt, ob ich ein Spotify Widget einbetten kann. Offensichtlich bekomme ich das hin. <br>
+                            Deshalb paar Musikempfehlungen. <br> <br>
                         </p>
+                        
 
                         <div class="spotify-box">
                             <iframe src="https://open.spotify.com/embed/track/2usrT8QIbIk9y0NEtQwS4j"></iframe>
+                            <div>
+
+                            </div>
+                            <iframe src="https://open.spotify.com/embed/track/57kFx9H3WdfzrCqrbezRmO">
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -301,11 +308,100 @@ container:hover{
             </div>
         </div>
 
-        <!-- TAB 4 -->
-
+        <!-- ===== TAB 4 – SUBNET CALCULATOR ===== -->
         <div class="tab-slide">
-            <div class="lernen-box">
-                <h2 class="lernen-title">Bald</h2>
+            <div class="lernen-box subnet-calc-wrapper">
+        
+                <div class="subnet-title-row">
+                    <h2 class="lernen-title">Subnet Calculator</h2>
+                    <p class="lernen-description">IPv4 Subnetz-Berechnung</p>
+                </div>
+        
+                <!-- INPUT -->
+                <div class="subnet-input-row">
+                    <div class="subnet-input-group">
+                        <label class="subnet-label">IP-Adresse / CIDR</label>
+                        <div class="subnet-ip-box">
+                            <input type="text" id="subnetIp" placeholder="192.168.1.0" maxlength="15" />
+                            <span class="subnet-slash">/</span>
+                            <input type="text" id="subnetCidrText" class="subnet-cidr-text" value="24" maxlength="2" />
+                        </div>
+                    </div>
+                    <button class="subnet-btn" onclick="subnetCalc()">Berechnen</button>
+                </div>
+        
+                <!-- SLIDER -->
+                <div class="subnet-slider-row">
+                    <span class="subnet-label">Präfix</span>
+                    <input type="range" id="subnetSlider" min="1" max="32" value="24" step="1"
+                        oninput="subnetSyncSlider(this.value)" />
+                    <span class="subnet-cidr-display" id="subnetCidrDisplay">/24</span>
+                </div>
+        
+                <!-- ERROR -->
+                <div class="subnet-error" id="subnetError"></div>
+        
+                <!-- RESULTS -->
+                <div class="subnet-results" id="subnetResults">
+                    <div class="lernen-divider" style="margin: 20px 0;"></div>
+        
+                    <div class="subnet-grid">
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Netzwerkadresse</div>
+                            <div class="subnet-card-value highlight" id="sNet">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Broadcast</div>
+                            <div class="subnet-card-value highlight" id="sBcast">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Subnetzmaske</div>
+                            <div class="subnet-card-value" id="sMask">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Wildcard Maske</div>
+                            <div class="subnet-card-value" id="sWild">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Erster Host</div>
+                            <div class="subnet-card-value" id="sFirst">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Letzter Host</div>
+                            <div class="subnet-card-value" id="sLast">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">Nutzbare Hosts</div>
+                            <div class="subnet-card-value highlight" id="sHosts">—</div>
+                        </div>
+                        <div class="subnet-card">
+                            <div class="subnet-card-label">IP-Klasse</div>
+                            <div class="subnet-card-value" id="sClass">—</div>
+                        </div>
+                    </div>
+        
+                    <!-- HOSTS BAR -->
+                    <div class="subnet-bar-wrap">
+                        <div class="subnet-bar-labels">
+                            <span>Netz-Bit Anteil</span>
+                            <span id="sBarPct">—</span>
+                        </div>
+                        <div class="subnet-bar-bg">
+                            <div class="subnet-bar-fill" id="sBarFill"></div>
+                        </div>
+                    </div>
+        
+                    <!-- BIT VISUAL -->
+                    <div class="subnet-bits-wrap">
+                        <div class="subnet-label" style="margin-bottom: 8px;">Bit-Aufteilung (32 Bit)</div>
+                        <div class="subnet-bits" id="sBits"></div>
+                        <div class="subnet-bits-legend">
+                            <span><span class="subnet-dot net"></span>Netz-Bits (<span id="sNetBits">—</span>)</span>
+                            <span><span class="subnet-dot host"></span>Host-Bits (<span id="sHostBits">—</span>)</span>
+                        </div>
+                    </div>
+                </div>
+        
             </div>
         </div>
 
