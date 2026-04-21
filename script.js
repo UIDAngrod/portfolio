@@ -1,197 +1,132 @@
-// ===== NAV-BAR =====
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <title>Thanh</title>
+</head>
+<body class="profil-page">
 
-function toggleMenu() {
-    const dropdown = document.querySelector(".dropdown");
-    const menuToggle = document.querySelector(".menu-toggle");
+    <!-- ===== NAV ===== -->
 
-    if (dropdown && menuToggle) {
-        dropdown.classList.toggle("active");
-        menuToggle.classList.toggle("active");
-    }
-}
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                Thanh <span>Nguyen</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-delay="100"><a href="index.html">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="200"><a href="profil.html">Profil</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="300"><a href="werdegang.html">Werdegang</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="400"><a href="hobbys.html">Hobbys</a></div>
+                <div class="link" data-aos="fade-up" data-aos-delay="500"><a href="lernen.html">Lernen</a></div>
+            </div>
 
-// ===== TYPEWRITER (Home) =====
+             <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
 
-const texts = [
-    "angehender ICT-Fachmann",
-    "ein IT Fan",
-    "ein lernfreudiger Mensch"
-];
+        <div class="dropdown">
+            <div class="links">
+                <a href="index.html">Home</a>
+                <a href="profil.html">Profil</a>
+                <a href="werdegang.html">Werdegang</a>
+                <a href="hobbys.html">Hobbys</a>
+                <a href="lernen.html">Lernen</a>
+            </div>
+        </div>
+    </nav>
 
-let speed = 100;
-const textElement = document.querySelector(".home-typewriter-text");
+    <!-- ===== PROFIL ===== -->
 
-let textIndex = 0;
-let characterIndex = 0;
+    <section class="profil-section">
+        <div class="profil-container">
 
-function typeWriter() {
-    if (!textElement) return;
+            <!-- Bild -->
 
-    if (characterIndex < texts[textIndex].length) {
-        textElement.innerHTML += texts[textIndex].charAt(characterIndex);
-        characterIndex++;
-        setTimeout(typeWriter, speed);
-    } else {
-        setTimeout(eraseText, 1000);
-    }
-}
+            <div class="profil-image" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="images/image_klavier.jpeg" alt="Profilbild von Thanh Nguyen">
+            </div>
 
-function eraseText() {
-    if (!textElement) return;
+            <!-- Text -->
 
-    if (textElement.innerHTML.length > 0) {
-        textElement.innerHTML = textElement.innerHTML.slice(0, -1);
-        setTimeout(eraseText, 50);
-    } else {
-        textIndex = (textIndex + 1) % texts.length;
-        characterIndex = 0;
-        setTimeout(typeWriter, 500);
-    }
-}
+            <div class="profil-text">
+                <h1 class="profil-title" data-aos="fade-down" data-aos-delay="900">
+                    Willkommen in meinem <span>Profil</span>
+                </h1>
 
-window.onload = function () {
-    typeWriter();
-};
+                <p class="profil-subtitle" data-aos="fade-up" data-aos-delay="1100">
+                    Man lernt nie aus
+                </p>
 
-let currentTab = 0;
+                <p class="profil-description" data-aos="fade-up" data-aos-delay="1300">
+                    Momentan absolviere ich die Ausbildung zum ICT-Fachmann bei der WISS Schulen für Wirtschaft, Informatik und Immobilien.
+                    <br>
+                    Wie man sieht, bringe ich mir aktuell selbst HTML, CSS und JS bei.
+                </p>
 
-function switchTab(btn, index) {
-    const tabs = document.querySelectorAll('.lernen-tab');
-    const track = document.getElementById('tabTrack');
+                <!-- Aktionen -->
 
-    tabs.forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
+                <div class="profil-actions" data-aos="fade-up" data-aos-delay="1500">
+                    <div class="social">
+                        <a href="https://www.linkedin.com/in/thanh-nguyen-17027b293/" target="_blank">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </div>
 
-    track.style.transform = `translateX(-${index * 100}%)`;
-}
+                    <a href="mailto:tsnguyen098@gmail.com" class="btn">
+                        Anschreiben
+                    </a>
+                </div>
+            </div>
+        </div>
 
-function scrollTabs(dir) {
-    const scroll = document.getElementById('lernenTabs');
-    scroll.scrollBy({ left: dir * 160, behavior: 'smooth' });
-}
+        <div class="profil-extra" data-aos="fade-up" data-aos-delay="1200">
+            <div class="profil-extra-inner glass-box">
+                <h2 class="profil-extra-title">Über mich</h2>
+                <p class="profil-extra-text">
+                    Ich interessiere mich stark für IT und lerne täglich neue Technologien.
+                    Besonders spannend finde ich Webentwicklung, Netzwerke und IT-Sicherheit.
+                    Mein Ziel ist es, mich stetig weiterzuentwickeln und praktische Erfahrungen zu sammeln.
+                    <br><br>
 
+                    Derzeit suche ich eine zweijährige Praktikumsstelle im ICT-Bereich, in der ich meine Kenntnisse anwenden,
+                    erweitern und praktische Erfahrungen sammeln kann.
+                    <br><br>
 
-// ===== SUBNET CALCULATOR =====
- 
-function subnetSyncSlider(val) {
-    document.getElementById('subnetCidrText').value = val;
-    document.getElementById('subnetCidrDisplay').textContent = '/' + val;
-}
- 
-document.addEventListener('DOMContentLoaded', function () {
-    const cidrText = document.getElementById('subnetCidrText');
-    const ipInput  = document.getElementById('subnetIp');
- 
-    if (cidrText) {
-        cidrText.addEventListener('input', function () {
-            const v = parseInt(this.value);
-            if (!isNaN(v) && v >= 1 && v <= 32) {
-                document.getElementById('subnetSlider').value = v;
-                document.getElementById('subnetCidrDisplay').textContent = '/' + v;
-            }
+                    Ich denke, kaum ein Technisches Problem ist nicht zu lösen.
+                    Gerade im IT-Bereich ist mir wichtig, Fehler systematisch zu analysieren und nachhaltig zu beheben.
+                    Darüber hinaus bin ich sehr wissbegierig und eigne mir gerne neue Kenntnisse an.
+                    <br><br>
+
+                    Meine privaten Projekte haben mir gezeigt, dass die digitale Zukunft noch so viel zu bieten hat.
+                    <br> Zudem ist mir klar geworden, dass der ICT Beruf für mich was ist, da man sich ständig weiter Fortbilden muss, da es immer was neues geben wird. Genau das motiviert mich zu diesem Beruf. <br><br>
+
+                    Und genau diese Zukunft möchte ich gerne mitgestalten!
+                    Mit Hilfe von OpenMediaVault hatte ich in meiner Vergangenheit bereits schon einmal auf meinem Raspberry Pi 5 für mein Zuhause ein NAS eingerichtet.
+                    <br><br>
+
+                    In meiner Freizeit verbringe ich viel Zeit mit meinen Nichten und meinem Neffen. Oder ich eigne mir neue Skills an, ob nützlich oder nicht, hauptsache es macht Spass!
+                    
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCRIPTS ===== -->
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 0
         });
-        cidrText.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') subnetCalc();
-        });
-    }
- 
-    if (ipInput) {
-        ipInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') subnetCalc();
-        });
-    }
-});
- 
-function subnetIpToNum(ip) {
-    const parts = ip.split('.').map(Number);
-    if (
-        parts.length !== 4 ||
-        parts.some(p => isNaN(p) || p < 0 || p > 255)
-    ) return null;
-    return ((parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]) >>> 0;
-}
- 
-function subnetNumToIp(n) {
-    return [24, 16, 8, 0].map(s => (n >> s) & 255).join('.');
-}
- 
-function subnetGetClass(firstOctet) {
-    if (firstOctet < 128)  return 'A';
-    if (firstOctet < 192)  return 'B';
-    if (firstOctet < 224)  return 'C';
-    if (firstOctet < 240)  return 'D (Multicast)';
-    return 'E (Reserviert)';
-}
- 
-function subnetCalc() {
-    const errEl  = document.getElementById('subnetError');
-    const resEl  = document.getElementById('subnetResults');
- 
-    errEl.style.display = 'none';
-    resEl.style.display = 'none';
- 
-    const ipRaw = document.getElementById('subnetIp').value.trim();
-    const cidr  = parseInt(document.getElementById('subnetCidrText').value);
- 
-    // Validate
-    if (!ipRaw) {
-        errEl.textContent = 'Bitte eine IP-Adresse eingeben.';
-        errEl.style.display = 'block';
-        return;
-    }
-    if (isNaN(cidr) || cidr < 1 || cidr > 32) {
-        errEl.textContent = 'CIDR muss zwischen 1 und 32 liegen.';
-        errEl.style.display = 'block';
-        return;
-    }
- 
-    const ipNum = subnetIpToNum(ipRaw);
-    if (ipNum === null) {
-        errEl.textContent = 'Ungültige IP-Adresse. Beispiel: 192.168.1.0';
-        errEl.style.display = 'block';
-        return;
-    }
- 
-    // Calculate
-    const maskNum  = cidr === 32
-        ? 0xFFFFFFFF
-        : (~((1 << (32 - cidr)) - 1)) >>> 0;
- 
-    const netNum   = (ipNum & maskNum) >>> 0;
-    const bcastNum = (netNum | (~maskNum >>> 0)) >>> 0;
-    const wildNum  = (~maskNum) >>> 0;
- 
-    const totalHosts = Math.pow(2, 32 - cidr);
-    const usable     = cidr >= 31 ? totalHosts : Math.max(0, totalHosts - 2);
-    const firstHost  = cidr >= 31 ? netNum  : netNum  + 1;
-    const lastHost   = cidr >= 31 ? bcastNum : bcastNum - 1;
-    const firstOctet = (netNum >> 24) & 255;
- 
-    // Fill results
-    document.getElementById('sNet').textContent   = subnetNumToIp(netNum);
-    document.getElementById('sBcast').textContent = subnetNumToIp(bcastNum);
-    document.getElementById('sMask').textContent  = subnetNumToIp(maskNum);
-    document.getElementById('sWild').textContent  = subnetNumToIp(wildNum);
-    document.getElementById('sFirst').textContent = subnetNumToIp(firstHost);
-    document.getElementById('sLast').textContent  = subnetNumToIp(lastHost);
-    document.getElementById('sHosts').textContent = usable.toLocaleString('de-CH');
-    document.getElementById('sClass').textContent = subnetGetClass(firstOctet);
- 
-    // Bar
-    const pct = Math.round((cidr / 32) * 100);
-    document.getElementById('sBarPct').textContent     = pct + '% Netz-Bits';
-    document.getElementById('sBarFill').style.width    = pct + '%';
- 
-    // Bit visual
-    const bitsEl = document.getElementById('sBits');
-    bitsEl.innerHTML = '';
-    for (let i = 0; i < 32; i++) {
-        const div = document.createElement('div');
-        div.className = 'subnet-bit ' + (i < cidr ? 'net' : 'host');
-        bitsEl.appendChild(div);
-    }
-    document.getElementById('sNetBits').textContent  = cidr;
-    document.getElementById('sHostBits').textContent = 32 - cidr;
- 
-    resEl.style.display = 'block';
-}
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

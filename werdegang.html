@@ -1,221 +1,2279 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-    <title>Thanh</title>
-</head>
-<body class="werdegang-page">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-    <!-- ===== NAV ===== -->
+/* ===== CSS VARIABLES ===== */
+:root {
+    --color-primary: purple;
+    --color-primary-dark: #8a2be2;
+    --color-primary-light: #d15cff;
+    --color-accent: #1e90ff;
+    --color-bg: black;
+    --color-text: white;
+    --color-text-secondary: rgba(255, 255, 255, 0.96);
+    --color-text-muted: rgba(255, 255, 255, 0.72);
+    --color-border: rgba(255, 255, 255, 0.06);
+    --color-border-light: rgba(255, 255, 255, 0.08);
+    
+    --spacing-small: 15px;
+    --spacing-medium: 20px;
+    --spacing-large: 35px;
+    --spacing-xlarge: 80px;
+    
+    --radius-small: 10px;
+    --radius-medium: 16px;
+    --radius-large: 20px;
+    --radius-xl: 22px;
+    --radius-xxl: 28px;
+    --radius-full: 50%;
+    
+    --shadow-sm: 0 0 15px purple;
+    --shadow-md: 0 0 20px rgba(128, 0, 255, 0.25);
+    --shadow-lg: 0 0 30px purple;
+    --shadow-glow: 0 0 15px rgba(128, 0, 255, 0.4);
+    
+    --backdrop: blur(15px);
+    --backdrop-heavy: blur(18px);
+    
+    --transition-fast: 0.2s linear;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
 
-    <nav>
-        <div class="nav-container">
-            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
-                Thanh <span>Nguyen</span>
-            </div>
-            <div class="links">
-                <div class="link" data-aos="fade-up" data-aos-delay="100"><a href="index.html">Home</a></div>
-                <div class="link" data-aos="fade-up" data-aos-delay="200"><a href="profil.html">Profil</a></div>
-                <div class="link" data-aos="fade-up" data-aos-delay="300"><a href="werdegang.html">Werdegang</a></div>
-                <div class="link" data-aos="fade-up" data-aos-delay="400"><a href="hobbys.html">Hobbys</a></div>
-                <div class="link" data-aos="fade-up" data-aos-delay="500"><a href="lernen.html">Lernen</a></div>
-            </div>
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
 
-             <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
 
-        <div class="dropdown">
-            <div class="links">
-                <a href="index.html">Home</a>
-                <a href="profil.html">Profil</a>
-                <a href="werdegang.html">Werdegang</a>
-                <a href="hobbys.html">Hobbys</a>
-                <a href="lernen.html">Lernen</a>
-            </div>
-        </div>
-    </nav>
+/* ===== COMPONENTS ===== */
 
-        <!-- ===== werdegang ===== -->
+/* Social Icons */
+.social a {
+    width: 55px;
+    height: 55px;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    transition: var(--transition-base);
+}
 
-    <section class="werdegang-section">
-        <div class="werdegang-container glass-box">
-            <div class="werdegang-profil">
-                <div class="werdegang-header">
-                    <div class="werdegang-image" data-aos="zoom-in" data-aos-duration="1500">
-                            <img src="images/image_Werdegang.jpeg" alt="Bild von Thanh Nguyen">
-                    </div>
+.social a:hover {
+    transform: scale(1.1);
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+}
 
-                    <div class="werdegang-content">
-                        <h1 class="werdegang-name" data-aos="fade-down" data-aos-delay="900">
-                            <span class="werdegang-firstname">Thanh</span>
-                            <span class="werdegang-lastname">Nguyen</span>
-                        </h1>
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--color-primary);
+    color: var(--color-text);
+    border-radius: var(--radius-small);
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition-base);
+}
 
-                        <p class="werdegang-title" data-aos="fade-up" data-aos-delay="1100">
-                            ICT-Fachmann
-                        </p>
+.btn:hover {
+    transform: scale(1.05);
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
 
-                        <p class="werdegang-description" data-aos="fade-up" data-aos-delay="1300">
-                            Momentan absolviere ich die Ausbildung zum ICT-Fachmann bei der WISS Schulen für Wirtschaft, Informatik und Immobilien.
-                        </p>
+section {
+    width: 100%;
+    min-height: 90vh;
+}
 
-                        <div class="werdegang-actions" data-aos="fade-up" data-aos-delay="1500">
-                            <div class="social">
-                                <a href="https://www.linkedin.com/in/thanh-nguyen-17027b293/" target="_blank">
-                                    <i class="fa-brands fa-linkedin-in"></i>
-                                </a>
-                            </div>
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-                            <a href="mailto:tsnguyen098@gmail.com" class="btn">
-                                Anschreiben
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+/* ===== NAVIGATION ===== */
 
-            <div class="werdegang-columns">
-                <div class="werdegang-group-1">
-                    <div class="werdegang-kenntnisse glass-card">
-                        <h3 class="werdegang-title">IT KENNTNISSE</h3>
-                        <p class="werdegang-description">Grundkenntnisse in</p>
-                        <ul class="werdegang-skills">
-                            <li>Adobe</li>
-                            <li>SAP RFC</li>
-                            <li>IT-Systeme</li>
-                            <li>TurboMed</li>
-                        </ul>
+nav {
+    width: 100%;
+    height: 10vh;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-                        <p class="werdegang-description">Fortgeschrittene in</p>
-                        <ul class="werdegang-skills">
-                            <li>Luminar</li>
-                            <li>MS Office</li>
-                            <li>MS 365</li>
-                            <li>IT-Sicherheit</li>
-                            <li>Windows</li>
-                        </ul>
-                    </div>
+nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: var(--backdrop);
+    -webkit-backdrop-filter: var(--backdrop);
+    background: rgba(0, 0, 0, 0.3);
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    pointer-events: none;
+}
 
-                    <div class="werdegang-language glass-card">
-                        <h3 class="werdegang-title">Sprachen</h3>
-                            <div class="werdegang-description werdegang-language-list">
-                                <div class="lang">
-                                    <span>Deutsch</span>
-                                    <span>Muttersprache</span>
-                                </div>
-                                <div class="lang">
-                                    <span>Englisch</span>
-                                    <span>Fortgeschritten</span>
-                                </div>
-                            </div>
-                    </div>
+.nav-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
 
-                    <div class="werdegang-personalien glass-card">
-                        <h3 class="werdegang-title">Personalien</h3>
-                        <p class="werdegang-description">
-                            Nehmt es mir nicht übel,
-                            das ich meine Personalien<br> nicht auf einer Webseite preis gebe.
-                            <br>Personalien sind im Lebenslauf PDF-Format zu finden.
-                        </p>
-                    </div>
+.logo {
+    color: var(--color-text);
+    font-size: 2rem;
+    font-weight: bold;
+}
 
-                    <div class="werdegang-ref glass-card">
-                        <h3 class="werdegang-title">Referenzen</h3>
-                        <p class="werdegang-description">Auf Anfrage</p>
-                    </div>
+.logo span {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px var(--color-primary);
+}
 
-                </div>
+.nav-container .links {
+    display: flex;
+    align-items: center;
+}
 
-                <div class="werdegang-group-2">
+.nav-container .links a {
+    position: relative;
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin: 0 20px;
+    font-weight: 550;
+    transition: var(--transition-base);
+    text-decoration: none;
+}
 
-                    <div class="werdegang-bildung glass-card">
-                        <h3 class="werdegang-title">Bildung</h3>
+.nav-container .links a::before {
+    position: absolute;
+    content: "";
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-primary);
+    transition: var(--transition-fast);
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">August 2025 - heute</p>
-                            <h4 class="werdegang-item-subtitle">ICT-Fachmann: WISS Schulen für Wirtschaft Informatik Immobilien</h4>
-                        </div>
+.nav-container .links a:hover::before,
+.nav-container .links a:hover {
+    width: 100%;
+    color: var(--color-primary);
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">August 2019 - Juli 2022</p>
-                            <h4 class="werdegang-item-subtitle">Kaufmann: Benedict-Schulen</h4>
-                        </div>
+/* ===== MENU TOGGLE ===== */
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">August 2018 - Juli 2019</p>
-                            <h4 class="werdegang-item-subtitle">MPA: Benedict-Schulen</h4>
-                        </div>
+.menu-toggle {
+    width: 32px;
+    height: 24px;
+    position: absolute;
+    right: var(--spacing-small);
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1200;
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">August 2014 - Juli 2016</p>
-                            <h4 class="werdegang-item-subtitle">Polymechaniker: Marcel Bützer AG</h4>
-                        </div>
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-text);
+    border-radius: 999px;
+    transition: all var(--transition-base);
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">Juli 2014</p>
-                            <h4 class="werdegang-item-subtitle">Abschluss Oberstufe</h4>
-                        </div>
-                    </div>
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
 
-                    <div class="werdegang-erfahrungen glass-card">
-                        <h3 class="werdegang-title">Erfahrungen</h3>
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">August 2023 - Juli 2025</p>
-                            <h4 class="werdegang-item-subtitle">Berufliche Neuorientierung &amp; Selbststudium</h4>
-                            <p class="werdegang-description">
-                                Vertiefen von EDV-Kenntnissen<br>
-                                Englisch vertiefen<br>
-                                Lernen neuer Softwares
-                            </p>
-                        </div>
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">Oktober 2022 - Juni 2023</p>
-                            <h4 class="werdegang-item-subtitle">Betriebsmitarbeiter: Findus</h4>
-                        </div>
+/* ===== DROPDOWN ===== */
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">Februar 2021 - Januar 2022</p>
-                            <h4 class="werdegang-item-subtitle">Kaufmännisches Praktikum: EDAG Engineering GmbH</h4>
-                            <p class="werdegang-description">
-                                Allgemeine Administration<br>
-                                Buchhaltung &amp; Einkauf<br>
-                                Instruieren neuer Mitarbeiter
-                            </p>
-                        </div>
+.dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-120%);
+    transition: transform var(--transition-base);
+    z-index: 1100;
+    padding: 100px 0 40px 0;
+}
 
-                        <div class="werdegang-item">
-                            <p class="werdegang-pretitle">August 2016 - Juli 2018</p>
-                            <h4 class="werdegang-item-subtitle">Medizinischer Praxisassistent: Neurozentrum München</h4>
-                            <p class="werdegang-description">
-                                Patientenanmeldung<br>
-                                NLG &amp; EEG Messungen
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.dropdown.active {
+    transform: translateY(0);
+}
+
+.dropdown .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-medium);
+}
+
+.dropdown .links a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.dropdown .links a:hover {
+    color: var(--color-primary);
+}
+
+@media (min-width: 768px) {
+    .dropdown {
+        display: none;
+    }
+}
+
+/* ===== HOME ===== */
+
+.home-section {
+    width: 100%;
+    min-height: auto;
+    padding: 40px var(--spacing-medium);
+    display: flex;
+    align-items: center;
+}
+
+.home-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xlarge);
+}
+
+.home-image {
+    width: 380px;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.home-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.home-image:hover {
+    animation: home-grow 1.5s ease-in-out infinite;
+}
+
+.home-content {
+    max-width: 600px;
+}
+
+.home-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--color-text);
+    margin-bottom: 15px;
+}
+
+.home-title span,
+.hobbys-title span,
+.lernen-hero-title span,
+.profil-title span {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px var(--color-primary);
+}
+
+.home-subtitle {
+    font-size: clamp(1.3rem, 2vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--color-text);
+}
+
+.home-typewriter-text {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px var(--color-primary);
+}
+
+.home-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 25px;
+}
+
+.home-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+    flex-wrap: wrap;
+}
+
+@keyframes home-grow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px purple;
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: var(--shadow-lg);
+    }
+}
+
+/* ===== HOBBYS ===== */
+
+.hobbys-section {
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px var(--spacing-medium);
+}
+
+.hobbys-container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hobbys-content {
+    max-width: 700px;
+}
+
+.hobbys-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: 15px;
+    color: var(--color-text);
+}
+
+.hobbys-subtitle {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: var(--color-primary);
+    font-weight: bold;
+    margin-bottom: var(--spacing-medium);
+}
+
+.hobbys-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+/* ===== LERNEN ===== */
+
+.lernen-section {
+    width: 100%;
+    padding: 60px var(--spacing-medium);
+}
+
+.lernen-hero {
+    max-width: 1100px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.lernen-hero-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--color-text);
+    margin-bottom: 15px;
+}
+
+.lernen-hero-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 14px;
+}
+
+.lernen-hero-subtitle {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.lernen-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+/* ===== GLASS BOX ===== */
+
+.lernen-box,
+.werdegang-language,
+.werdegang-personalien,
+.werdegang-ref,
+.werdegang-kenntnisse,
+.werdegang-bildung,
+.werdegang-erfahrungen {
+    position: relative;
+    padding: 28px 26px;
+    border-radius: var(--radius-xl);
+    background: rgba(18, 14, 28, 0.9);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.lernen-box::before,
+.werdegang-language::before,
+.werdegang-personalien::before,
+.werdegang-ref::before,
+.werdegang-kenntnisse::before,
+.werdegang-bildung::before,
+.werdegang-erfahrungen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from var(--lernen-angle, 0deg), #8a2be2, #1e90ff, #8a2be2, #1e90ff, #8a2be2);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+    filter: blur(0.5px);
+}
+
+.lernen-box:hover,
+.werdegang-language:hover,
+.werdegang-personalien:hover,
+.werdegang-ref:hover,
+.werdegang-kenntnisse:hover,
+.werdegang-bildung:hover,
+.werdegang-erfahrungen:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.lernen-box:hover::before,
+.werdegang-language:hover::before,
+.werdegang-personalien:hover::before,
+.werdegang-ref:hover::before,
+.werdegang-kenntnisse:hover::before,
+.werdegang-bildung:hover::before,
+.werdegang-erfahrungen:hover::before {
+    opacity: 1;
+    animation: glowBorder 2.2s linear infinite;
+}
+
+@property --lernen-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes glowBorder {
+    from { --lernen-angle: 0deg; }
+    to { --lernen-angle: 360deg; }
+}
+
+/* ===== LERNEN CONTENT ===== */
+
+.lernen-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.lernen-row.reverse {
+    grid-template-columns: 1fr 180px;
+}
+
+.lernen-row.reverse .lernen-text {
+    order: 1;
+}
+
+.lernen-row.reverse .lernen-image {
+    order: 2;
+}
+
+.lernen-image {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: clamp(120px, 20vw, 220px);
+    height: auto;
+    padding: 2rem;
+    margin-left: -10px;
+}
+
+.lernen-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform var(--transition-base);
+}
+
+.lernen-box:hover .lernen-image img {
+    transform: scale(1.08);
+}
+
+.lernen-text {
+    min-width: 0;
+    width: 100%;
+}
+
+.lernen-title {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 14px;
+    text-align: left;
+}
+
+.lernen-description {
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    text-align: left;
+    font-family: sans-serif;
+}
 
 
-    <!-- ===== SCRIPTS ===== -->
-     
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            offset: 0
-        });
-    </script>
-    <script src="script.js"></script>
-</body>
-</html>
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    .lernen-row,
+    .lernen-row.reverse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-medium);
+        text-align: center;
+    }
+
+    .lernen-row .lernen-image,
+    .lernen-row.reverse .lernen-image {
+        order: 1;
+        width: 140px;
+        height: 140px;
+        margin: 0 auto;
+    }
+
+    .lernen-row .lernen-text,
+    .lernen-row.reverse .lernen-text {
+        order: 2;
+        width: 100%;
+    }
+
+    .lernen-title,
+    .lernen-description {
+        text-align: center;
+    }
+
+    .home-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .home-actions {
+        justify-content: center;
+    }
+
+    .home-content {
+        max-width: 100%;
+    }
+
+    .home-image {
+        width: 250px;
+        height: 250px;
+    }
+
+    nav .logo {
+        position: absolute;
+        top: 50%;
+        left: var(--spacing-small);
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+    }
+
+    .nav-container .links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .profil-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 35px;
+    }
+
+    .profil-text {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .profil-actions {
+        justify-content: center;
+    }
+
+    .profil-image img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .glass-box {
+        padding: 26px 18px;
+        border-radius: var(--radius-large);
+    }
+
+    .glass-box::before,
+    .glass-box::after {
+        border-radius: var(--radius-large);
+    }
+
+    .profil-extra-title {
+        margin-bottom: var(--spacing-medium);
+    }
+
+    .profil-extra-text {
+        font-size: 0.98rem;
+        line-height: 1.75;
+        text-align: left;
+    }
+
+    .werdegang-section {
+        padding: 30px 16px 60px;
+    }
+
+    .werdegang-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .werdegang-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .werdegang-actions {
+        justify-content: center;
+    }
+
+    .werdegang-columns {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-medium);
+    }
+
+    .werdegang-container {
+        padding: 35px 25px;
+        gap: 35px;
+    }
+
+    .werdegang-language-list .lang {
+        grid-template-columns: 120px auto;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* ===== BOX ANIMATION ===== */
+
+.profilanimation-box {
+    width: 160px;
+    aspect-ratio: 1/1;
+    height: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: var(--radius-medium);
+    overflow: hidden;
+    margin: 0 auto;
+    transition: transform var(--transition-slow), box-shadow var(--transition-base);
+    transform-origin: center;
+}
+
+.profilanimation-box h2 {
+    pointer-events: none;
+}
+
+.profilanimation-box-h1 {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 12px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--color-text);
+    font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+    line-height: 1.15;
+    letter-spacing: 1px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.profilanimation-box::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 140%;
+    background: linear-gradient(purple, #8a2be2, #1e90ff, blue, purple);
+    animation: rotateBorder 2.5s linear infinite;
+}
+
+.profilanimation-box::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    background-color: transparent;
+    border-radius: var(--radius-medium);
+    z-index: 1;
+}
+
+.profilanimation-box:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-glow);
+}
+
+.profilanimation-box.scale:hover {
+    transform: scale(1.25);
+}
+
+.profilanimation-box.move:hover {
+    transform: translateX(50px);
+    transition: 2s ease;
+}
+
+.profilanimation-box.rotate:hover {
+    transform: rotate(360deg);
+    transition: 2s ease repeat infinite;
+}
+
+.profilanimation-box.tilt:hover {
+    transform: rotateY(25deg) rotateX(10deg);
+}
+
+.profilanimation-box.scaleX:hover {
+    transform: scaleX(1.4);
+}
+
+.profilanimation-box.scaleY:hover {
+    transform: scaleY(1.4);
+}
+
+.profilanimation-box:hover {
+    box-shadow: 0 0 15px purple, 0 0 30px blue;
+}
+
+@keyframes rotateBorder {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ===== SPOTIFY ===== */
+
+.spotify-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    border-radius: var(--radius-large);
+    background: rgba(18, 14, 28, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.spotify-box iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 152px;
+    border: none;
+    border-radius: var(--radius-large);
+    background: transparent;
+    box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+    .spotify-box {
+        padding: 8px;
+    }
+
+    .spotify-box iframe {
+        width: 100%;
+        height: 152px;
+    }
+}
+
+@media (max-width: 480px) {
+    .spotify-box {
+        padding: 6px;
+        border-radius: 14px;
+    }
+
+    .spotify-box iframe {
+        border-radius: 14px;
+        height: 152px;
+    }
+}
+
+
+/* ===== WERDEGANG ===== */
+
+.werdegang-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px var(--spacing-medium) 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.werdegang-container {
+    position: relative;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 40px;
+    border-radius: var(--radius-xxl);
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    background: rgba(20, 18, 24, 0.72);
+    backdrop-filter: var(--backdrop-heavy);
+    -webkit-backdrop-filter: var(--backdrop-heavy);
+    border: 1px solid var(--color-border-light);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.werdegang-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-xxl);
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(128, 0, 128, 0.95), rgba(206, 88, 255, 0.95), rgba(128, 0, 128, 0.95));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: purpleBreath 3.5s ease-in-out infinite;
+    filter: blur(0.5px);
+}
+
+.werdegang-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-xxl);
+    background: radial-gradient(circle at top center, rgba(180, 80, 255, 0.12), transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes purpleBreath {
+    0% {
+        opacity: 0.45;
+        box-shadow: 0 0 8px rgba(128, 0, 128, 0.25);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 18px rgba(180, 0, 255, 0.45), 0 0 35px rgba(140, 0, 255, 0.25);
+    }
+    100% {
+        opacity: 0.45;
+        box-shadow: 0 0 8px rgba(128, 0, 128, 0.25);
+    }
+}
+
+.werdegang-profil {
+    width: 100%;
+}
+
+.werdegang-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.werdegang-image {
+    width: 280px;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform var(--transition-base);
+}
+
+.werdegang-image:hover {
+    transform: scale(1.04);
+}
+
+.werdegang-image::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: var(--radius-full);
+    background: conic-gradient(from 0deg, transparent 0deg, purple 90deg, #d15cff 180deg, blue 270deg, transparent 360deg);
+    animation: werdegang-ring-rotate 4s linear infinite;
+    filter: blur(10px);
+    opacity: 0.95;
+}
+
+.werdegang-image::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: var(--radius-full);
+    background: rgba(12, 10, 15, 0.9);
+    z-index: 1;
+}
+
+.werdegang-image img {
+    position: relative;
+    z-index: 2;
+    width: calc(100% - 18px);
+    height: calc(100% - 18px);
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    display: block;
+}
+
+@keyframes werdegang-ring-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.werdegang-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.werdegang-name {
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.werdegang-firstname {
+    display: block;
+    color: var(--color-text);
+    font-weight: 200;
+    font-size: clamp(1.6rem, 5vw, 3.6rem);
+    text-transform: uppercase;
+}
+
+.werdegang-lastname {
+    display: block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: clamp(2rem, 6vw, 4rem);
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--color-primary);
+}
+
+.werdegang-title {
+    color: var(--color-primary);
+    font-weight: 900;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    text-transform: uppercase;
+    text-shadow: 0 0 5px var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.werdegang-description {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: var(--spacing-medium);
+}
+
+.werdegang-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+    flex-wrap: wrap;
+}
+
+.werdegang-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+}
+
+.werdegang-group-1,
+.werdegang-group-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.werdegang-language,
+.werdegang-personalien,
+.werdegang-ref,
+.werdegang-kenntnisse,
+.werdegang-bildung,
+.werdegang-erfahrungen {
+    padding: 24px 22px;
+}
+
+.werdegang-language:hover,
+.werdegang-personalien:hover,
+.werdegang-ref:hover,
+.werdegang-kenntnisse:hover,
+.werdegang-bildung:hover,
+.werdegang-erfahrungen:hover {
+    transform: scale(1.07);
+}
+
+.werdegang-language:hover::before,
+.werdegang-personalien:hover::before,
+.werdegang-ref:hover::before,
+.werdegang-kenntnisse:hover::before,
+.werdegang-bildung:hover::before,
+.werdegang-erfahrungen:hover::before {
+    opacity: 1;
+    animation: glowBorder 2s linear infinite;
+}
+
+.werdegang-language-list {
+    margin-bottom: 0;
+}
+
+.werdegang-language-list .lang {
+    display: grid;
+    grid-template-columns: 140px auto;
+    column-gap: var(--spacing-medium);
+    max-width: 350px;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.werdegang-skills {
+    margin-left: var(--spacing-medium);
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.werdegang-skills li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.werdegang-pretitle {
+    color: var(--color-text-muted);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    margin-top: 12px;
+}
+
+.werdegang-item {
+    margin-bottom: 18px;
+}
+
+.werdegang-item:last-child {
+    margin-bottom: 0;
+}
+
+.werdegang-item-subtitle {
+    color: var(--color-text);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .werdegang-section {
+        padding: 30px 16px 60px;
+    }
+
+    .werdegang-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .werdegang-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .werdegang-actions {
+        justify-content: center;
+    }
+
+    .werdegang-columns {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .werdegang-container {
+        padding: 35px 25px;
+        gap: 35px;
+    }
+
+    .werdegang-language-list .lang {
+        grid-template-columns: 120px auto;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .werdegang-image {
+        width: 220px;
+        height: 220px;
+    }
+
+    .werdegang-container {
+        padding: 24px 16px;
+        border-radius: 22px;
+    }
+
+    .werdegang-container::before,
+    .werdegang-container::after {
+        border-radius: 22px;
+    }
+
+    .werdegang-language,
+    .werdegang-personalien,
+    .werdegang-ref,
+    .werdegang-kenntnisse,
+    .werdegang-bildung,
+    .werdegang-erfahrungen {
+        padding: 18px 16px;
+        border-radius: 16px;
+    }
+
+    .werdegang-title {
+        font-size: 1.2rem;
+    }
+
+    .werdegang-description,
+    .werdegang-item-subtitle,
+    .werdegang-pretitle {
+        font-size: 0.95rem;
+    }
+
+    .werdegang-language-list .lang {
+        grid-template-columns: 100px auto;
+        column-gap: 12px;
+        max-width: 100%;
+    }
+
+    .werdegang-skills {
+        margin-left: 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .werdegang-section {
+        padding: 20px 10px 45px;
+    }
+
+    .werdegang-image {
+        width: 190px;
+        height: 190px;
+    }
+
+    .werdegang-container {
+        padding: 20px 14px;
+    }
+
+    .werdegang-firstname {
+        font-size: 1.45rem;
+    }
+
+    .werdegang-lastname {
+        font-size: 1.8rem;
+    }
+
+    .werdegang-language-list .lang {
+        grid-template-columns: 90px auto;
+    }
+}
+
+/* ===== PROFIL ===== */
+
+.profil-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+}
+
+.profil-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.profil-image {
+    flex-shrink: 0;
+}
+
+.profil-image img {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 0 30px purple;
+    transition: transform 0.3s ease;
+}
+
+.profil-image img:hover {
+    transform: scale(1.03);
+}
+
+.profil-text {
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profil-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: 10px;
+    color: white;
+}
+
+.profil-title span {
+    color: purple;
+    text-shadow: 0 0 10px purple;
+}
+
+.profil-subtitle {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: bold;
+    color: purple;
+    margin-bottom: 15px;
+}
+
+.profil-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.profil-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* ===== ÜBER MICH / GLASBOX ===== */
+.profil-extra {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 80px;
+}
+
+.profil-extra-inner {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.glass-box {
+    position: relative;
+    padding: 40px 35px;
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* breath purple border */
+.glass-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg,
+        rgba(128, 0, 128, 0.95),
+        rgba(210, 80, 255, 0.95),
+        rgba(128, 0, 128, 0.95)
+    );
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    pointer-events: none;
+    animation: purpleBreath 3.5s ease-in-out infinite;
+    filter: blur(0.5px);
+}
+
+/* GLASSBOX GLOW */
+.glass-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: radial-gradient(circle at top center, rgba(180, 80, 255, 0.12), transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes purpleBreath {
+    0% {
+        opacity: 0.45;
+        box-shadow: 0 0 8px rgba(128, 0, 128, 0.25);
+    }
+    50% {
+        opacity: 1;
+        box-shadow:
+            0 0 18px rgba(180, 0, 255, 0.45),
+            0 0 35px rgba(140, 0, 255, 0.25);
+    }
+    100% {
+        opacity: 0.45;
+        box-shadow: 0 0 8px rgba(128, 0, 128, 0.25);
+    }
+}
+
+.profil-extra-title {
+    text-align: center;
+    color: purple;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 28px;
+    font-weight: 700;
+}
+
+.profil-extra-text {
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 1.15rem;
+    line-height: 1.9;
+    text-align: left;
+    word-break: break-word;
+}
+
+/* ===== RESPONSIVE GLASSBOX ===== */
+@media (max-width: 992px) {
+    .glass-box {
+        padding: 32px 26px;
+    }
+
+    .profil-extra-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+}
+
+@media (max-width: 768px) {
+    .profil-extra {
+        padding: 30px 14px 60px;
+    }
+
+    .glass-box {
+        padding: 26px 18px;
+        border-radius: 20px;
+    }
+
+    .glass-box::before,
+    .glass-box::after {
+        border-radius: 20px;
+    }
+
+    .profil-extra-title {
+        margin-bottom: 20px;
+    }
+
+    .profil-extra-text {
+        font-size: 0.98rem;
+        line-height: 1.75;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .glass-box {
+        padding: 22px 16px;
+    }
+
+    .profil-extra-text {
+        font-size: 0.94rem;
+        line-height: 1.7;
+    }
+}
+
+/* ===== RESPONSIVE PROFIL ===== */
+
+@media (max-width: 900px) {
+    .profil-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 35px;
+    }
+
+    .profil-text {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .profil-actions {
+        justify-content: center;
+    }
+
+    .profil-image img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .profil-extra {
+        margin-top: 50px;
+    }
+
+    .profil-extra-inner {
+        max-width: 100%;
+    }
+
+    .profil-extra-title {
+        text-align: center;
+    }
+
+    .profil-extra-text {
+        text-align: center;
+    }
+}
+/* ===== ANIMATION BOX ===== */
+
+.profilanimation-box {
+    width: 160px;
+    aspect-ratio: 1/1;
+    height: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.profilanimation-box-h1 {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-size: 40px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 2px 2px 2px black;
+}
+
+.profilanimation-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px purple;
+    transition: 0.3s ease;
+}
+
+.profilanimation-box::before {
+    content: "";
+    position: absolute;
+    width: 140px;
+    height: 140%;
+    background: linear-gradient(purple, blue);
+    animation: rotate 2s linear infinite;
+}
+
+.profilanimation-box::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    background-color: black;
+    border-radius: 16px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .profil-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profil-text {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .profil-actions {
+        justify-content: center;
+    }
+
+    .profil-image img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav .logo {
+        position: absolute;
+        top: 16px;
+        left: 15px;
+        font-size: 1.5rem;
+    }
+
+    .nav-container .links {
+        display: none;
+    }
+
+    .home-container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 100px;
+    }
+
+    .home-content {
+        width: 80%;
+    }
+
+    .home-social a {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+    }
+
+.home-image {
+    width: min(380px, 80vw);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 50px purple;
+    transition: transform 0.3s ease;
+}
+
+.home-image:hover {
+    animation: home-grow 1.5s ease-in-out infinite;
+}
+
+@keyframes home-grow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 30px purple;
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 70px purple;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px purple;
+    }
+}
+    }
+
+    .lernen-container {
+        grid-template-columns: 1fr;
+    }
+
+    .lernen-container div {
+        width: 100%;
+    }
+
+    .lernen-1 { order: 1; }
+    .lernen-2 { order: 2; }
+    .lernen-3 { order: 3; }
+    .lernen-4 { order: 4; }
+    .lernen-5 { order: 5; }
+    .lernen-6 { order: 6; }
+    .lernen-7 { order: 7; }
+    .lernen-8 { order: 8; }
+    .lernen-9 { order: 9; }
+    .lernen-10 { order: 10; }
+
+    .werdegang-container {
+        width: 100%;
+        grid-template-columns: 1fr;
+        padding: 3rem;
+        gap: 7rem;
+    }
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 400px) {
+    .home-image {
+        width: 50%;
+        height: 40%;
+    }
+
+    .home-content {
+        width: 80%;
+    }
+
+    .home-button {
+        margin-top: 15px;
+    }
+}
+
+
+/* ===== WRAPPER ===== */
+.lernen-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto 35px;
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+
+
+/* ===== SCROLL CONTAINER ===== */
+.lernen-tabs-scroll {
+    display: flex;
+    width: 100%;
+    gap: 18px;
+    justify-content: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 14px 40px;
+
+    scrollbar-width: none; 
+}
+
+.lernen-tabs-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* ===== TAB GLASS ===== */
+.lernen-tab {
+    flex-shrink: 0;
+    padding: 16px 32px;
+    border-radius: 50px;
+
+    /* GLASS */
+    background: rgba(20, 10, 40, 0.6);
+    backdrop-filter: blur(16px);
+
+    /* BORDER */
+    border: 1px solid rgba(180, 120, 255, 0.3);
+
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    font-weight: 500;
+
+    position: relative;
+    overflow: hidden;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+/* ===== GLOW ===== */
+.lernen-tab::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 50px;
+    background: linear-gradient(120deg, purple, blue, purple);
+    background-size: 300%;
+    opacity: 0.4;
+    z-index: -1;
+    animation: neonMove 6s linear infinite;
+}
+
+/* ===== INNER GLASS ===== */
+.lernen-tab::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 50px;
+    background: rgba(15, 8, 30, 0.8);
+    z-index: -1;
+}
+
+/* ===== HOVER ===== */
+.lernen-tab:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(140, 0, 255, 0.5);
+}
+
+/* ===== ACTIVE ===== */
+.lernen-tab.active {
+    color: white;
+    box-shadow:
+        0 0 15px rgba(150, 0, 255, 0.6),
+        0 0 30px rgba(0, 120, 255, 0.4);
+}
+
+/* ===== CLICK ===== */
+.lernen-tab:active {
+    transform: scale(0.95);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes neonMove {
+    0% { background-position: 0% }
+    100% { background-position: 300% }
+}
+
+
+/* ===== SLIDER ===== */
+.tab-slider {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tab-track {
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.5s ease;
+}
+
+.tab-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.tab-slide .lernen-box {
+    margin: 0 10px; 
+ 
+}
+
+
+/* ===== SLIDER LAYOUT ===== */
+.tab-slider .lernen-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center; 
+    gap: 40px;
+}
+
+/* TEXT LINKS */
+.tab-slider .lernen-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* BILD RECHTS */
+.tab-slider .lernen-image {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+
+/* ===== QUADRAT BOX ===== */
+.tab-slider .profilanimation-box {
+    width: 220px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    margin-left: 20px;
+}
+
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+    .tab-slider .lernen-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    /* TEXT */
+    .tab-slider .lernen-text {
+        order: 1;
+    }
+
+    /* slider */
+    .tab-slider .lernen-image {
+        order: 2;
+        justify-content: center;
+    }
+
+    .tab-slider .profilanimation-box {
+        margin-left: 0;
+        width: 180px;
+    }
+}
+
+/* Abstand */
+.lernen-box {
+    width: 100%;
+    max-width: 1000px;
+
+    height: auto;
+}
+
+/* Trennlinie */
+.lernen-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(180, 0, 255, 0.5),
+        transparent
+    );
+}
+
+/* ===== BASIS (Animationen) ===== */
+.profilanimation-box {
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+    transform-origin: center;;
+}
+
+
+.profilanimation-box.scale:hover {
+    transform: scale(1.25);
+}
+
+.profilanimation-box.move:hover {
+    transform: translateX(50px);
+    transition: 2s ease;
+}
+
+.profilanimation-box.rotate:hover {
+    transform: rotate(360deg);
+    transition: 2s ease repeat infinite;
+}
+
+.profilanimation-box.tilt:hover {
+    transform: rotateY(25deg) rotateX(10deg);
+}
+
+.profilanimation-box.scaleX:hover {
+    transform: scaleX(1.4);
+}
+
+.profilanimation-box.scaleY:hover {
+    transform: scaleY(1.4);
+}
+
+.profilanimation-box:hover {
+    box-shadow:
+        0 0 15px purple,
+        0 0 30px blue;
+}
+
+/* ===== TEXT Animationen ===== */
+.profilanimation-box h2 {
+    pointer-events: none;
+}
+
+/* ===== CODE KOMPAKT ===== */
+.lernen-description {
+    font-family: sans-serif;
+    line-height: 1.3; 
+}
+
+.lernen-description br {
+    line-height: 1;     
+}
+
+.code-block {
+    font-family: monospace;
+    font-size: 0.95rem;
+
+    line-height: 1.4;  
+    margin: 0;          
+    padding: 0;         
+
+    color: white;
+}
+
+
+/* ===== SUBNET CALCULATOR ===== */
+ 
+.subnet-calc-wrapper {
+    width: 100%;
+    max-width: 1000px;
+}
+ 
+.subnet-title-row {
+    margin-bottom: 22px;
+}
+ 
+/* INPUT ROW */
+.subnet-input-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+ 
+.subnet-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+ 
+.subnet-label {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+ 
+/* INPUT BOX */
+.subnet-ip-box {
+    display: flex;
+    align-items: center;
+    background: rgba(10, 6, 20, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.subnet-ip-box:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(128, 0, 255, 0.15);
+}
+ 
+.subnet-ip-box input[type="text"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 11px 14px;
+    flex: 1;
+    min-width: 0;
+}
+ 
+.subnet-slash {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0 4px;
+}
+ 
+.subnet-cidr-text {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-primary-light);
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 11px 14px 11px 4px;
+    width: 48px;
+    text-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+}
+ 
+/* BUTTON */
+.subnet-btn {
+    padding: 11px 24px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-accent));
+    border: none;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 0 14px rgba(128, 0, 255, 0.35);
+    align-self: flex-end;
+    letter-spacing: 0.03em;
+}
+ 
+.subnet-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(128, 0, 255, 0.6);
+}
+ 
+.subnet-btn:active {
+    transform: scale(0.97);
+}
+ 
+/* SLIDER ROW */
+.subnet-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+ 
+.subnet-slider-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+ 
+.subnet-slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 10px rgba(128, 0, 255, 0.7);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+ 
+.subnet-slider-row input[type="range"]:hover::-webkit-slider-thumb {
+    box-shadow: 0 0 16px rgba(128, 0, 255, 0.9);
+}
+ 
+.subnet-cidr-display {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    text-shadow: 0 0 10px var(--color-primary);
+    min-width: 36px;
+    text-align: right;
+}
+ 
+/* ERROR */
+.subnet-error {
+    display: none;
+    font-size: 0.85rem;
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.25);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+}
+ 
+/* RESULTS */
+.subnet-results {
+    display: none;
+}
+ 
+/* GRID */
+.subnet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+ 
+.subnet-card {
+    background: rgba(10, 6, 22, 0.7);
+    border: 1px solid rgba(128, 0, 255, 0.2);
+    border-radius: 14px;
+    padding: 14px 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.subnet-card:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 14px rgba(128, 0, 255, 0.18);
+}
+ 
+.subnet-card-label {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    margin-bottom: 5px;
+}
+ 
+.subnet-card-value {
+    font-family: monospace;
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: white;
+    word-break: break-all;
+}
+ 
+.subnet-card-value.highlight {
+    color: var(--color-primary-light);
+    text-shadow: 0 0 8px rgba(128, 0, 255, 0.45);
+}
+ 
+/* HOSTS BAR */
+.subnet-bar-wrap {
+    margin-bottom: 20px;
+}
+ 
+.subnet-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 7px;
+}
+ 
+.subnet-bar-bg {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+}
+ 
+.subnet-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, var(--color-primary-dark), var(--color-accent));
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(128, 0, 255, 0.4);
+    transition: width 0.5s ease;
+}
+ 
+/* ===== BIT VISUAL ===== */
+
+.subnet-bits {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.subnet-bit {
+    flex: 1;
+    height: 14px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.subnet-bit.net {
+    background: var(--color-primary);
+    box-shadow: 0 0 6px rgba(128, 0, 255, 0.6);
+}
+
+.subnet-bit.host {
+    background: var(--color-accent);
+    box-shadow: 0 0 6px rgba(30, 144, 255, 0.5);
+}
+ 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .subnet-input-row {
+        grid-template-columns: 1fr;
+    }
+ 
+    .subnet-btn {
+        width: 100%;
+        padding: 12px;
+    }
+ 
+    .subnet-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+ 
+    .subnet-bits {
+        gap: 2px;
+    }
+ 
+    .subnet-bit {
+        width: 12px;
+        height: 12px;
+    }
+}
+ 
+@media (max-width: 480px) {
+    .subnet-grid {
+        grid-template-columns: 1fr;
+    }
+}
