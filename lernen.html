@@ -126,7 +126,7 @@
     <div class="lernen-tabs-scroll" id="lernenTabs">
         <button class="lernen-tab active" onclick="switchTab(this, 0)">Animationen</button>
         <button class="lernen-tab" onclick="switchTab(this, 1)">Spotify</button>
-        <button class="lernen-tab" onclick="switchTab(this, 2)">Option</button>
+        <button class="lernen-tab" onclick="switchTab(this, 2)">Testing</button>
         <button class="lernen-tab" onclick="switchTab(this, 3)">Subnet</button>
         <button class="lernen-tab" onclick="switchTab(this, 4)">Extras</button>
         <button class="lernen-tab" onclick="switchTab(this, 5)">Projekt</button>
@@ -289,22 +289,57 @@ container:hover{
 
                         <div class="spotify-box">
                             <iframe src="https://open.spotify.com/embed/track/2usrT8QIbIk9y0NEtQwS4j"></iframe>
-                            <div>
-
-                            </div>
-                            <iframe src="https://open.spotify.com/embed/track/57kFx9H3WdfzrCqrbezRmO">
-                            </iframe>
+                            <iframe src="https://open.spotify.com/embed/track/57kFx9H3WdfzrCqrbezRmO"></iframe>
+                            <iframe src="https://open.spotify.com/embed/track/3C3cr2JQwXIhqAHqOardVO"></iframe>
+                            <iframe src="https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 3 -->
+        <!-- TAB 3 CALCULATOR -->
 
         <div class="tab-slide">
             <div class="lernen-box">
-                <h2 class="lernen-title">Bald</h2>
+                <div class="lernen-row">
+
+                    <div class="lernen-text">
+                        <h2 class="lernen-title">Rechner</h2>
+
+                        <div class="lernen-calc">
+                            <input type="text" id="calcDisplay" readonly>
+
+                                <div class="lernen-calc-grid">
+                                    <!-- ROW 1 -->
+                                    <button onclick="calcClear()">C</button>
+                                    <button onclick="calcBack()">⌫</button>
+                                    <button onclick="calcPercent()">%</button>
+                                    <button onclick="calcAdd('/')">÷</button>
+                                    <!-- ROW 2 -->
+                                    <button onclick="calcAdd('7')">7</button>
+                                    <button onclick="calcAdd('8')">8</button>
+                                    <button onclick="calcAdd('9')">9</button>
+                                    <button onclick="calcAdd('*')">×</button>
+                                    <!-- ROW 3 -->
+                                    <button onclick="calcAdd('4')">4</button>
+                                    <button onclick="calcAdd('5')">5</button>
+                                    <button onclick="calcAdd('6')">6</button>
+                                    <button onclick="calcAdd('-')">−</button>
+                                    <!-- ROW 4 -->
+                                    <button onclick="calcAdd('1')">1</button>
+                                    <button onclick="calcAdd('2')">2</button>
+                                    <button onclick="calcAdd('3')">3</button>
+                                    <button onclick="calcAdd('+')">+</button>
+                                    <!-- ROW 5 -->
+                                    <button onclick="calcAdd('0')">0</button>
+                                    <button onclick="calcAdd('.')">.</button>
+                                    <button class="equal" onclick="calcEqual()">=</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -434,6 +469,6 @@ container:hover{
             offset: 0
         });
     </script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

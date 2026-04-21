@@ -835,14 +835,17 @@ nav::before {
     border-radius: var(--radius-large);
     background: rgba(18, 14, 28, 0.6);
     display: flex;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .spotify-box iframe {
     display: block;
     width: 100%;
+    flex: 1 1 300px;
     max-width: 100%;
     height: 152px;
     border: none;
@@ -2276,4 +2279,70 @@ nav::before {
     .subnet-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.lernen-calc-wrapper {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lernen-calc-box {
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
+    border-radius: var(--radius-xl);
+    background: rgba(18, 14, 28, 0.9);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+}
+
+#calcDisplay {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 15px;
+    border-radius: var(--radius-medium);
+    border: 1px solid var(--color-border);
+    background: rgba(10, 6, 20, 0.8);
+    color: white;
+    font-size: 1.4rem;
+    text-align: right;
+    padding: 12px;
+    font-family: monospace;
+}
+
+.lernen-calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.lernen-calc-grid button {
+    padding: 16px 0;
+    border-radius: var(--radius-small);
+    border: none;
+    background: rgba(128, 0, 255, 0.2);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.lernen-calc-grid button:hover {
+    background: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.equal {
+    grid-column: span 2;
+
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-dark),
+        var(--color-accent)
+    );
+
+    font-weight: bold;
 }

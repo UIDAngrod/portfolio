@@ -195,3 +195,47 @@ function subnetCalc() {
  
     resEl.style.display = 'block';
 }
+
+// ======= CALCULATOR ======= //
+
+let calcExpression = "";
+
+function calcAdd(value) {
+    calcExpression += value;
+    updateDisplay();
+}
+
+function calcClear() {
+    calcExpression = "";
+    updateDisplay();
+}
+
+function calcBack() {
+    calcExpression = calcExpression.slice(0, -1);
+    updateDisplay();
+}
+
+function calcPercent() {
+    try {
+        calcExpression = (eval(calcExpression) / 100).toString();
+        updateDisplay();
+    } catch {
+        calcExpression = "";
+        document.getElementById("calcDisplay").value = "Error";
+    }
+}
+
+function calcEqual() {
+    try {
+        calcExpression = eval(calcExpression).toString();
+    } catch {
+        calcExpression = "";
+        document.getElementById("calcDisplay").value = "Error";
+        return;
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+    document.getElementById("calcDisplay").value = calcExpression;
+}
