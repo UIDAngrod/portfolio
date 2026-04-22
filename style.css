@@ -36,6 +36,8 @@
     --transition-fast: 0.2s linear;
     --transition-base: 0.3s ease;
     --transition-slow: 0.5s ease;
+
+    --lernen-content-width: 1000px;
 }
 
 /* ===== GLOBAL ===== */
@@ -405,12 +407,14 @@ nav::before {
 
 .lernen-section {
     width: 100%;
-    padding: 60px var(--spacing-medium);
+    padding: 80px var(--spacing-medium);
 }
 
 .lernen-hero {
-    max-width: 1100px;
-    margin: 0 auto 50px;
+    width: 100%;
+    max-width: var(--lernen-content-widht);
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
     text-align: center;
 }
 
@@ -421,6 +425,8 @@ nav::before {
 }
 
 .lernen-hero-description {
+    max-width: 800px;
+    margin: 0 auto 12px auto;
     font-size: 1.1rem;
     line-height: 1.6;
     color: var(--color-text);
@@ -434,7 +440,8 @@ nav::before {
 }
 
 .lernen-container {
-    max-width: 1100px;
+    width: 100%;
+    max-width: var(--lernen-content-width);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -449,6 +456,7 @@ nav::before {
 .werdegang-ref,
 .werdegang-kenntnisse,
 .werdegang-bildung,
+.werdegang-kompetenzen,
 .werdegang-erfahrungen {
     position: relative;
     padding: 28px 26px;
@@ -469,6 +477,7 @@ nav::before {
 .werdegang-ref::before,
 .werdegang-kenntnisse::before,
 .werdegang-bildung::before,
+.werdegang-kompetenzen::before,
 .werdegang-erfahrungen::before {
     content: "";
     position: absolute;
@@ -492,6 +501,7 @@ nav::before {
 .werdegang-ref:hover,
 .werdegang-kenntnisse:hover,
 .werdegang-bildung:hover,
+.werdegang-kompetenzen:hover,
 .werdegang-erfahrungen:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
@@ -503,6 +513,7 @@ nav::before {
 .werdegang-ref:hover::before,
 .werdegang-kenntnisse:hover::before,
 .werdegang-bildung:hover::before,
+.werdegang-kompetenzen:hover::before,
 .werdegang-erfahrungen:hover::before {
     opacity: 1;
     animation: glowBorder 2.2s linear infinite;
@@ -1076,6 +1087,7 @@ nav::before {
 .werdegang-personalien,
 .werdegang-ref,
 .werdegang-kenntnisse,
+.werdegang-kompetenzen,
 .werdegang-bildung,
 .werdegang-erfahrungen {
     padding: 24px 22px;
@@ -1085,6 +1097,7 @@ nav::before {
 .werdegang-personalien:hover,
 .werdegang-ref:hover,
 .werdegang-kenntnisse:hover,
+.werdegang-kompetenzen:hover,
 .werdegang-bildung:hover,
 .werdegang-erfahrungen:hover {
     transform: scale(1.07);
@@ -1094,6 +1107,7 @@ nav::before {
 .werdegang-personalien:hover::before,
 .werdegang-ref:hover::before,
 .werdegang-kenntnisse:hover::before,
+.werdegang-kompetenzen:hover::before,
 .werdegang-bildung:hover::before,
 .werdegang-erfahrungen:hover::before {
     opacity: 1;
@@ -1351,11 +1365,14 @@ nav::before {
 .profil-extra-inner {
     width: 100%;
     max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .glass-box {
     position: relative;
-    padding: 40px 35px;
+    padding: 30px 30px;
     border-radius: 24px;
 
     background: rgba(255, 255, 255, 0.06);
@@ -1369,6 +1386,7 @@ nav::before {
 
     overflow: hidden;
     isolation: isolate;
+    margin: 0;
 }
 
 /* breath purple border */
@@ -1714,6 +1732,7 @@ nav::before {
     display: flex;
     justify-content: center;
     width: 100%;
+    max-width: var(--lernen-content-width);
     margin: 0 auto 35px;
     padding: 0 20px;
     overflow: hidden;
@@ -1817,6 +1836,7 @@ nav::before {
 /* ===== SLIDER ===== */
 .tab-slider {
     width: 100%;
+    max-width: var(--lernen-content-width);
     max-width: 1000px;
     margin: 0 auto;
     overflow: hidden;
@@ -1833,7 +1853,7 @@ nav::before {
     min-width: 100%;
     display: flex;
     justify-content: center;
-    padding: 40px;
+    padding: 40px 0;
 }
 
 .tab-slide .lernen-box {
@@ -1905,6 +1925,7 @@ nav::before {
 /* Abstand */
 .lernen-box {
     width: 100%;
+    max-width: var(--lernen-content-widht);
     max-width: 1000px;
 
     height: auto;
