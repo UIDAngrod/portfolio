@@ -59,6 +59,17 @@ body {
 /* ===== COMPONENTS ===== */
 
 /* Social Icons */
+.home-actions{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
 .social a {
     width: 55px;
     height: 55px;
@@ -455,6 +466,7 @@ nav::before {
 .werdegang-personalien,
 .werdegang-ref,
 .werdegang-kenpro,
+.werdegang-proken,
 .werdegang-kenntnisse,
 .werdegang-bildung,
 .werdegang-kompetenzen,
@@ -477,6 +489,7 @@ nav::before {
 .werdegang-personalien::before,
 .werdegang-ref::before,
 .werdegang-kenpro::before,
+.werdegang-proken::before,
 .werdegang-kenntnisse::before,
 .werdegang-bildung::before,
 .werdegang-kompetenzen::before,
@@ -502,6 +515,7 @@ nav::before {
 .werdegang-personalien:hover,
 .werdegang-ref:hover,
 .werdegang-kenpro:hover,
+.werdegang-proken:hover,
 .werdegang-kenntnisse:hover,
 .werdegang-bildung:hover,
 .werdegang-kompetenzen:hover,
@@ -515,6 +529,7 @@ nav::before {
 .werdegang-personalien:hover::before,
 .werdegang-ref:hover::before,
 .werdegang-kenpro:hover::before,
+.werdegang-proken:hover::before,
 .werdegang-kenntnisse:hover::before,
 .werdegang-bildung:hover::before,
 .werdegang-kompetenzen:hover::before,
@@ -1092,6 +1107,7 @@ nav::before {
 .werdegang-ref,
 .werdegang-kenntnisse,
 .werdegang-kenpro,
+.werdegang-proken,
 .werdegang-kompetenzen,
 .werdegang-bildung,
 .werdegang-erfahrungen {
@@ -1102,6 +1118,7 @@ nav::before {
 .werdegang-personalien:hover,
 .werdegang-ref:hover,
 .werdegang-kenpro:hover,
+.werdegang-proken:hover,
 .werdegang-kenntnisse:hover,
 .werdegang-kompetenzen:hover,
 .werdegang-bildung:hover,
@@ -1113,6 +1130,7 @@ nav::before {
 .werdegang-personalien:hover::before,
 .werdegang-ref:hover::before,
 .werdegang-kenpro:hover::before,
+.werdegang-proken:hover::before,
 .werdegang-kenntnisse:hover::before,
 .werdegang-kompetenzen:hover::before,
 .werdegang-bildung:hover::before,
@@ -1232,6 +1250,7 @@ nav::before {
     .werdegang-personalien,
     .werdegang-ref,
     .werdegang-kenpro,
+    .werdegang-proken,
     .werdegang-kenntnisse,
     .werdegang-bildung,
     .werdegang-erfahrungen {
