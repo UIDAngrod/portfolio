@@ -1695,9 +1695,6 @@ nav::before {
         grid-template-columns: 1fr;
     }
 
-    .lernen-container div {
-        width: 100%;
-    }
 
     .lernen-1 { order: 1; }
     .lernen-2 { order: 2; }
@@ -1739,26 +1736,15 @@ nav::before {
 .lernen-tabs-wrapper {
     display: flex;
     justify-content: center;
-    width: 100%;
-    max-width: var(--lernen-content-width);
-    margin: 0 auto 35px;
-    padding: 0 20px;
-    overflow: hidden;
 }
 
-
-
-/* ===== SCROLL CONTAINER ===== */
 .lernen-tabs-scroll {
     display: flex;
-    width: 100%;
-    gap: 18px;
+    flex-wrap: wrap;
     justify-content: center;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 14px 40px;
+    gap: 14px;
 
-    scrollbar-width: none; 
+    max-width: 800px;
 }
 
 .lernen-tabs-scroll::-webkit-scrollbar {
@@ -1869,13 +1855,59 @@ nav::before {
  
 }
 
+.tab-slide .lernen-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
 
-/* ===== SLIDER LAYOUT ===== */
+
+/* ===== SLIDER LAYOUT FIX ===== */
+
 .tab-slider .lernen-row {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center; 
-    gap: 40px;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.tab-slider .lernen-row.reverse {
+    grid-template-columns: 1fr 180px;
+}
+
+.tab-slider .lernen-row.reverse .lernen-text {
+    order: 1;
+}
+
+.tab-slider .lernen-row.reverse .lernen-image {
+    order: 2;
+}
+
+.tab-slider .lernen-image {
+    width: clamp(120px, 20vw, 220px);
+    padding: 2rem;
+    margin-left: -10px;
+    justify-content: flex-start;
+}
+
+.tab-slider .lernen-image img {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+
+.tab-slider .lernen-text {
+    width: 100%;
+    min-width: 0;
+}
+
+.tab-slider .lernen-description {
+    text-align: left;
+    line-height: 1.7;
 }
 
 /* TEXT LINKS */
@@ -1900,6 +1932,7 @@ nav::before {
     height: auto;
     margin-left: 20px;
 }
+
 
 
 /* ===== RESPONSIVE ===== */
@@ -1927,6 +1960,56 @@ nav::before {
     .tab-slider .profilanimation-box {
         margin-left: 0;
         width: 180px;
+    }
+}
+
+/* =====  ===== */
+
+@media (max-width: 768px) {
+    .tab-slider .lernen-row,
+    .tab-slider .lernen-row.reverse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 22px;
+    }
+
+    .tab-slider .lernen-image,
+    .tab-slider .lernen-row.reverse .lernen-image {
+        order: 1;
+        width: 160px;
+        max-width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tab-slider .lernen-image img,
+    .tab-slider .lernen-row.reverse .lernen-image img {
+        width: 100%;
+        max-width: 140px;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .tab-slider .lernen-text,
+    .tab-slider .lernen-row.reverse .lernen-text {
+        order: 2;
+        width: 100%;
+        text-align: center;
+    }
+
+    .tab-slider .lernen-title,
+    .tab-slider .lernen-description {
+        text-align: center;
     }
 }
 
@@ -2548,4 +2631,214 @@ nav::before {
     color: rgba(255, 255, 255, 0.28);
     margin: 0;
     font-style: italic;
+}
+
+
+/* ===== OSI INSIDE LERNEN BOX ===== */
+
+.osi-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* CARD */
+
+.osi-card {
+    position: relative;
+    padding: 18px 20px;
+    border-radius: 18px;
+    cursor: pointer;
+
+    background: rgba(15, 10, 25, 0.75);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+}
+
+/* LEFT GLOW BAR */
+
+.osi-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 5px;
+    border-radius: 10px;
+    background: purple;
+    box-shadow: 0 0 15px purple;
+}
+
+/* HEADER */
+
+.osi-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.osi-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(128,0,128,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* TEXT */
+
+.osi-short {
+    margin-left: 55px;
+    color: rgba(255,255,255,0.6);
+}
+
+.osi-details {
+    margin-left: 55px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+/* HOVER */
+
+.osi-stack:hover .osi-card {
+    opacity: 0.4;
+    transform: scale(0.96);
+}
+
+.osi-card:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(40, 10, 70, 0.9);
+    box-shadow: 0 0 25px purple;
+}
+
+.osi-card:hover .osi-details {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+/* COLORS */
+
+.osi-7::after { background:#ff6b6b; box-shadow:0 0 15px #ff6b6b; }
+.osi-6::after { background:#c77dff; box-shadow:0 0 15px #c77dff; }
+.osi-5::after { background:#845ef7; box-shadow:0 0 15px #845ef7; }
+.osi-4::after { background:#339af0; box-shadow:0 0 15px #339af0; }
+.osi-3::after { background:#f59f00; box-shadow:0 0 15px #f59f00; }
+.osi-2::after { background:#22b8cf; box-shadow:0 0 15px #22b8cf; }
+.osi-1::after { background:#868e96; box-shadow:0 0 15px #868e96; }
+
+/* ===== Spotify Layout ===== */
+
+.tab-slide .lernen-row:has(.spotify-box) {
+    display: block;
+}
+
+.tab-slide .lernen-row:has(.spotify-box) .lernen-text {
+    width: 100%;
+}
+
+.spotify-box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+/* Iframes */
+.spotify-box iframe {
+    width: 100%;
+    height: 152px;
+    border: none;
+    border-radius: 16px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .spotify-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== FIX: Animationen Tab wieder wie vorher ===== */
+
+/* Nur erster Tab = Animationen */
+.tab-slide:nth-child(1) .lernen-row {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    align-items: center;
+    gap: 40px;
+}
+
+.tab-slide:nth-child(1) .lernen-text {
+    width: 100%;
+}
+
+.tab-slide:nth-child(1) .lernen-image {
+    width: 260px;
+    max-width: 260px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.tab-slide:nth-child(1) .profilanimation-box {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .tab-slide:nth-child(1) .lernen-row {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+
+    .tab-slide:nth-child(1) .lernen-text {
+        order: 1;
+        text-align: center;
+    }
+
+    .tab-slide:nth-child(1) .lernen-image {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+    }
+
+    .tab-slide:nth-child(1) .profilanimation-box {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* ===== FIX: Animation Box kleiner ===== */
+
+.tab-slide:nth-child(1) .profilanimation-box {
+    width: 110px;
+    height: 110px;
+}
+
+.tab-slide:nth-child(1) .profilanimation-box h2 {
+    font-size: 0.8rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .tab-slide:nth-child(1) .profilanimation-box {
+        width: 90px;
+        height: 90px;
+    }
 }
