@@ -1606,13 +1606,13 @@ nav::before {
 
 /* ===== RESPONSIVE ===== */
 
-/* ── 992px ── */
+/*  992px  */
 @media (max-width: 992px) {
     .glass-box { padding: 32px 26px; }
     .profil-extra-text { font-size: 1.05rem; line-height: 1.8; }
 }
 
-/* ── 900px ── */
+/*  900px  */
 @media (max-width: 900px) {
     .profil-container { flex-direction: column; text-align: center; gap: 35px; }
     .profil-text { max-width: 100%; align-items: center; }
@@ -1632,7 +1632,7 @@ nav::before {
     .werdegang-language-list .lang { grid-template-columns: 120px auto; justify-content: center; margin-left: auto; margin-right: auto; }
 }
 
-/* ── 768px ── */
+/*  768px  */
 @media (max-width: 768px) {
     nav .logo { position: absolute; top: 50%; left: var(--spacing-small); transform: translateY(-50%); font-size: 1.5rem; }
     .nav-container .links { display: none; }
@@ -1711,7 +1711,7 @@ nav::before {
     .spotify-box { grid-template-columns: 1fr; }
 }
 
-/* ── 600px ── */
+/*  600px  */
 @media (max-width: 600px) {
     .werdegang-image { width: 220px; height: 220px; }
     .werdegang-container { padding: 24px 16px; border-radius: 22px; }
@@ -1723,14 +1723,14 @@ nav::before {
     .werdegang-skills { margin-left: 18px; }
 }
 
-/* ── 480px ── */
+/*  480px  */
 @media (max-width: 480px) {
     .glass-box { padding: 22px 16px; }
     .profil-extra-text { font-size: 0.94rem; line-height: 1.7; }
     .subnet-grid { grid-template-columns: 1fr; }
 }
 
-/* ── 420px ── */
+/*  420px  */
 @media (max-width: 420px) {
     .werdegang-section { padding: 20px 10px 45px; }
     .werdegang-image { width: 190px; height: 190px; }
@@ -1740,7 +1740,7 @@ nav::before {
     .werdegang-language-list .lang { grid-template-columns: 90px auto; }
 }
 
-/* ── 400px ── */
+/*  400px  */
 @media (max-width: 400px) {
     .home-image { width: 50%; height: 40%; }
     .home-content { width: 80%; }
@@ -1770,7 +1770,6 @@ nav::before {
     position: relative;
     overflow: hidden;
 
-    /* flex-grow wird animiert — das schiebt die Nachbarn smooth */
     flex: 2 1 260px;
     min-height: 220px;
 
@@ -1789,11 +1788,9 @@ nav::before {
     min-height: 440px;
 }
 
-/* Hover: wächst — Nachbarn weichen automatisch */
 .hobby-card:hover      { flex-grow: 5; }
 .hobby-card.large:hover { flex-grow: 7; min-height: 480px; }
 
-/* Bild */
 .hobby-card img,
 .hobby-preview {
     position: absolute;
@@ -1871,12 +1868,12 @@ nav::before {
     margin: 0;
 }
 
-/* Platzhalter ohne Bild */
+/* Platzhalter */
 .hobby-preview {
     background: linear-gradient(135deg, rgba(108, 0, 255, 0.7), rgba(30, 64, 175, 0.65));
 }
 
-/* Mobile */
+
 @media (max-width: 900px) {
     .hobby-card,
     .hobby-card.large {
