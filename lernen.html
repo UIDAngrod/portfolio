@@ -65,7 +65,7 @@
 <div class="lernen-tabs-wrapper">
     <div class="lernen-tabs-scroll" id="lernenTabs">
         <button class="lernen-tab active" onclick="switchTab(this, 0)">Animationen</button>
-        <button class="lernen-tab" onclick="switchTab(this, 1)">*Wird aktuell umstrukturiert*</button>
+        <button class="lernen-tab" onclick="switchTab(this, 1)">Firmensuche</button>
         <button class="lernen-tab" onclick="switchTab(this, 2)">SPOTIFY</button>
         <button class="lernen-tab" onclick="switchTab(this, 3)">HTML</button>
         <button class="lernen-tab" onclick="switchTab(this, 4)">CSS</button>
@@ -209,7 +209,354 @@
 
         <div class="tab-slide">
             <div class="lernen-box">
-                    Diese Seite wird hier aktuell umgebaut 
+                    <!-- ===== FIRMEN-SUCHE WIDGET ===== -->
+<!-- Einbetten in: TAB 2 HTML > tab-slide > lernen-box -->
+
+<style>
+.fs-wrap { width: 100%; font-family: 'Roboto', sans-serif; color: #fff; }
+
+.fs-branche-label { font-size: 0.72rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+.fs-branche-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+.fs-branche-pill {
+    padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; cursor: pointer;
+    border: 1px solid rgba(168,85,247,0.25); background: rgba(128,0,255,0.08);
+    color: rgba(255,255,255,0.6); transition: all 0.18s; user-select: none;
+    display: flex; align-items: center; gap: 6px;
+}
+.fs-branche-pill:hover { border-color: rgba(168,85,247,0.55); color: #fff; background: rgba(128,0,255,0.18); }
+.fs-branche-pill.selected { background: rgba(128,0,255,0.35); border-color: #a855f7; color: #fff; box-shadow: 0 0 10px rgba(128,0,255,0.35); }
+
+.fs-search-bar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.fs-filters { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; }
+
+.fs-input {
+    width: 100%; padding: 11px 16px; border-radius: 12px;
+    border: 1px solid rgba(180,120,255,0.3); background: rgba(10,6,20,0.8);
+    color: #fff; font-size: 1rem; outline: none; font-family: 'Roboto', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.fs-input:focus { border-color: purple; box-shadow: 0 0 0 3px rgba(128,0,255,0.15); }
+.fs-input::placeholder { color: rgba(255,255,255,0.3); }
+
+.fs-select {
+    padding: 10px 14px; border-radius: 12px;
+    border: 1px solid rgba(180,120,255,0.25); background: rgba(10,6,20,0.8);
+    color: #fff; font-size: 0.9rem; font-family: 'Roboto', sans-serif;
+    outline: none; cursor: pointer; transition: border-color 0.2s;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+    height: 43px;
+}
+.fs-select option { background: #1a0a2e; color: #fff; }
+.fs-select:focus { border-color: purple; }
+
+.fs-btn {
+    padding: 11px 24px; border-radius: 12px;
+    background: linear-gradient(135deg, #8a2be2, #1e90ff);
+    border: none; color: #fff; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    box-shadow: 0 0 14px rgba(128,0,255,0.35); font-family: 'Roboto', sans-serif;
+    height: 43px;
+}
+.fs-btn:hover { transform: scale(1.04); box-shadow: 0 0 24px rgba(128,0,255,0.6); }
+.fs-btn:active { transform: scale(0.97); }
+
+.fs-info-bar { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-bottom: 14px; min-height: 20px; }
+.fs-count { color: #c77dff; font-weight: 600; }
+
+.fs-loading { display: none; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); font-size: 0.9rem; padding: 30px 0; justify-content: center; }
+.fs-spinner { width: 22px; height: 22px; border: 2px solid rgba(128,0,255,0.2); border-top-color: purple; border-radius: 50%; animation: fs-spin 0.7s linear infinite; }
+@keyframes fs-spin { to { transform: rotate(360deg); } }
+
+.fs-error { display: none; padding: 12px 16px; border-radius: 12px; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25); color: #f87171; font-size: 0.88rem; margin-bottom: 14px; }
+.fs-empty { display: none; text-align: center; padding: 40px 0; color: rgba(255,255,255,0.35); font-size: 0.95rem; }
+
+.fs-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+.fs-card {
+    background: rgba(18,10,32,0.75); border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 16px; padding: 18px 20px;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    animation: fs-fadein 0.3s ease both;
+}
+@keyframes fs-fadein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.fs-card:hover { border-color: rgba(168,85,247,0.5); box-shadow: 0 0 20px rgba(128,0,255,0.18); transform: translateY(-2px); }
+
+.fs-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.fs-card-name { font-size: 1.05rem; font-weight: 700; color: #d15cff; text-shadow: 0 0 10px rgba(128,0,255,0.4); line-height: 1.3; flex: 1; }
+
+.fs-badge { flex-shrink: 0; padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; background: rgba(128,0,255,0.2); border: 1px solid rgba(168,85,247,0.35); color: #c77dff; white-space: nowrap; }
+.fs-badge.aktiv { background: rgba(22,163,74,0.15); border-color: rgba(34,197,94,0.3); color: #4ade80; }
+.fs-badge.geloescht { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.25); color: #f87171; }
+
+.fs-card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; margin-bottom: 12px; }
+.fs-detail { display: flex; flex-direction: column; gap: 1px; }
+.fs-detail-label { font-size: 0.68rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+.fs-detail-val { font-size: 0.88rem; color: rgba(255,255,255,0.85); font-family: monospace; word-break: break-word; }
+.fs-detail-val.hl { color: #a78bfa; }
+.fs-detail-val.purpose { font-family: sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+
+.fs-card-contact { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
+.fs-contact-pill {
+    display: flex; align-items: center; gap: 5px; padding: 5px 12px;
+    border-radius: 20px; border: 1px solid rgba(168,85,247,0.25);
+    background: rgba(128,0,255,0.08); font-size: 0.8rem; color: rgba(255,255,255,0.75);
+    text-decoration: none; transition: background 0.15s, border-color 0.15s;
+}
+.fs-contact-pill:hover { background: rgba(128,0,255,0.22); border-color: rgba(168,85,247,0.55); color: #fff; }
+
+.fs-pagination { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+.fs-page-btn { padding: 7px 18px; border-radius: 20px; border: 1px solid rgba(168,85,247,0.3); background: rgba(10,6,20,0.7); color: rgba(255,255,255,0.6); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-family: 'Roboto', sans-serif; }
+.fs-page-btn:hover:not(:disabled) { background: rgba(128,0,255,0.2); color: #fff; border-color: rgba(168,85,247,0.6); }
+.fs-page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.fs-page-btn.active { background: rgba(128,0,255,0.35); color: #fff; border-color: purple; }
+
+.fs-hint { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.3); font-size: 0.9rem; line-height: 1.6; }
+.fs-hint span { color: #a78bfa; }
+
+@media (max-width: 640px) {
+    .fs-filters { grid-template-columns: 1fr; }
+    .fs-card-details { grid-template-columns: 1fr; }
+    .fs-btn { width: 100%; }
+}
+</style>
+
+<div class="fs-wrap">
+    <h2 class="lernen-title" style="margin-bottom:6px;"></h2>
+                        <div class="lernen-text">
+                        <h2 class="lernen-title">Firmensuche in Handelsregister</h2>
+                        <p class="lernen-description">
+                            Ich hatte echt Schwierigkeiten, nach Adressen von Unternehmen zu suchen. Mit der Hilfe von KI habe ich eine Möglichkeit erstellt, schneller an Firmenadressen zu kommen und diese nach Branchen zu filtern. <br> <br>
+                        </p>
+                        </div>
+    <p class="lernen-description" style="margin-bottom:20px; font-size:0.88rem; color:rgba(255,255,255,0.4);">Live-Suche im Handelsregister &mdash; via Zefix API</p>
+
+    <div class="fs-branche-label">1. Branche wählen</div>
+    <div class="fs-branche-row" id="fsBranchePills"></div>
+
+    <div class="fs-branche-label" style="margin-top:4px;">2. Optional eingrenzen</div>
+    <div class="fs-search-bar">
+        <div class="fs-filters">
+            <select class="fs-select" id="fsCanton">
+                <option value="">🇨🇭 Alle Kantone</option>
+                <option value="AG">Aargau (AG)</option>
+                <option value="AI">Appenzell Innerrhoden (AI)</option>
+                <option value="AR">Appenzell Ausserrhoden (AR)</option>
+                <option value="BE">Bern (BE)</option>
+                <option value="BL">Basel-Landschaft (BL)</option>
+                <option value="BS">Basel-Stadt (BS)</option>
+                <option value="FR">Freiburg (FR)</option>
+                <option value="GE">Genf (GE)</option>
+                <option value="GL">Glarus (GL)</option>
+                <option value="GR">Graubünden (GR)</option>
+                <option value="JU">Jura (JU)</option>
+                <option value="LU">Luzern (LU)</option>
+                <option value="NE">Neuenburg (NE)</option>
+                <option value="NW">Nidwalden (NW)</option>
+                <option value="OW">Obwalden (OW)</option>
+                <option value="SG">St. Gallen (SG)</option>
+                <option value="SH">Schaffhausen (SH)</option>
+                <option value="SO">Solothurn (SO)</option>
+                <option value="SZ">Schwyz (SZ)</option>
+                <option value="TG">Thurgau (TG)</option>
+                <option value="TI">Tessin (TI)</option>
+                <option value="UR">Uri (UR)</option>
+                <option value="VD">Waadt (VD)</option>
+                <option value="VS">Wallis (VS)</option>
+                <option value="ZG">Zug (ZG)</option>
+                <option value="ZH">Zürich (ZH)</option>
+            </select>
+            <input class="fs-input" type="text" id="fsQuery" placeholder="Firmenname eingrenzen (optional)" />
+            <button class="fs-btn" onclick="fsSearch(1)">Suchen</button>
+        </div>
+    </div>
+
+    <div class="fs-info-bar">
+        <span id="fsResultCount"></span>
+        <span style="font-size:0.75rem;opacity:0.4;">Quelle: Zefix / admin.ch</span>
+    </div>
+
+    <div class="fs-error" id="fsError"></div>
+    <div class="fs-loading" id="fsLoading"><div class="fs-spinner"></div><span>Suche läuft…</span></div>
+    <div class="fs-empty" id="fsEmpty">Keine Treffer gefunden. Versuche eine andere Branche oder einen anderen Kanton.</div>
+    <div class="fs-grid" id="fsGrid"></div>
+    <div class="fs-hint" id="fsHint">Wähle eine <span>Branche</span> aus, dann klicke <span>Suchen</span>.<br>Optional nach Kanton oder Firmennamen filtern.</div>
+    <div class="fs-pagination" id="fsPagination"></div>
+</div>
+
+<script>
+(function() {
+
+var BRANCHEN = [
+    { label: 'Gastronomie',     icon: '🍽️', keys: ['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Beiz','Catering'] },
+    { label: 'Informatik / IT', icon: '💻', keys: ['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Cyber','Web','App'] },
+    { label: 'Bau & Handwerk',  icon: '🏗️', keys: ['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann','Haustechnik'] },
+    { label: 'Handel & Retail', icon: '🛒', keys: ['Handel','Markt','Shop','Import','Export','Trading','Vertrieb','Detailhandel'] },
+    { label: 'Gesundheit',      icon: '🏥', keys: ['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio','Medizin'] },
+    { label: 'Finanzen',        icon: '💰', keys: ['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital','Vermögen'] },
+    { label: 'Immobilien',      icon: '🏠', keys: ['Immobilien','Liegenschaften','Real Estate','Wohnen','Verwaltung','Hausverwaltung'] },
+    { label: 'Transport',       icon: '🚛', keys: ['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug','Fahrzeug'] },
+    { label: 'Bildung',         icon: '🎓', keys: ['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training'] },
+    { label: 'Marketing',       icon: '📢', keys: ['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik','Kreativ'] },
+    { label: 'Industrie',       icon: '🏭', keys: ['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical','Manufacturing'] },
+    { label: 'Reinigung',       icon: '🧹', keys: ['Reinigung','Cleaning','Gebäudereinigung','Haushalt','Unterhalt','Hygiene'] },
+    { label: 'Rechtsberatung',  icon: '⚖️', keys: ['Anwalt','Rechts','Legal','Kanzlei','Notar','Advokat','Law'] },
+    { label: 'Tourismus',       icon: '✈️', keys: ['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Ferien','Pension'] },
+    { label: 'Energie',         icon: '⚡', keys: ['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik','Elektrizität'] },
+    { label: 'Landwirtschaft',  icon: '🌾', keys: ['Landwirtschaft','Bauernhof','Agrar','Forst','Gärtnerei','Obst','Gemüse'] },
+];
+
+var PER_PAGE = 10;
+var allResults = [];
+var selected = null;
+
+// Build pills
+var pillRow = document.getElementById('fsBranchePills');
+BRANCHEN.forEach(function(b) {
+    var pill = document.createElement('div');
+    pill.className = 'fs-branche-pill';
+    pill.innerHTML = '<span style="font-size:1em;line-height:1">' + b.icon + '</span>' + b.label;
+    pill.onclick = function() {
+        document.querySelectorAll('.fs-branche-pill').forEach(function(p){ p.classList.remove('selected'); });
+        pill.classList.add('selected');
+        selected = b;
+    };
+    pillRow.appendChild(pill);
+});
+
+window.fsSearch = async function(page) {
+    if (!selected) { fsShowError('Bitte zuerst eine Branche auswählen (Pill oben anklicken).'); return; }
+
+    var canton = document.getElementById('fsCanton').value;
+    var extra  = document.getElementById('fsQuery').value.trim();
+    var terms  = extra ? [extra] : selected.keys.slice(0, 4);
+
+    fsSetState('loading');
+    allResults = [];
+
+    try {
+        var fetches = terms.map(function(term) {
+            var body = { maxEntries: 50, languageKey: 'de', activeOnly: true, name: term };
+            if (canton) body.cantonAbbreviation = canton;
+            return fetch('https://www.zefix.ch/ZefixREST/api/v1/firm/search', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(body)
+            }).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
+        });
+
+        var results = await Promise.all(fetches);
+        var seen = new Set();
+        results.forEach(function(list) {
+            (Array.isArray(list) ? list : (list.list || [])).forEach(function(firm) {
+                var key = firm.uid || firm.name;
+                if (!seen.has(key)) { seen.add(key); allResults.push(firm); }
+            });
+        });
+
+        if (allResults.length === 0) { fsSetState('empty'); return; }
+        fsSetState('results');
+        renderPage(1);
+    } catch(e) {
+        fsShowError('API-Fehler. Auf GitHub Pages funktioniert dies direkt im Browser.');
+    }
+};
+
+function renderPage(page) {
+    var start = (page - 1) * PER_PAGE;
+    var slice = allResults.slice(start, start + PER_PAGE);
+    var grid  = document.getElementById('fsGrid');
+    grid.innerHTML = '';
+    slice.forEach(function(firm, i) { grid.appendChild(makeCard(firm, i)); });
+    document.getElementById('fsResultCount').innerHTML =
+        '<span class="fs-count">' + allResults.length + '</span> Firmen &mdash; ' +
+        selected.icon + ' <b style="color:#d15cff">' + selected.label + '</b>';
+    renderPagination(allResults.length, page);
+}
+
+function makeCard(firm, delay) {
+    var el = document.createElement('div');
+    el.className = 'fs-card';
+    el.style.animationDelay = (delay * 35) + 'ms';
+
+    var active  = !firm.deleteDate && firm.status !== 'RADIE';
+    var name    = esc(firm.name || '—');
+    var uid     = esc(firm.uid || '—');
+    var lf      = esc((firm.legalForm && firm.legalForm.name && firm.legalForm.name.de) || firm.legalFormAbbreviation || '—');
+    var canton  = esc(firm.canton || firm.cantonAbbreviation || '—');
+    var reg     = firm.registrationDate || '';
+    var purpose = ((firm.purpose && firm.purpose.de) || '').trim();
+    var addr    = firm.address || {};
+    var addrStr = [addr.street, addr.houseNumber, addr.swissZipCode, addr.town].filter(Boolean).join(' ');
+    var zip     = addr.swissZipCode || '';
+    var town    = addr.town || '';
+    var zUrl    = firm.uid ? 'https://www.zefix.ch/de/search/entity/list/firm/' + encodeURIComponent(firm.uid) : '';
+
+    var pills = '';
+    if (addrStr) pills += '<span class="fs-contact-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>' + esc(addrStr.length > 45 ? addrStr.slice(0,45)+'…' : addrStr) + '</span>';
+    if (zUrl)    pills += '<a class="fs-contact-pill" href="' + zUrl + '" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Zefix</a>';
+    if (zip && town) pills += '<a class="fs-contact-pill" href="https://www.google.com/maps/search/' + encodeURIComponent(zip+' '+town+' Schweiz') + '" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>Karte</a>';
+
+    el.innerHTML =
+        '<div class="fs-card-top"><div class="fs-card-name">' + name + '</div><span class="fs-badge ' + (active?'aktiv':'geloescht') + '">' + (active?'Aktiv':'Gelöscht') + '</span></div>' +
+        '<div class="fs-card-details">' +
+            '<div class="fs-detail"><span class="fs-detail-label">UID</span><span class="fs-detail-val hl">' + uid + '</span></div>' +
+            '<div class="fs-detail"><span class="fs-detail-label">Rechtsform</span><span class="fs-detail-val">' + lf + '</span></div>' +
+            '<div class="fs-detail"><span class="fs-detail-label">Kanton</span><span class="fs-detail-val">' + canton + '</span></div>' +
+            (reg ? '<div class="fs-detail"><span class="fs-detail-label">Eingetragen</span><span class="fs-detail-val">' + fmtDate(reg) + '</span></div>' : '') +
+            (purpose ? '<div class="fs-detail" style="grid-column:1/-1"><span class="fs-detail-label">Zweck</span><span class="fs-detail-val purpose">' + esc(purpose.length>130?purpose.slice(0,130)+'…':purpose) + '</span></div>' : '') +
+        '</div>' +
+        (pills ? '<div class="fs-card-contact">' + pills + '</div>' : '');
+    return el;
+}
+
+function renderPagination(total, curr) {
+    var pages = Math.ceil(total / PER_PAGE);
+    var pg = document.getElementById('fsPagination');
+    pg.innerHTML = '';
+    if (pages <= 1) return;
+    pg.appendChild(mkBtn('← Zurück', curr===1, function(){ renderPage(curr-1); }));
+    for (var i=1; i<=Math.min(pages,8); i++) {
+        (function(p){
+            var b = mkBtn(p, false, function(){ renderPage(p); });
+            if (p===curr) b.classList.add('active');
+            pg.appendChild(b);
+        })(i);
+    }
+    if (pages > 8) { var s=document.createElement('span'); s.style.cssText='font-size:.82rem;color:rgba(255,255,255,.3)'; s.textContent='… '+pages+' Seiten'; pg.appendChild(s); }
+    pg.appendChild(mkBtn('Weiter →', curr===pages, function(){ renderPage(curr+1); }));
+}
+
+function mkBtn(label, disabled, fn) {
+    var b = document.createElement('button');
+    b.className = 'fs-page-btn'; b.textContent = label; b.disabled = disabled; b.onclick = fn;
+    return b;
+}
+
+function fsSetState(state) {
+    document.getElementById('fsLoading').style.display = state==='loading'?'flex':'none';
+    document.getElementById('fsError').style.display   = 'none';
+    document.getElementById('fsEmpty').style.display   = state==='empty'?'block':'none';
+    document.getElementById('fsHint').style.display    = state==='idle'?'block':'none';
+    if (state!=='results') { document.getElementById('fsGrid').innerHTML=''; document.getElementById('fsPagination').innerHTML=''; document.getElementById('fsResultCount').innerHTML=''; }
+}
+
+function fsShowError(msg) {
+    var el = document.getElementById('fsError'); el.style.display='block'; el.textContent=msg;
+    document.getElementById('fsLoading').style.display='none';
+    document.getElementById('fsGrid').innerHTML=''; document.getElementById('fsPagination').innerHTML=''; document.getElementById('fsResultCount').innerHTML='';
+}
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtDate(d) { try { var p=d.split('-'); return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d; } catch(e){ return d; } }
+
+document.getElementById('fsQuery').addEventListener('keydown', function(e){ if(e.key==='Enter') fsSearch(1); });
+
+})();
+</script>
                 
 
 
