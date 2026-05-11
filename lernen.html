@@ -205,11 +205,11 @@
             </div>
         </div>
 
-                <!-- ===== TAB 2 HTML ===== -->
+                <!-- ===== TAB 2 FIRMENSUCHE ===== -->
 
         <div class="tab-slide">
             <div class="lernen-box">
-                    <!-- ===== FIRMEN-SUCHE WIDGET ===== -->
+                    
 <style>
 .fs-wrap { width: 100%; font-family: 'Roboto', sans-serif; color: #fff; }
 
@@ -450,285 +450,440 @@
 <script>
 (function(){
 
-var BRANCHEN = [
-    { label:'Gastronomie',     icon:'🍽️', keys:['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Catering'] },
-    { label:'Informatik / IT', icon:'💻', keys:['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Web'] },
-    { label:'Bau & Handwerk',  icon:'🏗️', keys:['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann'] },
-    { label:'Handel & Retail', icon:'🛒', keys:['Handel','Markt','Import','Export','Trading','Vertrieb','Detailhandel'] },
-    { label:'Gesundheit',      icon:'🏥', keys:['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio'] },
-    { label:'Finanzen',        icon:'💰', keys:['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital'] },
-    { label:'Immobilien',      icon:'🏠', keys:['Immobilien','Liegenschaften','Real Estate','Wohnen','Hausverwaltung'] },
-    { label:'Transport',       icon:'🚛', keys:['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug'] },
-    { label:'Bildung',         icon:'🎓', keys:['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training'] },
-    { label:'Marketing',       icon:'📢', keys:['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik'] },
-    { label:'Industrie',       icon:'🏭', keys:['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical'] },
-    { label:'Reinigung',       icon:'🧹', keys:['Reinigung','Cleaning','Gebäudereinigung','Unterhalt','Hygiene'] },
-    { label:'Rechtsberatung',  icon:'⚖️', keys:['Anwalt','Rechts','Legal','Kanzlei','Notar','Advokat'] },
-    { label:'Tourismus',       icon:'✈️', keys:['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Pension'] },
-    { label:'Energie',         icon:'⚡', keys:['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik'] },
-    { label:'Landwirtschaft',  icon:'🌾', keys:['Landwirtschaft','Bauernhof','Agrar','Gärtnerei','Forst'] },
+const BRANCHEN = [
+
+    {
+        label:'Gastronomie',
+        icon:'🍽️',
+        keys:['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Catering']
+    },
+
+    {
+        label:'Informatik / IT',
+        icon:'💻',
+        keys:['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Web']
+    },
+
+    {
+        label:'Bau & Handwerk',
+        icon:'🏗️',
+        keys:['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann']
+    },
+
+    {
+        label:'Handel & Retail',
+        icon:'🛒',
+        keys:['Handel','Markt','Import','Export','Trading','Vertrieb','Detailhandel']
+    },
+
+    {
+        label:'Gesundheit',
+        icon:'🏥',
+        keys:['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio']
+    },
+
+    {
+        label:'Finanzen',
+        icon:'💰',
+        keys:['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital']
+    },
+
+    {
+        label:'Immobilien',
+        icon:'🏠',
+        keys:['Immobilien','Liegenschaften','Real Estate','Wohnen','Hausverwaltung']
+    },
+
+    {
+        label:'Transport',
+        icon:'🚛',
+        keys:['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug']
+    },
+
+    {
+        label:'Bildung',
+        icon:'🎓',
+        keys:['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training']
+    },
+
+    {
+        label:'Marketing',
+        icon:'📢',
+        keys:['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik']
+    },
+
+    {
+        label:'Industrie',
+        icon:'🏭',
+        keys:['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical']
+    },
+
+    {
+        label:'Reinigung',
+        icon:'🧹',
+        keys:['Reinigung','Cleaning','Gebäudereinigung','Unterhalt','Hygiene']
+    },
+
+    {
+        label:'Rechtsberatung',
+        icon:'⚖️',
+        keys:['Anwalt','Rechts','Legal','Kanzlei','Notar','Advokat']
+    },
+
+    {
+        label:'Tourismus',
+        icon:'✈️',
+        keys:['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Pension']
+    },
+
+    {
+        label:'Energie',
+        icon:'⚡',
+        keys:['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik']
+    },
+
+    {
+        label:'Landwirtschaft',
+        icon:'🌾',
+        keys:['Landwirtschaft','Bauernhof','Agrar','Gärtnerei','Forst']
+    }
+
 ];
 
-var PER_PAGE = 8;
-var allResults = [];
-var selected = null;
-var detailCache = {};
+const PER_PAGE = 8;
 
-// Build pills
-var pillRow = document.getElementById('fsBranchePills');
-BRANCHEN.forEach(function(b){
-    var pill = document.createElement('div');
+let selected = null;
+let allResults = [];
+
+const pillRow = document.getElementById('fsBranchePills');
+
+BRANCHEN.forEach(branche => {
+
+    const pill = document.createElement('div');
     pill.className = 'fs-branche-pill';
-    pill.innerHTML = '<span style="font-size:1em;line-height:1">' + b.icon + '</span>' + b.label;
-    pill.onclick = function(){
-        document.querySelectorAll('.fs-branche-pill').forEach(function(p){ p.classList.remove('selected'); });
+
+    pill.innerHTML = `
+        <span>${branche.icon}</span>
+        ${branche.label}
+    `;
+
+    pill.onclick = () => {
+
+        document.querySelectorAll('.fs-branche-pill')
+            .forEach(p => p.classList.remove('selected'));
+
         pill.classList.add('selected');
-        selected = b;
+
+        selected = branche;
     };
+
     pillRow.appendChild(pill);
 });
 
-window.fsSearch = async function(page){
-    if (!selected){ fsShowError('Bitte zuerst eine Branche auswählen.'); return; }
-    var canton = document.getElementById('fsCanton').value;
-    var extra  = document.getElementById('fsQuery').value.trim();
-    var terms  = extra ? [extra] : selected.keys.slice(0,4);
+window.fsSearch = async function(page = 1){
 
-    fsSetState('loading');
-    allResults = [];
-    detailCache = {};
+    if(!selected){
+        fsShowError('Bitte zuerst eine Branche auswählen.');
+        return;
+    }
+
+    fsClear();
+
+    document.getElementById('fsLoading').style.display = 'flex';
+
+    const canton = document.getElementById('fsCanton').value;
+    const extra  = document.getElementById('fsQuery').value.trim();
+
+    const searchTerms = extra
+        ? [extra]
+        : selected.keys;
 
     try {
-        var fetches = terms.map(function(term){
-            var body = { maxEntries:50, languageKey:'de', activeOnly:true, name:term };
-            if (canton) body.cantonAbbreviation = canton;
-            return fetch('https://www.zefix.ch/ZefixREST/api/v1/firm/search',{
-                method:'POST',
-                headers:{'Content-Type':'application/json','Accept':'application/json'},
-                body: JSON.stringify(body)
-            }).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
-        });
 
-        var results = await Promise.all(fetches);
-        var seen = new Set();
-        results.forEach(function(list){
-            (Array.isArray(list) ? list : (list.list||[])).forEach(function(firm){
-                var key = firm.uid || firm.name;
-                if(!seen.has(key)){ seen.add(key); allResults.push(firm); }
+        let merged = [];
+        let seen = new Set();
+
+        for(const term of searchTerms){
+
+            const body = {
+                name: term,
+                activeOnly: true,
+                languageKey: "de",
+                maxEntries: 30
+            };
+
+            if(canton){
+                body.cantonAbbreviation = canton;
+            }
+
+            const res = await fetch(
+                'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json',
+                        'Accept':'application/json'
+                    },
+                    body: JSON.stringify(body)
+                }
+            );
+
+            const data = await res.json();
+
+            const list = Array.isArray(data)
+                ? data
+                : (data.list || []);
+
+            list.forEach(firm => {
+
+                const uid = firm.uid || firm.name;
+
+                if(!seen.has(uid)){
+                    seen.add(uid);
+                    merged.push(firm);
+                }
             });
-        });
+        }
 
-        if(allResults.length === 0){ fsSetState('empty'); return; }
-        fsSetState('results');
-        renderPage(1);
-    } catch(e){
-        fsShowError('API-Fehler. Auf GitHub Pages funktioniert dies direkt.');
+        allResults = merged;
+
+        document.getElementById('fsLoading').style.display = 'none';
+
+        if(allResults.length === 0){
+            document.getElementById('fsEmpty').style.display = 'block';
+            return;
+        }
+
+        renderPage(page);
+
+    } catch(err){
+
+        console.error(err);
+
+        fsShowError('Fehler beim Laden der Firmendaten.');
     }
 };
 
 function renderPage(page){
-    var start = (page-1)*PER_PAGE;
-    var slice = allResults.slice(start, start+PER_PAGE);
-    var grid  = document.getElementById('fsGrid');
+
+    const grid = document.getElementById('fsGrid');
+
     grid.innerHTML = '';
-    slice.forEach(function(firm,i){ grid.appendChild(makeCard(firm,i)); });
-    document.getElementById('fsResultCount').innerHTML =
-        '<span class="fs-count">'+allResults.length+'</span> Firmen &mdash; '+selected.icon+' <b style="color:#d15cff">'+selected.label+'</b>';
-    renderPagination(allResults.length, page);
+
+    const start = (page - 1) * PER_PAGE;
+
+    const items = allResults.slice(start, start + PER_PAGE);
+
+    items.forEach((firm, index) => {
+
+        grid.appendChild(createCard(firm, index));
+    });
+
+    document.getElementById('fsResultCount').innerHTML = `
+        <span class="fs-count">${allResults.length}</span>
+        Firmen gefunden
+    `;
+
+    renderPagination(page);
 }
 
-function makeCard(firm, delay){
-    var el = document.createElement('div');
-    el.className = 'fs-card';
-    el.style.animationDelay = (delay*35)+'ms';
+function createCard(firm, index){
 
-    var active  = !firm.deleteDate && firm.status !== 'RADIE';
-    var name    = esc(firm.name || '—');
-    var canton  = firm.canton || firm.cantonAbbreviation || '';
-    var lf      = (firm.legalForm && firm.legalForm.name && firm.legalForm.name.de) || firm.legalFormAbbreviation || '';
-    var sub     = [lf, canton ? 'Kanton '+canton : ''].filter(Boolean).join(' · ');
-    var uid     = firm.uid || '';
+    const card = document.createElement('div');
 
-    el.innerHTML =
-        '<div class="fs-card-header" onclick="fsToggleCard(this)">' +
-            '<div class="fs-card-icon">'+selected.icon+'</div>' +
-            '<div class="fs-card-meta">' +
-                '<div class="fs-card-name">'+name+'</div>' +
-                '<div class="fs-card-sub">'+esc(sub)+'</div>' +
-            '</div>' +
-            '<div class="fs-card-right">' +
-                '<span class="fs-badge '+(active?'aktiv':'geloescht')+'">'+(active?'Aktiv':'Gelöscht')+'</span>' +
-                '<span class="fs-chevron">▼</span>' +
-            '</div>' +
-        '</div>' +
-        '<div class="fs-card-body" data-uid="'+esc(uid)+'"></div>';
+    card.className = 'fs-card';
 
-    return el;
+    const address = buildAddress(firm);
+
+    const mapsUrl = address
+        ? `https://www.google.com/maps/search/${encodeURIComponent(address)}`
+        : '';
+
+    card.innerHTML = `
+
+        <div class="fs-card-header">
+
+            <div class="fs-card-icon">
+                ${selected.icon}
+            </div>
+
+            <div class="fs-card-meta">
+
+                <div class="fs-card-name">
+                    ${escapeHtml(firm.name || 'Unbekannt')}
+                </div>
+
+                <div class="fs-card-sub">
+                    ${escapeHtml(firm.canton || '')}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="fs-card-body" style="display:block;">
+
+            <div class="fs-dg">
+
+                ${buildItem('UID', firm.uid)}
+                ${buildItem('CH-ID', firm.chid)}
+                ${buildItem('Kanton', firm.canton)}
+                ${buildItem('Rechtsform',
+                    firm.legalForm?.name?.de || '')}
+
+            </div>
+
+            ${
+                address
+                ?
+                `
+                <div class="fs-addr-block">
+
+                    <div class="fs-addr-text">
+
+                        <span class="fs-addr-line1">
+                            ${escapeHtml(address)}
+                        </span>
+
+                    </div>
+
+                </div>
+                `
+                :
+                ''
+            }
+
+            <div class="fs-actions">
+
+                ${
+                    mapsUrl
+                    ?
+                    `
+                    <a class="fs-action-link"
+                       href="${mapsUrl}"
+                       target="_blank">
+
+                        Google Maps
+
+                    </a>
+                    `
+                    :
+                    ''
+                }
+
+            </div>
+
+        </div>
+    `;
+
+    return card;
 }
 
-window.fsToggleCard = async function(header){
-    var card = header.parentElement;
-    var body = card.querySelector('.fs-card-body');
-    var uid  = body.getAttribute('data-uid');
-    var isOpen = card.classList.contains('open');
+function buildAddress(firm){
 
-    // Close all others
-    document.querySelectorAll('.fs-card.open').forEach(function(c){ c.classList.remove('open'); });
+    const a = firm.address || {};
 
-    if(isOpen) return;
-    card.classList.add('open');
+    const street = [
+        a.street,
+        a.houseNumber
+    ].filter(Boolean).join(' ');
 
-    if(body.innerHTML.trim()) return; // already loaded
+    const city = [
+        a.swissZipCode,
+        a.town
+    ].filter(Boolean).join(' ');
 
-    // Show spinner
-    body.innerHTML = '<div class="fs-detail-loading"><div class="fs-spinner"></div><span>Lade Firmendaten…</span></div>';
-
-    if(!uid){ body.innerHTML = renderNoDetail(); return; }
-
-    // Check cache
-    if(detailCache[uid]){ body.innerHTML = renderDetail(detailCache[uid]); return; }
-
-    try {
-        // Fetch full firm details by UID
-        var url = 'https://www.zefix.ch/ZefixREST/api/v1/firm/' + encodeURIComponent(uid) + '.json';
-        var res = await fetch(url, { headers:{ 'Accept':'application/json' } });
-        if(!res.ok) throw new Error('HTTP '+res.status);
-        var data = await res.json();
-
-        // data might be array or single object
-        var firm = Array.isArray(data) ? data[0] : data;
-        detailCache[uid] = firm;
-        body.innerHTML = renderDetail(firm);
-    } catch(e) {
-        // Fallback: try search by UID
-        try {
-            var res2 = await fetch('https://www.zefix.ch/ZefixREST/api/v1/firm/search', {
-                method:'POST',
-                headers:{'Content-Type':'application/json','Accept':'application/json'},
-                body: JSON.stringify({ uid: uid, languageKey:'de' })
-            });
-            var data2 = await res2.json();
-            var firm2 = Array.isArray(data2) ? data2[0] : (data2.list ? data2.list[0] : data2);
-            if(firm2){ detailCache[uid] = firm2; body.innerHTML = renderDetail(firm2); }
-            else { body.innerHTML = renderNoDetail(); }
-        } catch(e2){
-            body.innerHTML = '<div style="padding:16px 0;color:rgba(255,255,255,.4);font-size:.85rem;">Detaildaten konnten nicht geladen werden.</div>';
-        }
-    }
-};
-
-function renderDetail(f){
-    if(!f) return renderNoDetail();
-
-    var addr   = f.address || {};
-    var street = [addr.street, addr.houseNumber].filter(Boolean).join(' ');
-    var city   = [addr.swissZipCode, addr.town].filter(Boolean).join(' ');
-    var addrFull = [street, city, addr.additionalAddress].filter(Boolean).join(', ');
-    var mapsUrl = city ? 'https://www.google.com/maps/search/'+encodeURIComponent((street+' '+city+' Schweiz').trim()) : '';
-
-    var uid         = f.uid || '—';
-    var chid        = f.chid || f.registrationNumber || '—';
-    var lf          = (f.legalForm && f.legalForm.name && f.legalForm.name.de) || '—';
-    var canton      = f.canton || f.cantonAbbreviation || '—';
-    var regDate     = fmtDate(f.registrationDate || f.inscriptionDate || '');
-    var deleteDate  = fmtDate(f.deleteDate || '');
-    var purpose     = (f.purpose && (f.purpose.de || f.purpose.fr || f.purpose.it || f.purpose.en)) || '';
-    var capital     = f.capital ? f.capital.toLocaleString('de-CH') + ' CHF' : '';
-    var zefixUrl    = uid !== '—' ? 'https://www.zefix.ch/de/search/entity/list/firm/'+encodeURIComponent(uid) : '';
-
-    var html = '';
-
-    // Address highlight
-    if(addrFull){
-        html += '<div class="fs-addr-block">' +
-            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' +
-            '<div class="fs-addr-text">' +
-                (street ? '<span class="fs-addr-line1">'+esc(street)+'</span>' : '') +
-                (city   ? '<span class="fs-addr-line2">'+esc(city)+' &mdash; Schweiz</span>' : '') +
-                (addr.additionalAddress ? '<span class="fs-addr-line2">'+esc(addr.additionalAddress)+'</span>' : '') +
-            '</div>' +
-        '</div>';
-    }
-
-    // Detail grid
-    html += '<div class="fs-dg">';
-    html += dgi('UID', uid, 'hl');
-    html += dgi('CHID / HR-Nr.', chid, 'hl');
-    html += dgi('Rechtsform', lf);
-    html += dgi('Kanton', canton);
-    html += dgi('Eingetragen', regDate || '—');
-    if(deleteDate)  html += dgi('Gelöscht am', deleteDate);
-    if(capital)     html += dgi('Kapital', capital);
-    if(f.noga)      html += dgi('NOGA-Code', f.noga);
-    html += '</div>';
-
-    // Purpose
-    if(purpose){
-        html += '<div class="fs-purpose-block">' +
-            '<div class="fs-purpose-label">Zweck / Tätigkeit</div>' +
-            '<div class="fs-purpose-text">'+esc(purpose.length>300?purpose.slice(0,300)+'…':purpose)+'</div>' +
-        '</div>';
-    }
-
-    // Action links
-    html += '<div class="fs-actions">';
-    if(zefixUrl) html += '<a class="fs-action-link" href="'+zefixUrl+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Zefix öffnen</a>';
-    if(mapsUrl)  html += '<a class="fs-action-link" href="'+mapsUrl+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>Google Maps</a>';
-    if(addrFull) html += '<span class="fs-action-link" onclick="fsCopyAddr(\''+esc(addrFull)+'\')" style="cursor:pointer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Adresse kopieren</span>';
-    html += '</div>';
-
-    return html;
+    return [street, city]
+        .filter(Boolean)
+        .join(', ');
 }
 
-function renderNoDetail(){
-    return '<div style="padding:14px 0;color:rgba(255,255,255,.4);font-size:.85rem;">Keine Detaildaten verfügbar.</div>';
+function buildItem(label, value){
+
+    if(!value) return '';
+
+    return `
+        <div class="fs-dg-item">
+
+            <span class="fs-dg-label">
+                ${escapeHtml(label)}
+            </span>
+
+            <span class="fs-dg-val">
+                ${escapeHtml(value)}
+            </span>
+
+        </div>
+    `;
 }
 
-function dgi(label, val, cls){
-    if(!val || val==='—') return '';
-    return '<div class="fs-dg-item"><span class="fs-dg-label">'+esc(label)+'</span><span class="fs-dg-val'+(cls?' '+cls:'')+'">'+esc(val)+'</span></div>';
-}
+function renderPagination(current){
 
-window.fsCopyAddr = function(addr){
-    if(navigator.clipboard){ navigator.clipboard.writeText(addr); }
-    else { var t=document.createElement('textarea'); t.value=addr; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); }
-    var links = document.querySelectorAll('.fs-action-link');
-    links.forEach(function(l){ if(l.textContent.includes('kopieren')){ var orig=l.innerHTML; l.textContent='✓ Kopiert!'; setTimeout(function(){ l.innerHTML=orig; },1800); } });
-};
+    const pg = document.getElementById('fsPagination');
 
-function renderPagination(total, curr){
-    var pages = Math.ceil(total/PER_PAGE);
-    var pg = document.getElementById('fsPagination');
     pg.innerHTML = '';
-    if(pages<=1) return;
-    pg.appendChild(mkBtn('← Zurück', curr===1, function(){ renderPage(curr-1); }));
-    for(var i=1; i<=Math.min(pages,8); i++){
-        (function(p){ var b=mkBtn(p,false,function(){ renderPage(p); }); if(p===curr) b.classList.add('active'); pg.appendChild(b); })(i);
+
+    const totalPages = Math.ceil(allResults.length / PER_PAGE);
+
+    if(totalPages <= 1) return;
+
+    for(let i=1; i<=totalPages; i++){
+
+        const btn = document.createElement('button');
+
+        btn.className = 'fs-page-btn';
+
+        if(i === current){
+            btn.classList.add('active');
+        }
+
+        btn.textContent = i;
+
+        btn.onclick = () => renderPage(i);
+
+        pg.appendChild(btn);
     }
-    if(pages>8){ var s=document.createElement('span'); s.style.cssText='font-size:.82rem;color:rgba(255,255,255,.3)'; s.textContent='… '+pages+' Seiten'; pg.appendChild(s); }
-    pg.appendChild(mkBtn('Weiter →', curr===pages, function(){ renderPage(curr+1); }));
 }
 
-function mkBtn(label,disabled,fn){ var b=document.createElement('button'); b.className='fs-page-btn'; b.textContent=label; b.disabled=disabled; b.onclick=fn; return b; }
+function fsClear(){
 
-function fsSetState(state){
-    document.getElementById('fsLoading').style.display = state==='loading'?'flex':'none';
-    document.getElementById('fsError').style.display   = 'none';
-    document.getElementById('fsEmpty').style.display   = state==='empty'?'block':'none';
-    document.getElementById('fsHint').style.display    = state==='idle'?'block':'none';
-    if(state!=='results'){ document.getElementById('fsGrid').innerHTML=''; document.getElementById('fsPagination').innerHTML=''; document.getElementById('fsResultCount').innerHTML=''; }
+    document.getElementById('fsLoading').style.display = 'none';
+    document.getElementById('fsError').style.display = 'none';
+    document.getElementById('fsEmpty').style.display = 'none';
+
+    document.getElementById('fsGrid').innerHTML = '';
+    document.getElementById('fsPagination').innerHTML = '';
+    document.getElementById('fsResultCount').innerHTML = '';
 }
 
 function fsShowError(msg){
-    var el=document.getElementById('fsError'); el.style.display='block'; el.textContent=msg;
-    document.getElementById('fsLoading').style.display='none';
-    document.getElementById('fsGrid').innerHTML=''; document.getElementById('fsPagination').innerHTML=''; document.getElementById('fsResultCount').innerHTML='';
+
+    fsClear();
+
+    const err = document.getElementById('fsError');
+
+    err.style.display = 'block';
+
+    err.textContent = msg;
 }
 
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function fmtDate(d){ if(!d) return ''; try{ var p=d.split('-'); return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d; } catch(e){ return d; } }
+function escapeHtml(str){
 
-document.getElementById('fsQuery').addEventListener('keydown',function(e){ if(e.key==='Enter') fsSearch(1); });
+    return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+document
+.getElementById('fsQuery')
+.addEventListener('keydown', e => {
+
+    if(e.key === 'Enter'){
+        fsSearch(1);
+    }
+});
+
 })();
 </script>
                 
