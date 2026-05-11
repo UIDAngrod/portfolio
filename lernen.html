@@ -698,7 +698,7 @@ async function renderPage(page){
     renderPagination(page);
 }
 
-async function createCard(firm, index){
+ async function createCard(firm, index){
 
     const card = document.createElement('div');
 
@@ -740,18 +740,34 @@ async function createCard(firm, index){
 
     try {
 
+        // NOCHMAL per Name suchen
         const res = await fetch(
-            `https://www.zefix.ch/ZefixREST/api/v1/company/${firm.uid}`,
+            'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
             {
+                method:'POST',
                 headers:{
+                    'Content-Type':'application/json',
                     'Accept':'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    name: firm.name,
+                    activeOnly: true,
+                    languageKey: 'de',
+                    maxEntries: 10
+                })
             }
         );
 
-        const detail = await res.json();
+        const data = await res.json();
 
-        const addr = detail.address || {};
+        const list = Array.isArray(data)
+            ? data
+            : (data.list || []);
+
+        // richtige Firma anhand UID finden
+        const match = list.find(x => x.uid === firm.uid) || list[0];
+
+        const addr = match?.address || {};
 
         const street = [
             addr.street,
@@ -820,7 +836,7 @@ async function createCard(firm, index){
 
         const sub = card.querySelector('.fs-card-sub');
 
-        sub.innerHTML = 'Adressdaten konnten nicht geladen werden';
+        sub.innerHTML = 'Keine Adresse gefunden';
     }
 
     return card;
