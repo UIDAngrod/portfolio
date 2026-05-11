@@ -449,535 +449,288 @@
 
 <script>
 (function(){
+    let selected = [];
+
+let allResults = [];
+
+const PER_PAGE = 12;
+
+const pillRow =
+    document.getElementById('fsBranchePills');
 
 const BRANCHEN = [
 
-    {
-        label:'Gastronomie',
-        icon:'🍽️',
-        keys:['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Catering','Take Away','Food']
-    },
-
-    {
-        label:'Informatik / IT',
-        icon:'💻',
-        keys:['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Web','Cyber','Hosting','Netzwerk']
-    },
-
-    {
-        label:'Bau & Handwerk',
-        icon:'🏗️',
-        keys:['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann','Tiefbau','Maurer']
-    },
-
-    {
-        label:'Handel & Retail',
-        icon:'🛒',
-        keys:['Handel','Markt','Import','Export','Trading','Vertrieb','Detailhandel','Shop','Store']
-    },
-
-    {
-        label:'Gesundheit',
-        icon:'🏥',
-        keys:['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio','Med']
-    },
-
-    {
-        label:'Finanzen',
-        icon:'💰',
-        keys:['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital','Versicherung']
-    },
-
-    {
-        label:'Immobilien',
-        icon:'🏠',
-        keys:['Immobilien','Liegenschaften','Real Estate','Wohnen','Hausverwaltung','Makler']
-    },
-
-    {
-        label:'Transport',
-        icon:'🚛',
-        keys:['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug','Bus','Delivery']
-    },
-
-    {
-        label:'Bildung',
-        icon:'🎓',
-        keys:['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training','Lern']
-    },
-
-    {
-        label:'Marketing',
-        icon:'📢',
-        keys:['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik','Social Media']
-    },
-
-    {
-        label:'Industrie',
-        icon:'🏭',
-        keys:['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical','Automation','Metall']
-    },
-
-    {
-        label:'Reinigung',
-        icon:'🧹',
-        keys:['Reinigung','Cleaning','Gebäudereinigung','Unterhalt','Hygiene','Facility']
-    },
-
-    {
-        label:'Rechtsberatung',
-        icon:'⚖️',
-        keys:['Anwalt','Rechts','Legal','Kanzlei','Notar','Advokat']
-    },
-
-    {
-        label:'Tourismus',
-        icon:'✈️',
-        keys:['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Pension','Ferien']
-    },
-
-    {
-        label:'Energie',
-        icon:'⚡',
-        keys:['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik','Elektrotechnik']
-    },
-
-    {
-        label:'Landwirtschaft',
-        icon:'🌾',
-        keys:['Landwirtschaft','Bauernhof','Agrar','Gärtnerei','Forst']
-    },
-
-    {
-        label:'Automobil',
-        icon:'🚗',
-        keys:['Garage','Auto','Automobil','Car','KFZ','Fahrzeug','Tuning','Motors']
-    },
-
-    {
-        label:'Coiffeur & Beauty',
-        icon:'💇',
-        keys:['Coiffeur','Beauty','Kosmetik','Nails','Hair','Salon','Spa']
-    },
-
-    {
-        label:'Fitness & Sport',
-        icon:'🏋️',
-        keys:['Fitness','Gym','Sport','Personal Training','Crossfit','Wellness']
-    },
-
-    {
-        label:'Security',
-        icon:'🛡️',
-        keys:['Security','Sicherheit','Bewachung','Alarm','Surveillance','Guard']
-    },
-
-    {
-        label:'Telekommunikation',
-        icon:'📡',
-        keys:['Telecom','Telefon','Internet','Mobilfunk','ISP','Fiber','Netcom']
-    },
-
-    {
-        label:'Medien & Film',
-        icon:'🎬',
-        keys:['Film','Video','Produktion','Studio','Media','Streaming','Photography']
-    },
-
-    {
-        label:'Musik',
-        icon:'🎵',
-        keys:['Musik','Music','Studio','Label','DJ','Audio']
-    },
-
-    {
-        label:'Event & Veranstaltung',
-        icon:'🎉',
-        keys:['Event','Veranstaltung','Festival','Booking','Concert','Show']
-    },
-
-    {
-        label:'Mode & Kleidung',
-        icon:'👕',
-        keys:['Mode','Fashion','Clothing','Boutique','Kleider','Textil']
-    },
-
-    {
-        label:'Möbel & Einrichtung',
-        icon:'🛋️',
-        keys:['Möbel','Interior','Einrichtung','Küche','Wohnstudio']
-    },
-
-    {
-        label:'Tier & Veterinär',
-        icon:'🐾',
-        keys:['Tierarzt','Veterinär','Pet','Hund','Katze','Zoo']
-    },
-
-    {
-        label:'Chemie & Pharma',
-        icon:'🧪',
-        keys:['Pharma','Chemie','Labor','Biotech','Medical','Science']
-    },
-
-    {
-        label:'Elektronik',
-        icon:'🔌',
-        keys:['Elektronik','Electronic','PCB','Hardware','Microtech']
-    },
-
-    {
-        label:'Personalvermittlung',
-        icon:'👔',
-        keys:['Recruiting','Personal','HR','Jobs','Stellenvermittlung']
-    },
-
-    {
-        label:'Versicherung',
-        icon:'🧾',
-        keys:['Versicherung','Insurance','Assurance']
-    },
-
-    {
-        label:'Architektur',
-        icon:'📐',
-        keys:['Architektur','Architect','Planung','Bauplanung']
-    },
-
-    {
-        label:'Umwelt & Recycling',
-        icon:'♻️',
-        keys:['Recycling','Umwelt','Entsorgung','Waste','Eco']
-    },
+{
+    category: '💼 Business',
+    items: [
 
         {
-    label:'Gaming',
-    icon:'🎮',
-    keys:['Gaming','Games','Esports','Streamer','Game Studio']
+            label:'Finanzen',
+            icon:'💰',
+            keys:['Bank','Finanz','Invest','Treuhand','Kapital']
+        },
+
+        {
+            label:'Versicherung',
+            icon:'🧾',
+            keys:['Versicherung','Insurance']
+        },
+
+        {
+            label:'Immobilien',
+            icon:'🏠',
+            keys:['Immobilien','Makler','Liegenschaften']
+        },
+
+        {
+            label:'Marketing',
+            icon:'📢',
+            keys:['Marketing','Werbung','Media','PR']
+        },
+
+        {
+            label:'Beratung',
+            icon:'📋',
+            keys:['Consulting','Beratung']
+        },
+
+        {
+            label:'Personalvermittlung',
+            icon:'👔',
+            keys:['Recruiting','HR','Jobs']
+        }
+
+    ]
 },
 
 {
-    label:'Blockchain & Crypto',
-    icon:'🪙',
-    keys:['Blockchain','Crypto','Bitcoin','Ethereum','Web3','NFT']
+    category: '💻 Technik & IT',
+    items: [
+
+        {
+            label:'Informatik / IT',
+            icon:'💻',
+            keys:['IT','Software','Cloud','Hosting','Netzwerk']
+        },
+
+        {
+            label:'Cybersecurity',
+            icon:'🔐',
+            keys:['Cybersecurity','Pentest','SOC','Security']
+        },
+
+        {
+            label:'KI & AI',
+            icon:'🤖',
+            keys:['AI','Machine Learning','KI']
+        },
+
+        {
+            label:'Robotik',
+            icon:'🦾',
+            keys:['Robotik','Robotics']
+        },
+
+        {
+            label:'Elektronik',
+            icon:'🔌',
+            keys:['Elektronik','Hardware']
+        },
+
+        {
+            label:'Telekommunikation',
+            icon:'📡',
+            keys:['Telecom','Internet','ISP']
+        }
+
+    ]
 },
 
 {
-    label:'KI & AI',
-    icon:'🤖',
-    keys:['AI','KI','Artificial Intelligence','Machine Learning','Neural','Automation']
+    category: '🏗️ Bau & Industrie',
+    items: [
+
+        {
+            label:'Bau & Handwerk',
+            icon:'🏗️',
+            keys:['Bau','Maurer','Holzbau']
+        },
+
+        {
+            label:'Metallbau',
+            icon:'🔩',
+            keys:['Metallbau','Steel']
+        },
+
+        {
+            label:'Elektriker',
+            icon:'💡',
+            keys:['Elektriker','Elektro']
+        },
+
+        {
+            label:'Sanitär & Heizung',
+            icon:'🚿',
+            keys:['Sanitär','Heizung','HVAC']
+        },
+
+        {
+            label:'Industrie',
+            icon:'🏭',
+            keys:['Industrie','Produktion']
+        }
+
+    ]
 },
 
 {
-    label:'Drohnen',
-    icon:'🚁',
-    keys:['Drone','Drohne','UAV','Aerial']
+    category: '🍔 Gastronomie & Lifestyle',
+    items: [
+
+        {
+            label:'Gastronomie',
+            icon:'🍽️',
+            keys:['Restaurant','Bar','Café']
+        },
+
+        {
+            label:'Tourismus',
+            icon:'✈️',
+            keys:['Hotel','Travel','Resort']
+        },
+
+        {
+            label:'Fitness & Sport',
+            icon:'🏋️',
+            keys:['Fitness','Gym']
+        },
+
+        {
+            label:'Coiffeur & Beauty',
+            icon:'💇',
+            keys:['Beauty','Kosmetik']
+        },
+
+        {
+            label:'Mode & Kleidung',
+            icon:'👕',
+            keys:['Fashion','Mode']
+        }
+
+    ]
 },
 
 {
-    label:'Luftfahrt',
-    icon:'🛩️',
-    keys:['Aviation','Air','Flight','Airport','Pilot']
-},
+    category: '🎬 Medien & Kreativ',
+    items: [
 
-{
-    label:'Schifffahrt',
-    icon:'🚢',
-    keys:['Marine','Ship','Shipping','Boat','Yacht']
-},
+        {
+            label:'Gaming',
+            icon:'🎮',
+            keys:['Gaming','Games']
+        },
 
-{
-    label:'Bergbau',
-    icon:'⛏️',
-    keys:['Mining','Mine','Rohstoffe','Extraction']
-},
+        {
+            label:'Streaming & Creator',
+            icon:'📺',
+            keys:['Streaming','Creator']
+        },
 
-{
-    label:'Goldschmied & Schmuck',
-    icon:'💎',
-    keys:['Jewelry','Schmuck','Goldschmied','Uhren','Luxury']
-},
+        {
+            label:'Fotografie',
+            icon:'📸',
+            keys:['Photography','Foto']
+        },
 
-{
-    label:'Uhren',
-    icon:'⌚',
-    keys:['Watch','Uhr','Horlogerie','Swiss Watch']
-},
+        {
+            label:'Videoproduktion',
+            icon:'🎥',
+            keys:['Video','Film']
+        },
 
-{
-    label:'Druck & Print',
-    icon:'🖨️',
-    keys:['Print','Druck','Copy','Werbetechnik','Beschriftung']
-},
+        {
+            label:'Musik',
+            icon:'🎵',
+            keys:['Music','DJ']
+        }
 
-{
-    label:'Messebau',
-    icon:'🏢',
-    keys:['Messebau','Exhibition','Standbau']
-},
-
-{
-    label:'Fotografie',
-    icon:'📸',
-    keys:['Fotografie','Photography','Photo','Fotostudio']
-},
-
-{
-    label:'Videoproduktion',
-    icon:'🎥',
-    keys:['Video','Videoproduktion','Filmproduktion','Cinematography']
-},
-
-{
-    label:'Tattoo',
-    icon:'🖋️',
-    keys:['Tattoo','Ink','Tattoo Studio']
-},
-
-{
-    label:'Cannabis / CBD',
-    icon:'🌿',
-    keys:['CBD','Cannabis','Hemp']
-},
-
-{
-    label:'E-Zigaretten / Vape',
-    icon:'💨',
-    keys:['Vape','E-Zigarette','Liquid']
-},
-
-{
-    label:'Brauerei & Getränke',
-    icon:'🍺',
-    keys:['Brauerei','Beer','Getränke','Drinks','Beverage']
-},
-
-{
-    label:'Bäckerei & Konditorei',
-    icon:'🥐',
-    keys:['Bäckerei','Konditorei','Confiserie','Bakery']
-},
-
-{
-    label:'Metallbau',
-    icon:'🔩',
-    keys:['Metallbau','Stahlbau','Metal','Steel']
-},
-
-{
-    label:'Schlosserei',
-    icon:'🔧',
-    keys:['Schlosserei','Schweiss','Welding','Mechanic']
-},
-
-{
-    label:'Elektriker',
-    icon:'💡',
-    keys:['Elektriker','Elektroinstallationen','Electric']
-},
-
-{
-    label:'Sanitär & Heizung',
-    icon:'🚿',
-    keys:['Sanitär','Heizung','HVAC','Klima']
-},
-
-{
-    label:'Solar & Photovoltaik',
-    icon:'☀️',
-    keys:['Solar','Photovoltaik','PV','Solartechnik']
-},
-
-{
-    label:'Kälte & Klima',
-    icon:'❄️',
-    keys:['Klima','Cooling','Kälte','Refrigeration']
-},
-
-{
-    label:'Ingenieurbüro',
-    icon:'🧠',
-    keys:['Ingenieur','Engineering','Consulting']
-},
-
-{
-    label:'Beratung',
-    icon:'📋',
-    keys:['Consulting','Beratung','Advisory']
-},
-
-{
-    label:'Treuhand',
-    icon:'📊',
-    keys:['Treuhand','Accounting','Audit']
-},
-
-{
-    label:'Callcenter',
-    icon:'📞',
-    keys:['Callcenter','Support','Customer Service']
-},
-
-{
-    label:'Pflegeheim',
-    icon:'🧓',
-    keys:['Pflegeheim','Senioren','Altersheim']
-},
-
-{
-    label:'Kinderbetreuung',
-    icon:'🧸',
-    keys:['Kita','Kinderbetreuung','Daycare']
-},
-
-{
-    label:'Kirche & Religion',
-    icon:'⛪',
-    keys:['Kirche','Religious','Mission']
-},
-
-{
-    label:'Stiftung & Verein',
-    icon:'🤝',
-    keys:['Stiftung','Verein','Association','Foundation']
-},
-
-{
-    label:'Öffentliche Verwaltung',
-    icon:'🏛️',
-    keys:['Gemeinde','Verwaltung','Public','Kanton']
-},
-
-{
-    label:'Polizei & Rettung',
-    icon:'🚓',
-    keys:['Police','Polizei','Rescue','Feuerwehr']
-},
-
-{
-    label:'Feuerwehr',
-    icon:'🚒',
-    keys:['Feuerwehr','Fire','Brand']
-},
-
-{
-    label:'Bestattung',
-    icon:'⚰️',
-    keys:['Bestattung','Funeral']
-},
-
-{
-    label:'Dating & Social',
-    icon:'❤️',
-    keys:['Dating','Social','Matchmaking']
-},
-
-{
-    label:'Streaming & Creator',
-    icon:'📺',
-    keys:['Streamer','Streaming','Creator','Content']
-},
-
-{
-    label:'3D Druck',
-    icon:'🖨️',
-    keys:['3D','3D Print','Additive']
-},
-
-{
-    label:'Robotik',
-    icon:'🦾',
-    keys:['Robotik','Robotics','Automation']
-},
-
-{
-    label:'Nanotechnologie',
-    icon:'⚛️',
-    keys:['Nano','Nanotech']
-},
-
-{
-    label:'Raumfahrt',
-    icon:'🚀',
-    keys:['Space','Aerospace','Rocket']
-},
-
-{
-    label:'Biotechnologie',
-    icon:'🧬',
-    keys:['Biotech','Biologie','Genetics']
-},
-
-{
-    label:'Forensik',
-    icon:'🕵️',
-    keys:['Forensic','Forensik','Investigation']
-},
-
-{
-    label:'Cybersecurity',
-    icon:'🔐',
-    keys:['Cybersecurity','Security','Pentest','SOC','Hacking']
+    ]
 }
-    
 
 ];
 
-const PER_PAGE = 8;
+BRANCHEN.forEach(group => {
 
-let selected = [];
-let allResults = [];
+    const wrapper = document.createElement('div');
+    wrapper.className = 'fs-group';
 
-const pillRow = document.getElementById('fsBranchePills');
+    const header = document.createElement('div');
+    header.className = 'fs-group-header';
 
-BRANCHEN.forEach(branche => {
-
-    const pill = document.createElement('div');
-
-    pill.className = 'fs-branche-pill';
-
-    pill.innerHTML = `
-        <span>${branche.icon}</span>
-        ${branche.label}
+    header.innerHTML = `
+        <span>${group.category}</span>
+        <span class="fs-group-arrow">⌄</span>
     `;
 
-    pill.onclick = () => {
+    const content = document.createElement('div');
+    content.className = 'fs-group-content';
 
-        pill.classList.toggle('selected');
+    header.onclick = () => {
 
-        const exists = selected.find(
-            b => b.label === branche.label
-        );
-
-        if(exists){
-
-            selected = selected.filter(
-                b => b.label !== branche.label
-            );
-
-        } else {
-
-            selected.push(branche);
-        }
+        wrapper.classList.toggle('open');
     };
 
-    pillRow.appendChild(pill);
+    group.items.forEach(branche => {
+
+        const pill = document.createElement('div');
+
+        pill.className = 'fs-branche-pill';
+
+        pill.innerHTML = `
+            <span>${branche.icon}</span>
+            ${branche.label}
+        `;
+
+        pill.onclick = () => {
+
+            pill.classList.toggle('selected');
+
+            const exists = selected.find(
+                b => b.label === branche.label
+            );
+
+            if(exists){
+
+                selected = selected.filter(
+                    b => b.label !== branche.label
+                );
+
+            } else {
+
+                selected.push(branche);
+            }
+        };
+
+        content.appendChild(pill);
+    });
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(content);
+
+    pillRow.appendChild(wrapper);
 });
 
 
 window.fsSearch = async function(page = 1){
 
-    if(selected.length === 0){
-
-        fsShowError('Bitte zuerst eine Branche auswählen.');
-        return;
-    }
-
     fsClear();
 
     document.getElementById('fsLoading').style.display = 'flex';
 
-    const canton = document.getElementById('fsCanton').value.trim();
+    const canton =
+        document.getElementById('fsCanton')
+        .value
+        .trim();
 
     const extra =
         document.getElementById('fsQuery')
@@ -986,18 +739,33 @@ window.fsSearch = async function(page = 1){
 
     let searchTerms = [];
 
-if(extra){
+    // SUCHLOGIK
 
-    searchTerms = [extra];
+    if(extra){
 
-} else {
+        searchTerms = [extra];
 
-    selected.forEach(branche => {
+    } else if(selected.length > 0){
 
-        searchTerms.push(...branche.keys);
+        selected.forEach(branche => {
 
-    });
-}
+            searchTerms.push(...branche.keys);
+
+        });
+
+    } else {
+
+        searchTerms = [
+            'IT',
+            'Software',
+            'Restaurant',
+            'Bau',
+            'Digital',
+            'Tech',
+            'Elektro',
+            'Consulting'
+        ];
+    }
 
     try {
 
@@ -1006,24 +774,18 @@ if(extra){
 
         for(const term of searchTerms){
 
-            // WICHTIG:
-            // Suchbegriff MIT Kanton erweitern
-            // statt kaputten Zefix-Filter benutzen
+        const body = {
 
-            const searchName = canton
-                ? `${term} ${canton}`
-                : term;
+            name: term,
 
-            const body = {
+            activeOnly: true,
 
-                name: searchName,
+            languageKey: 'de',
 
-                activeOnly: true,
+            maxEntries: 4000,
 
-                languageKey: 'de',
-
-                maxEntries: 40
-            };
+        
+        };
 
             const res = await fetch(
                 'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
@@ -1045,10 +807,25 @@ if(extra){
                 ? data
                 : (data.list || []);
 
-            // KEIN CLIENT FILTER MEHR !!!
-            // Zefix macht das intern
 
-            list.forEach(firm => {
+            const normalizedCanton =
+    canton.trim().toUpperCase();
+
+const filteredList = list.filter(firm => {
+
+    if(!normalizedCanton) return true;
+
+    // ALLE möglichen Felder prüfen
+    const values = Object.values(firm)
+        .join(' ')
+        .toUpperCase();
+
+    return values.includes(normalizedCanton);
+});
+            // KANTON FILTER
+
+
+            filteredList.forEach(firm => {
 
                 const uid =
                     firm.uid ||
@@ -1064,10 +841,10 @@ if(extra){
             });
         }
 
-        // Doppelte Firmen entfernen
         allResults = merged.filter((firm, index, self) =>
 
             index === self.findIndex(f =>
+
                 (f.uid || f.name) ===
                 (firm.uid || firm.name)
             )
@@ -1091,6 +868,7 @@ if(extra){
         fsShowError('Fehler beim Laden der Firmendaten.');
     }
 };
+
 
 
 
