@@ -560,6 +560,7 @@ const pillRow = document.getElementById('fsBranchePills');
 BRANCHEN.forEach(branche => {
 
     const pill = document.createElement('div');
+
     pill.className = 'fs-branche-pill';
 
     pill.innerHTML = `
@@ -583,7 +584,9 @@ BRANCHEN.forEach(branche => {
 window.fsSearch = async function(page = 1){
 
     if(!selected){
+
         fsShowError('Bitte zuerst eine Branche auswählen.');
+
         return;
     }
 
@@ -592,7 +595,8 @@ window.fsSearch = async function(page = 1){
     document.getElementById('fsLoading').style.display = 'flex';
 
     const canton = document.getElementById('fsCanton').value;
-    const extra  = document.getElementById('fsQuery').value.trim();
+
+    const extra = document.getElementById('fsQuery').value.trim();
 
     const searchTerms = extra
         ? [extra]
@@ -601,6 +605,7 @@ window.fsSearch = async function(page = 1){
     try {
 
         let merged = [];
+
         let seen = new Set();
 
         for(const term of searchTerms){
@@ -608,8 +613,8 @@ window.fsSearch = async function(page = 1){
             const body = {
                 name: term,
                 activeOnly: true,
-                languageKey: "de",
-                maxEntries: 30
+                languageKey: 'de',
+                maxEntries: 20
             };
 
             if(canton){
@@ -619,8 +624,8 @@ window.fsSearch = async function(page = 1){
             const res = await fetch(
                 'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
                 {
-                    method: 'POST',
-                    headers: {
+                    method:'POST',
+                    headers:{
                         'Content-Type':'application/json',
                         'Accept':'application/json'
                     },
@@ -639,7 +644,9 @@ window.fsSearch = async function(page = 1){
                 const uid = firm.uid || firm.name;
 
                 if(!seen.has(uid)){
+
                     seen.add(uid);
+
                     merged.push(firm);
                 }
             });
@@ -650,11 +657,13 @@ window.fsSearch = async function(page = 1){
         document.getElementById('fsLoading').style.display = 'none';
 
         if(allResults.length === 0){
+
             document.getElementById('fsEmpty').style.display = 'block';
+
             return;
         }
 
-        renderPage(page);
+        await renderPage(page);
 
     } catch(err){
 
@@ -664,7 +673,7 @@ window.fsSearch = async function(page = 1){
     }
 };
 
-function renderPage(page){
+async function renderPage(page){
 
     const grid = document.getElementById('fsGrid');
 
@@ -674,10 +683,12 @@ function renderPage(page){
 
     const items = allResults.slice(start, start + PER_PAGE);
 
-    items.forEach((firm, index) => {
+    for(const [index, firm] of items.entries()){
 
-        grid.appendChild(createCard(firm, index));
-    });
+        const card = await createCard(firm, index);
+
+        grid.appendChild(card);
+    }
 
     document.getElementById('fsResultCount').innerHTML = `
         <span class="fs-count">${allResults.length}</span>
@@ -687,17 +698,11 @@ function renderPage(page){
     renderPagination(page);
 }
 
-function createCard(firm, index){
+async function createCard(firm, index){
 
     const card = document.createElement('div');
 
     card.className = 'fs-card';
-
-    const address = buildAddress(firm);
-
-    const mapsUrl = address
-        ? `https://www.google.com/maps/search/${encodeURIComponent(address)}`
-        : '';
 
     card.innerHTML = `
 
@@ -714,7 +719,7 @@ function createCard(firm, index){
                 </div>
 
                 <div class="fs-card-sub">
-                    ${escapeHtml(firm.canton || '')}
+                    Lade Adresse...
                 </div>
 
             </div>
@@ -727,75 +732,98 @@ function createCard(firm, index){
 
                 ${buildItem('UID', firm.uid)}
                 ${buildItem('CH-ID', firm.chid)}
-                ${buildItem('Kanton', firm.canton)}
-                ${buildItem('Rechtsform',
-                    firm.legalForm?.name?.de || '')}
-
-            </div>
-
-            ${
-                address
-                ?
-                `
-                <div class="fs-addr-block">
-
-                    <div class="fs-addr-text">
-
-                        <span class="fs-addr-line1">
-                            ${escapeHtml(address)}
-                        </span>
-
-                    </div>
-
-                </div>
-                `
-                :
-                ''
-            }
-
-            <div class="fs-actions">
-
-                ${
-                    mapsUrl
-                    ?
-                    `
-                    <a class="fs-action-link"
-                       href="${mapsUrl}"
-                       target="_blank">
-
-                        Google Maps
-
-                    </a>
-                    `
-                    :
-                    ''
-                }
 
             </div>
 
         </div>
     `;
 
-    return card;
-}
+    try {
 
-function buildAddress(firm){
+        const res = await fetch(
+            `https://www.zefix.ch/ZefixREST/api/v1/company/${firm.uid}`,
+            {
+                headers:{
+                    'Accept':'application/json'
+                }
+            }
+        );
 
-    const a = firm.address || {};
+        const detail = await res.json();
 
-    const street = [
-        a.street,
-        a.houseNumber
-    ].filter(Boolean).join(' ');
+        const addr = detail.address || {};
 
-    const city = [
-        a.swissZipCode,
-        a.town
-    ].filter(Boolean).join(' ');
+        const street = [
+            addr.street,
+            addr.houseNumber
+        ]
+        .filter(Boolean)
+        .join(' ');
 
-    return [street, city]
+        const city = [
+            addr.swissZipCode,
+            addr.town
+        ]
+        .filter(Boolean)
+        .join(' ');
+
+        const fullAddress = [
+            street,
+            city
+        ]
         .filter(Boolean)
         .join(', ');
+
+        const sub = card.querySelector('.fs-card-sub');
+
+        if(fullAddress){
+
+            sub.innerHTML = fullAddress;
+
+            const body = card.querySelector('.fs-card-body');
+
+            body.innerHTML += `
+
+                <div class="fs-addr-block">
+
+                    <div class="fs-addr-text">
+
+                        <span class="fs-addr-line1">
+                            ${escapeHtml(fullAddress)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="fs-actions">
+
+                    <a class="fs-action-link"
+                       href="https://www.google.com/maps/search/${encodeURIComponent(fullAddress)}"
+                       target="_blank">
+
+                        Google Maps
+
+                    </a>
+
+                </div>
+            `;
+        }
+        else{
+
+            sub.innerHTML = 'Keine Adresse gefunden';
+        }
+
+    } catch(err){
+
+        console.error(err);
+
+        const sub = card.querySelector('.fs-card-sub');
+
+        sub.innerHTML = 'Adressdaten konnten nicht geladen werden';
+    }
+
+    return card;
 }
 
 function buildItem(label, value){
@@ -827,7 +855,7 @@ function renderPagination(current){
 
     if(totalPages <= 1) return;
 
-    for(let i=1; i<=totalPages; i++){
+    for(let i = 1; i <= totalPages; i++){
 
         const btn = document.createElement('button');
 
@@ -848,11 +876,15 @@ function renderPagination(current){
 function fsClear(){
 
     document.getElementById('fsLoading').style.display = 'none';
+
     document.getElementById('fsError').style.display = 'none';
+
     document.getElementById('fsEmpty').style.display = 'none';
 
     document.getElementById('fsGrid').innerHTML = '';
+
     document.getElementById('fsPagination').innerHTML = '';
+
     document.getElementById('fsResultCount').innerHTML = '';
 }
 
@@ -880,6 +912,7 @@ document
 .addEventListener('keydown', e => {
 
     if(e.key === 'Enter'){
+
         fsSearch(1);
     }
 });
