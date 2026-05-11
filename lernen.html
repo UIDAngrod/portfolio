@@ -387,9 +387,9 @@
 <div class="fs-wrap">
         <h2 class="lernen-title" style="margin-bottom:6px;"></h2>
                         <div class="lernen-text">
-                        <h2 class="lernen-title">Firmensuche in Handelsregister</h2>
+                        <h2 class="lernen-title">Firmensuche in Handelsregister - Etwas sinnvolles mit KI</h2>
                         <p class="lernen-description">
-                            Ich hatte echt Schwierigkeiten, nach Adressen von Unternehmen zu suchen. Mit der Hilfe von KI habe ich eine Möglichkeit erstellt, schneller an Firmenadressen zu kommen und diese nach Branchen zu filtern. <br> <br>
+                            Ich hatte echt Schwierigkeiten, nach Adressen von Unternehmen zu suchen. Mit der Hilfe von KI habe ich eine Möglichkeit erstellt, ohne Backend-Server im Zefix Index nach Branchen zu filtern.
                         </p>
                         </div>
     <p class="lernen-description" style="margin-bottom:20px;font-size:.88rem;color:rgba(255,255,255,.4);">
@@ -455,73 +455,73 @@ const BRANCHEN = [
     {
         label:'Gastronomie',
         icon:'🍽️',
-        keys:['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Catering']
+        keys:['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Catering','Take Away','Food']
     },
 
     {
         label:'Informatik / IT',
         icon:'💻',
-        keys:['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Web']
+        keys:['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Web','Cyber','Hosting','Netzwerk']
     },
 
     {
         label:'Bau & Handwerk',
         icon:'🏗️',
-        keys:['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann']
+        keys:['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann','Tiefbau','Maurer']
     },
 
     {
         label:'Handel & Retail',
         icon:'🛒',
-        keys:['Handel','Markt','Import','Export','Trading','Vertrieb','Detailhandel']
+        keys:['Handel','Markt','Import','Export','Trading','Vertrieb','Detailhandel','Shop','Store']
     },
 
     {
         label:'Gesundheit',
         icon:'🏥',
-        keys:['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio']
+        keys:['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio','Med']
     },
 
     {
         label:'Finanzen',
         icon:'💰',
-        keys:['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital']
+        keys:['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital','Versicherung']
     },
 
     {
         label:'Immobilien',
         icon:'🏠',
-        keys:['Immobilien','Liegenschaften','Real Estate','Wohnen','Hausverwaltung']
+        keys:['Immobilien','Liegenschaften','Real Estate','Wohnen','Hausverwaltung','Makler']
     },
 
     {
         label:'Transport',
         icon:'🚛',
-        keys:['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug']
+        keys:['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug','Bus','Delivery']
     },
 
     {
         label:'Bildung',
         icon:'🎓',
-        keys:['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training']
+        keys:['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training','Lern']
     },
 
     {
         label:'Marketing',
         icon:'📢',
-        keys:['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik']
+        keys:['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik','Social Media']
     },
 
     {
         label:'Industrie',
         icon:'🏭',
-        keys:['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical']
+        keys:['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical','Automation','Metall']
     },
 
     {
         label:'Reinigung',
         icon:'🧹',
-        keys:['Reinigung','Cleaning','Gebäudereinigung','Unterhalt','Hygiene']
+        keys:['Reinigung','Cleaning','Gebäudereinigung','Unterhalt','Hygiene','Facility']
     },
 
     {
@@ -533,26 +533,399 @@ const BRANCHEN = [
     {
         label:'Tourismus',
         icon:'✈️',
-        keys:['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Pension']
+        keys:['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Pension','Ferien']
     },
 
     {
         label:'Energie',
         icon:'⚡',
-        keys:['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik']
+        keys:['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik','Elektrotechnik']
     },
 
     {
         label:'Landwirtschaft',
         icon:'🌾',
         keys:['Landwirtschaft','Bauernhof','Agrar','Gärtnerei','Forst']
-    }
+    },
+
+    {
+        label:'Automobil',
+        icon:'🚗',
+        keys:['Garage','Auto','Automobil','Car','KFZ','Fahrzeug','Tuning','Motors']
+    },
+
+    {
+        label:'Coiffeur & Beauty',
+        icon:'💇',
+        keys:['Coiffeur','Beauty','Kosmetik','Nails','Hair','Salon','Spa']
+    },
+
+    {
+        label:'Fitness & Sport',
+        icon:'🏋️',
+        keys:['Fitness','Gym','Sport','Personal Training','Crossfit','Wellness']
+    },
+
+    {
+        label:'Security',
+        icon:'🛡️',
+        keys:['Security','Sicherheit','Bewachung','Alarm','Surveillance','Guard']
+    },
+
+    {
+        label:'Telekommunikation',
+        icon:'📡',
+        keys:['Telecom','Telefon','Internet','Mobilfunk','ISP','Fiber','Netcom']
+    },
+
+    {
+        label:'Medien & Film',
+        icon:'🎬',
+        keys:['Film','Video','Produktion','Studio','Media','Streaming','Photography']
+    },
+
+    {
+        label:'Musik',
+        icon:'🎵',
+        keys:['Musik','Music','Studio','Label','DJ','Audio']
+    },
+
+    {
+        label:'Event & Veranstaltung',
+        icon:'🎉',
+        keys:['Event','Veranstaltung','Festival','Booking','Concert','Show']
+    },
+
+    {
+        label:'Mode & Kleidung',
+        icon:'👕',
+        keys:['Mode','Fashion','Clothing','Boutique','Kleider','Textil']
+    },
+
+    {
+        label:'Möbel & Einrichtung',
+        icon:'🛋️',
+        keys:['Möbel','Interior','Einrichtung','Küche','Wohnstudio']
+    },
+
+    {
+        label:'Tier & Veterinär',
+        icon:'🐾',
+        keys:['Tierarzt','Veterinär','Pet','Hund','Katze','Zoo']
+    },
+
+    {
+        label:'Chemie & Pharma',
+        icon:'🧪',
+        keys:['Pharma','Chemie','Labor','Biotech','Medical','Science']
+    },
+
+    {
+        label:'Elektronik',
+        icon:'🔌',
+        keys:['Elektronik','Electronic','PCB','Hardware','Microtech']
+    },
+
+    {
+        label:'Personalvermittlung',
+        icon:'👔',
+        keys:['Recruiting','Personal','HR','Jobs','Stellenvermittlung']
+    },
+
+    {
+        label:'Versicherung',
+        icon:'🧾',
+        keys:['Versicherung','Insurance','Assurance']
+    },
+
+    {
+        label:'Architektur',
+        icon:'📐',
+        keys:['Architektur','Architect','Planung','Bauplanung']
+    },
+
+    {
+        label:'Umwelt & Recycling',
+        icon:'♻️',
+        keys:['Recycling','Umwelt','Entsorgung','Waste','Eco']
+    },
+
+        {
+    label:'Gaming',
+    icon:'🎮',
+    keys:['Gaming','Games','Esports','Streamer','Game Studio']
+},
+
+{
+    label:'Blockchain & Crypto',
+    icon:'🪙',
+    keys:['Blockchain','Crypto','Bitcoin','Ethereum','Web3','NFT']
+},
+
+{
+    label:'KI & AI',
+    icon:'🤖',
+    keys:['AI','KI','Artificial Intelligence','Machine Learning','Neural','Automation']
+},
+
+{
+    label:'Drohnen',
+    icon:'🚁',
+    keys:['Drone','Drohne','UAV','Aerial']
+},
+
+{
+    label:'Luftfahrt',
+    icon:'🛩️',
+    keys:['Aviation','Air','Flight','Airport','Pilot']
+},
+
+{
+    label:'Schifffahrt',
+    icon:'🚢',
+    keys:['Marine','Ship','Shipping','Boat','Yacht']
+},
+
+{
+    label:'Bergbau',
+    icon:'⛏️',
+    keys:['Mining','Mine','Rohstoffe','Extraction']
+},
+
+{
+    label:'Goldschmied & Schmuck',
+    icon:'💎',
+    keys:['Jewelry','Schmuck','Goldschmied','Uhren','Luxury']
+},
+
+{
+    label:'Uhren',
+    icon:'⌚',
+    keys:['Watch','Uhr','Horlogerie','Swiss Watch']
+},
+
+{
+    label:'Druck & Print',
+    icon:'🖨️',
+    keys:['Print','Druck','Copy','Werbetechnik','Beschriftung']
+},
+
+{
+    label:'Messebau',
+    icon:'🏢',
+    keys:['Messebau','Exhibition','Standbau']
+},
+
+{
+    label:'Fotografie',
+    icon:'📸',
+    keys:['Fotografie','Photography','Photo','Fotostudio']
+},
+
+{
+    label:'Videoproduktion',
+    icon:'🎥',
+    keys:['Video','Videoproduktion','Filmproduktion','Cinematography']
+},
+
+{
+    label:'Tattoo',
+    icon:'🖋️',
+    keys:['Tattoo','Ink','Tattoo Studio']
+},
+
+{
+    label:'Cannabis / CBD',
+    icon:'🌿',
+    keys:['CBD','Cannabis','Hemp']
+},
+
+{
+    label:'E-Zigaretten / Vape',
+    icon:'💨',
+    keys:['Vape','E-Zigarette','Liquid']
+},
+
+{
+    label:'Brauerei & Getränke',
+    icon:'🍺',
+    keys:['Brauerei','Beer','Getränke','Drinks','Beverage']
+},
+
+{
+    label:'Bäckerei & Konditorei',
+    icon:'🥐',
+    keys:['Bäckerei','Konditorei','Confiserie','Bakery']
+},
+
+{
+    label:'Metallbau',
+    icon:'🔩',
+    keys:['Metallbau','Stahlbau','Metal','Steel']
+},
+
+{
+    label:'Schlosserei',
+    icon:'🔧',
+    keys:['Schlosserei','Schweiss','Welding','Mechanic']
+},
+
+{
+    label:'Elektriker',
+    icon:'💡',
+    keys:['Elektriker','Elektroinstallationen','Electric']
+},
+
+{
+    label:'Sanitär & Heizung',
+    icon:'🚿',
+    keys:['Sanitär','Heizung','HVAC','Klima']
+},
+
+{
+    label:'Solar & Photovoltaik',
+    icon:'☀️',
+    keys:['Solar','Photovoltaik','PV','Solartechnik']
+},
+
+{
+    label:'Kälte & Klima',
+    icon:'❄️',
+    keys:['Klima','Cooling','Kälte','Refrigeration']
+},
+
+{
+    label:'Ingenieurbüro',
+    icon:'🧠',
+    keys:['Ingenieur','Engineering','Consulting']
+},
+
+{
+    label:'Beratung',
+    icon:'📋',
+    keys:['Consulting','Beratung','Advisory']
+},
+
+{
+    label:'Treuhand',
+    icon:'📊',
+    keys:['Treuhand','Accounting','Audit']
+},
+
+{
+    label:'Callcenter',
+    icon:'📞',
+    keys:['Callcenter','Support','Customer Service']
+},
+
+{
+    label:'Pflegeheim',
+    icon:'🧓',
+    keys:['Pflegeheim','Senioren','Altersheim']
+},
+
+{
+    label:'Kinderbetreuung',
+    icon:'🧸',
+    keys:['Kita','Kinderbetreuung','Daycare']
+},
+
+{
+    label:'Kirche & Religion',
+    icon:'⛪',
+    keys:['Kirche','Religious','Mission']
+},
+
+{
+    label:'Stiftung & Verein',
+    icon:'🤝',
+    keys:['Stiftung','Verein','Association','Foundation']
+},
+
+{
+    label:'Öffentliche Verwaltung',
+    icon:'🏛️',
+    keys:['Gemeinde','Verwaltung','Public','Kanton']
+},
+
+{
+    label:'Polizei & Rettung',
+    icon:'🚓',
+    keys:['Police','Polizei','Rescue','Feuerwehr']
+},
+
+{
+    label:'Feuerwehr',
+    icon:'🚒',
+    keys:['Feuerwehr','Fire','Brand']
+},
+
+{
+    label:'Bestattung',
+    icon:'⚰️',
+    keys:['Bestattung','Funeral']
+},
+
+{
+    label:'Dating & Social',
+    icon:'❤️',
+    keys:['Dating','Social','Matchmaking']
+},
+
+{
+    label:'Streaming & Creator',
+    icon:'📺',
+    keys:['Streamer','Streaming','Creator','Content']
+},
+
+{
+    label:'3D Druck',
+    icon:'🖨️',
+    keys:['3D','3D Print','Additive']
+},
+
+{
+    label:'Robotik',
+    icon:'🦾',
+    keys:['Robotik','Robotics','Automation']
+},
+
+{
+    label:'Nanotechnologie',
+    icon:'⚛️',
+    keys:['Nano','Nanotech']
+},
+
+{
+    label:'Raumfahrt',
+    icon:'🚀',
+    keys:['Space','Aerospace','Rocket']
+},
+
+{
+    label:'Biotechnologie',
+    icon:'🧬',
+    keys:['Biotech','Biologie','Genetics']
+},
+
+{
+    label:'Forensik',
+    icon:'🕵️',
+    keys:['Forensic','Forensik','Investigation']
+},
+
+{
+    label:'Cybersecurity',
+    icon:'🔐',
+    keys:['Cybersecurity','Security','Pentest','SOC','Hacking']
+}
+    
 
 ];
 
 const PER_PAGE = 8;
 
-let selected = null;
+let selected = [];
 let allResults = [];
 
 const pillRow = document.getElementById('fsBranchePills');
@@ -570,23 +943,33 @@ BRANCHEN.forEach(branche => {
 
     pill.onclick = () => {
 
-        document.querySelectorAll('.fs-branche-pill')
-            .forEach(p => p.classList.remove('selected'));
+        pill.classList.toggle('selected');
 
-        pill.classList.add('selected');
+        const exists = selected.find(
+            b => b.label === branche.label
+        );
 
-        selected = branche;
+        if(exists){
+
+            selected = selected.filter(
+                b => b.label !== branche.label
+            );
+
+        } else {
+
+            selected.push(branche);
+        }
     };
 
     pillRow.appendChild(pill);
 });
 
+
 window.fsSearch = async function(page = 1){
 
-    if(!selected){
+    if(selected.length === 0){
 
         fsShowError('Bitte zuerst eine Branche auswählen.');
-
         return;
     }
 
@@ -594,41 +977,64 @@ window.fsSearch = async function(page = 1){
 
     document.getElementById('fsLoading').style.display = 'flex';
 
-    const canton = document.getElementById('fsCanton').value;
+    const canton = document.getElementById('fsCanton').value.trim();
 
-    const extra = document.getElementById('fsQuery').value.trim();
+    const extra =
+        document.getElementById('fsQuery')
+        .value
+        .trim();
 
-    const searchTerms = extra
-        ? [extra]
-        : selected.keys;
+    let searchTerms = [];
+
+if(extra){
+
+    searchTerms = [extra];
+
+} else {
+
+    selected.forEach(branche => {
+
+        searchTerms.push(...branche.keys);
+
+    });
+}
 
     try {
 
         let merged = [];
-
         let seen = new Set();
 
         for(const term of searchTerms){
 
-            const body = {
-                name: term,
-                activeOnly: true,
-                languageKey: 'de',
-                maxEntries: 20
-            };
+            // WICHTIG:
+            // Suchbegriff MIT Kanton erweitern
+            // statt kaputten Zefix-Filter benutzen
 
-            if(canton){
-                body.cantonAbbreviation = canton;
-            }
+            const searchName = canton
+                ? `${term} ${canton}`
+                : term;
+
+            const body = {
+
+                name: searchName,
+
+                activeOnly: true,
+
+                languageKey: 'de',
+
+                maxEntries: 40
+            };
 
             const res = await fetch(
                 'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
                 {
-                    method:'POST',
-                    headers:{
+                    method: 'POST',
+
+                    headers: {
                         'Content-Type':'application/json',
                         'Accept':'application/json'
                     },
+
                     body: JSON.stringify(body)
                 }
             );
@@ -639,9 +1045,15 @@ window.fsSearch = async function(page = 1){
                 ? data
                 : (data.list || []);
 
+            // KEIN CLIENT FILTER MEHR !!!
+            // Zefix macht das intern
+
             list.forEach(firm => {
 
-                const uid = firm.uid || firm.name;
+                const uid =
+                    firm.uid ||
+                    firm.name ||
+                    Math.random();
 
                 if(!seen.has(uid)){
 
@@ -652,7 +1064,14 @@ window.fsSearch = async function(page = 1){
             });
         }
 
-        allResults = merged;
+        // Doppelte Firmen entfernen
+        allResults = merged.filter((firm, index, self) =>
+
+            index === self.findIndex(f =>
+                (f.uid || f.name) ===
+                (firm.uid || firm.name)
+            )
+        );
 
         document.getElementById('fsLoading').style.display = 'none';
 
@@ -672,6 +1091,8 @@ window.fsSearch = async function(page = 1){
         fsShowError('Fehler beim Laden der Firmendaten.');
     }
 };
+
+
 
 async function renderPage(page){
 
@@ -698,18 +1119,35 @@ async function renderPage(page){
     renderPagination(page);
 }
 
- async function createCard(firm, index){
+async function createCard(firm, index){
 
     const card = document.createElement('div');
 
     card.className = 'fs-card';
+
+    const canton =
+    firm.canton ||
+    firm.cantonAbbreviation ||
+    'Schweiz';
+
+    // Google Maps Suchquery
+    const mapsQuery = `
+        ${firm.name}
+        ${canton}
+        Schweiz
+    `
+    .replace(/\s+/g, ' ')
+    .trim();
+
+    const mapsUrl =
+        `https://www.google.com/maps/search/${encodeURIComponent(mapsQuery)}`;
 
     card.innerHTML = `
 
         <div class="fs-card-header">
 
             <div class="fs-card-icon">
-                ${selected.icon}
+                ${selected[0]?.icon || '🏢'}
             </div>
 
             <div class="fs-card-meta">
@@ -719,7 +1157,7 @@ async function renderPage(page){
                 </div>
 
                 <div class="fs-card-sub">
-                    Lade Adresse...
+                    ${escapeHtml(canton)}
                 </div>
 
             </div>
@@ -732,112 +1170,47 @@ async function renderPage(page){
 
                 ${buildItem('UID', firm.uid)}
                 ${buildItem('CH-ID', firm.chid)}
+                ${buildItem('Kanton', canton)}
+
+            </div>
+
+            <div class="fs-addr-block">
+
+                <div class="fs-addr-text">
+
+                    <span class="fs-addr-line1">
+                        Adresse über Google Maps suchen
+                    </span>
+
+                    <span class="fs-addr-line2">
+                        ${escapeHtml(mapsQuery)}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="fs-actions">
+
+                <a class="fs-action-link"
+                   href="${mapsUrl}"
+                   target="_blank">
+
+                    Google Maps öffnen
+
+                </a>
+
+                <span class="fs-action-link"
+                      onclick="navigator.clipboard.writeText('${escapeHtml(mapsQuery)}')">
+
+                    Suche kopieren
+
+                </span>
 
             </div>
 
         </div>
     `;
-
-    try {
-
-        // NOCHMAL per Name suchen
-        const res = await fetch(
-            'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
-            {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                    'Accept':'application/json'
-                },
-                body: JSON.stringify({
-                    name: firm.name,
-                    activeOnly: true,
-                    languageKey: 'de',
-                    maxEntries: 10
-                })
-            }
-        );
-
-        const data = await res.json();
-
-        const list = Array.isArray(data)
-            ? data
-            : (data.list || []);
-
-        // richtige Firma anhand UID finden
-        const match = list.find(x => x.uid === firm.uid) || list[0];
-
-        const addr = match?.address || {};
-
-        const street = [
-            addr.street,
-            addr.houseNumber
-        ]
-        .filter(Boolean)
-        .join(' ');
-
-        const city = [
-            addr.swissZipCode,
-            addr.town
-        ]
-        .filter(Boolean)
-        .join(' ');
-
-        const fullAddress = [
-            street,
-            city
-        ]
-        .filter(Boolean)
-        .join(', ');
-
-        const sub = card.querySelector('.fs-card-sub');
-
-        if(fullAddress){
-
-            sub.innerHTML = fullAddress;
-
-            const body = card.querySelector('.fs-card-body');
-
-            body.innerHTML += `
-
-                <div class="fs-addr-block">
-
-                    <div class="fs-addr-text">
-
-                        <span class="fs-addr-line1">
-                            ${escapeHtml(fullAddress)}
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="fs-actions">
-
-                    <a class="fs-action-link"
-                       href="https://www.google.com/maps/search/${encodeURIComponent(fullAddress)}"
-                       target="_blank">
-
-                        Google Maps
-
-                    </a>
-
-                </div>
-            `;
-        }
-        else{
-
-            sub.innerHTML = 'Keine Adresse gefunden';
-        }
-
-    } catch(err){
-
-        console.error(err);
-
-        const sub = card.querySelector('.fs-card-sub');
-
-        sub.innerHTML = 'Keine Adresse gefunden';
-    }
 
     return card;
 }
