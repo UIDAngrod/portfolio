@@ -10,7 +10,7 @@
 </head>
 <body class="lernen-page">
 
-<!-- ===== NAV ===== -->
+    <!-- ===== NAV ===== -->
 
     <nav>
         <div class="nav-container">
@@ -41,7 +41,9 @@
         </div>
     </nav>
 
-<!-- ===== LERNEN ===== -->
+    <!-- ===== LERNEN ===== -->
+
+
 
 <section class="lernen-section">
     <div class="lernen-hero">
@@ -55,9 +57,10 @@
             Random stuff
         </p>
     </div>
+
     <div class="lernen-container">
 
-<!-- ===== TABS NAV ===== -->
+        <!-- ===== TABS NAV ===== -->
 
 <div class="lernen-tabs-wrapper">
     <div class="lernen-tabs-scroll" id="lernenTabs">
@@ -202,894 +205,1116 @@
             </div>
         </div>
 
-<!-- ===== TAB FIRMENSUCHE ===== -->
+                <!-- ===== TAB 2 FIRMENSUCHE ===== -->
 
         <div class="tab-slide">
             <div class="lernen-box">
                     
-            <style>
-            .fs-wrap { width: 100%; font-family: 'Roboto', sans-serif; color: #fff; }
-
-            .fs-branche-label { font-size: 0.72rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-
-            .fs-branche-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-
-            .fs-branche-pill {
-                padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; cursor: pointer;
-                border: 1px solid rgba(168,85,247,0.25); background: rgba(128,0,255,0.08);
-                color: rgba(255,255,255,0.6); transition: all 0.18s; user-select: none;
-                display: flex; align-items: center; gap: 6px;
-            }
-            .fs-branche-pill:hover { border-color: rgba(168,85,247,0.55); color: #fff; background: rgba(128,0,255,0.18); }
-            .fs-branche-pill.selected { background: rgba(128,0,255,0.35); border-color: #a855f7; color: #fff; box-shadow: 0 0 10px rgba(128,0,255,0.35); }
-
-            .fs-filters { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 20px; }
-
-            .fs-input {
-                padding: 11px 16px; border-radius: 12px;
-                border: 1px solid rgba(180,120,255,0.3); background: rgba(10,6,20,0.8);
-                color: #fff; font-size: 0.95rem; outline: none; font-family: 'Roboto', sans-serif;
-                transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
-            }
-            .fs-input:focus { border-color: purple; box-shadow: 0 0 0 3px rgba(128,0,255,0.15); }
-            .fs-input::placeholder { color: rgba(255,255,255,0.3); }
-
-            .fs-select {
-                padding: 11px 14px; border-radius: 12px; height: 44px;
-                border: 1px solid rgba(180,120,255,0.25); background: rgba(10,6,20,0.8);
-                color: #fff; font-size: 0.9rem; font-family: 'Roboto', sans-serif;
-                outline: none; cursor: pointer;
-                appearance: none; -webkit-appearance: none;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-                background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
-            }
-            .fs-select option { background: #1a0a2e; color: #fff; }
-
-            .fs-btn {
-                padding: 11px 24px; border-radius: 12px; height: 44px;
-                background: linear-gradient(135deg, #8a2be2, #1e90ff);
-                border: none; color: #fff; font-size: 0.95rem; font-weight: 700;
-                cursor: pointer; transition: all 0.2s; white-space: nowrap;
-                box-shadow: 0 0 14px rgba(128,0,255,0.35); font-family: 'Roboto', sans-serif;
-            }
-            .fs-btn:hover { transform: scale(1.04); box-shadow: 0 0 24px rgba(128,0,255,0.6); }
-            .fs-btn:active { transform: scale(0.97); }
-
-            .fs-info-bar { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-bottom: 14px; min-height: 20px; }
-            .fs-count { color: #c77dff; font-weight: 600; }
-
-            .fs-loading { display: none; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); font-size: 0.9rem; padding: 30px 0; justify-content: center; }
-            .fs-spinner { width: 22px; height: 22px; border: 2px solid rgba(128,0,255,0.2); border-top-color: purple; border-radius: 50%; animation: fs-spin 0.7s linear infinite; flex-shrink: 0; }
-            @keyframes fs-spin { to { transform: rotate(360deg); } }
-
-            .fs-error { display: none; padding: 12px 16px; border-radius: 12px; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25); color: #f87171; font-size: 0.88rem; margin-bottom: 14px; }
-            .fs-empty { display: none; text-align: center; padding: 40px 0; color: rgba(255,255,255,0.35); font-size: 0.95rem; }
-
-            .fs-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-
-            /* ── CARD ── */
-            .fs-card {
-                background: rgba(18,10,32,0.75); border: 1px solid rgba(168,85,247,0.2);
-                border-radius: 16px; overflow: hidden;
-                transition: border-color 0.2s, box-shadow 0.2s;
-                animation: fs-fadein 0.3s ease both;
-            }
-            @keyframes fs-fadein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-            .fs-card:hover { border-color: rgba(168,85,247,0.45); }
-            .fs-card.open { border-color: rgba(168,85,247,0.6); box-shadow: 0 0 22px rgba(128,0,255,0.2); }
-
-            .fs-card-header {
-                display: flex; align-items: center; gap: 12px;
-                padding: 16px 20px; cursor: pointer;
-                transition: background 0.15s;
-            }
-            .fs-card-header:hover { background: rgba(128,0,255,0.06); }
-
-            .fs-card-icon {
-                width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-                background: rgba(128,0,255,0.2); border: 1px solid rgba(168,85,247,0.3);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.2em; line-height: 1;
-            }
-
-            .fs-card-meta { flex: 1; min-width: 0; }
-            .fs-card-name { font-size: 1rem; font-weight: 700; color: #d15cff; text-shadow: 0 0 8px rgba(128,0,255,0.35); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-            .fs-card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
-
-            .fs-card-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-
-            .fs-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
-            .fs-badge.aktiv { background: rgba(22,163,74,0.15); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
-            .fs-badge.geloescht { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); color: #f87171; }
-
-            .fs-chevron { color: rgba(255,255,255,0.3); font-size: 0.85rem; transition: transform 0.25s; }
-            .fs-card.open .fs-chevron { transform: rotate(180deg); }
-
-            /* ── EXPANDED BODY ── */
-            .fs-card-body { display: none; border-top: 1px solid rgba(255,255,255,0.06); padding: 0 20px 18px; }
-            .fs-card.open .fs-card-body { display: block; }
-
-            .fs-detail-loading { display: flex; align-items: center; gap: 8px; padding: 16px 0; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
-
-            /* Detail grid */
-            .fs-dg {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 14px 20px;
-                margin-top: 16px;
-            }
-
-            .fs-dg-item { display: flex; flex-direction: column; gap: 3px; }
-
-            .fs-dg-label {
-                font-size: 0.65rem; color: rgba(255,255,255,0.3);
-                text-transform: uppercase; letter-spacing: 0.09em;
-            }
-
-            .fs-dg-val {
-                font-size: 0.88rem; color: rgba(255,255,255,0.88);
-                word-break: break-word; line-height: 1.4;
-            }
-            .fs-dg-val.hl { color: #a78bfa; font-family: monospace; }
-            .fs-dg-val.addr { color: rgba(255,255,255,0.75); }
-            .fs-dg-val.purpose { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
-
-            /* Address highlight block */
-            .fs-addr-block {
-                margin-top: 14px;
-                padding: 12px 16px;
-                border-radius: 10px;
-                background: rgba(128,0,255,0.08);
-                border: 1px solid rgba(168,85,247,0.2);
-                display: flex; align-items: flex-start; gap: 10px;
-            }
-            .fs-addr-block svg { flex-shrink: 0; margin-top: 2px; }
-            .fs-addr-text { display: flex; flex-direction: column; gap: 2px; }
-            .fs-addr-line1 { font-size: 0.95rem; font-weight: 600; color: #e0c0ff; }
-            .fs-addr-line2 { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
-
-            /* Action links */
-            .fs-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-            .fs-action-link {
-                display: flex; align-items: center; gap: 5px;
-                padding: 6px 14px; border-radius: 20px;
-                border: 1px solid rgba(168,85,247,0.25); background: rgba(128,0,255,0.08);
-                font-size: 0.8rem; color: rgba(255,255,255,0.65); text-decoration: none;
-                transition: all 0.15s; cursor: pointer;
-            }
-            .fs-action-link:hover { background: rgba(128,0,255,0.22); border-color: rgba(168,85,247,0.55); color: #fff; }
-
-            /* Pagination */
-            .fs-pagination { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-            .fs-page-btn { padding: 7px 18px; border-radius: 20px; border: 1px solid rgba(168,85,247,0.3); background: rgba(10,6,20,0.7); color: rgba(255,255,255,0.6); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-family: 'Roboto', sans-serif; }
-            .fs-page-btn:hover:not(:disabled) { background: rgba(128,0,255,0.2); color: #fff; }
-            .fs-page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-            .fs-page-btn.active { background: rgba(128,0,255,0.35); color: #fff; border-color: purple; }
-
-            .fs-hint { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.3); font-size: 0.9rem; line-height: 1.7; }
-            .fs-hint span { color: #a78bfa; }
-
-            .fs-purpose-block { margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: rgba(10,6,22,0.6); border: 1px solid rgba(255,255,255,0.07); }
-            .fs-purpose-label { font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 5px; }
-            .fs-purpose-text { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
-
-            @media (max-width: 640px) {
-                .fs-filters { grid-template-columns: 1fr; }
-                .fs-btn { width: 100%; }
-                .fs-dg { grid-template-columns: 1fr 1fr; }
-            }
-            @media (max-width: 400px) { .fs-dg { grid-template-columns: 1fr; } }
-            </style>
-
-            <div class="fs-wrap">
-                    <h2 class="lernen-title" style="margin-bottom:6px;"></h2>
-                                    <div class="lernen-text">
-                                    <h2 class="lernen-title">Firmensuche in Handelsregister</h2>
-                                    <p class="lernen-description">
-                                        Ich hatte echt Schwierigkeiten, nach Adressen von Unternehmen zu suchen. Mit der Hilfe von KI habe ich eine Möglichkeit erstellt, ohne Backend-Server im Zefix Index nach Branchen zu filtern. ~ Eine Möglichkeit KI Sinnvoll zu nutzen.
-                                    </p>
-                                    </div>
-                <p class="lernen-description" style="margin-bottom:20px;font-size:.88rem;color:rgba(255,255,255,.4);">
-                    Live-Suche im Handelsregister 
-                </p>
-
-                <div class="fs-branche-label">1. Branche wählen</div>
-                <div class="fs-branche-row" id="fsBranchePills"></div>
-
-                <div class="fs-branche-label" style="margin-top:4px;">2. Optional eingrenzen &amp; suchen</div>
-                <div class="fs-filters">
-                    <select class="fs-select" id="fsCanton">
-                        <option value="">🇨🇭 Alle Kantone</option>
-                        <option value="AG">Aargau (AG)</option>
-                        <option value="AI">Appenzell Innerrhoden (AI)</option>
-                        <option value="AR">Appenzell Ausserrhoden (AR)</option>
-                        <option value="BE">Bern (BE)</option>
-                        <option value="BL">Basel-Landschaft (BL)</option>
-                        <option value="BS">Basel-Stadt (BS)</option>
-                        <option value="FR">Freiburg (FR)</option>
-                        <option value="GE">Genf (GE)</option>
-                        <option value="GL">Glarus (GL)</option>
-                        <option value="GR">Graubünden (GR)</option>
-                        <option value="JU">Jura (JU)</option>
-                        <option value="LU">Luzern (LU)</option>
-                        <option value="NE">Neuenburg (NE)</option>
-                        <option value="NW">Nidwalden (NW)</option>
-                        <option value="OW">Obwalden (OW)</option>
-                        <option value="SG">St. Gallen (SG)</option>
-                        <option value="SH">Schaffhausen (SH)</option>
-                        <option value="SO">Solothurn (SO)</option>
-                        <option value="SZ">Schwyz (SZ)</option>
-                        <option value="TG">Thurgau (TG)</option>
-                        <option value="TI">Tessin (TI)</option>
-                        <option value="UR">Uri (UR)</option>
-                        <option value="VD">Waadt (VD)</option>
-                        <option value="VS">Wallis (VS)</option>
-                        <option value="ZG">Zug (ZG)</option>
-                        <option value="ZH">Zürich (ZH)</option>
-                    </select>
-                    <input class="fs-input" type="text" id="fsQuery" placeholder="Firmenname eingrenzen (optional)" />
-                    <button class="fs-btn" onclick="fsSearch(1)">Suchen</button>
-                </div>
-
-                <div class="fs-info-bar">
-                    <span id="fsResultCount"></span>
-                    <span style="font-size:.75rem;opacity:.4;">Zefix / admin.ch</span>
-                </div>
-
-                <div class="fs-error" id="fsError"></div>
-                <div class="fs-loading" id="fsLoading"><div class="fs-spinner"></div><span>Suche läuft…</span></div>
-                <div class="fs-empty" id="fsEmpty">Keine Treffer. Andere Branche oder Kanton versuchen.</div>
-                <div class="fs-grid" id="fsGrid"></div>
-                <div class="fs-hint" id="fsHint">Wähle eine <span>Branche</span> aus, dann klicke <span>Suchen</span>.</div>
-                <div class="fs-pagination" id="fsPagination"></div>
-            </div>
-
-            <script>
-            (function(){
-                let selected = [];
-
-            let allResults = [];
-
-            const PER_PAGE = 12;
-
-            const pillRow =
-                document.getElementById('fsBranchePills');
-
-            const BRANCHEN = [
-
-            {
-                category: '💼 Business',
-                items: [
-
-                    {
-                        label:'Finanzen',
-                        icon:'💰',
-                        keys:['Bank','Finanz','Invest','Treuhand','Kapital']
-                    },
-
-                    {
-                        label:'Versicherung',
-                        icon:'🧾',
-                        keys:['Versicherung','Insurance']
-                    },
-
-                    {
-                        label:'Immobilien',
-                        icon:'🏠',
-                        keys:['Immobilien','Makler','Liegenschaften']
-                    },
-
-                    {
-                        label:'Marketing',
-                        icon:'📢',
-                        keys:['Marketing','Werbung','Media','PR']
-                    },
-
-                    {
-                        label:'Beratung',
-                        icon:'📋',
-                        keys:['Consulting','Beratung']
-                    },
-
-                    {
-                        label:'Personalvermittlung',
-                        icon:'👔',
-                        keys:['Recruiting','HR','Jobs']
-                    }
-
-                ]
-            },
-
-            {
-                category: '💻 Technik & IT',
-                items: [
-
-                    {
-                        label:'Informatik / IT',
-                        icon:'💻',
-                        keys:['IT','Software','Cloud','Hosting','Netzwerk']
-                    },
-
-                    {
-                        label:'Cybersecurity',
-                        icon:'🔐',
-                        keys:['Cybersecurity','Pentest','SOC','Security']
-                    },
-
-                    {
-                        label:'KI & AI',
-                        icon:'🤖',
-                        keys:['AI','Machine Learning','KI']
-                    },
-
-                    {
-                        label:'Robotik',
-                        icon:'🦾',
-                        keys:['Robotik','Robotics']
-                    },
-
-                    {
-                        label:'Elektronik',
-                        icon:'🔌',
-                        keys:['Elektronik','Hardware']
-                    },
-
-                    {
-                        label:'Telekommunikation',
-                        icon:'📡',
-                        keys:['Telecom','Internet','ISP']
-                    }
-
-                ]
-            },
-
-            {
-                category: '🏗️ Bau & Industrie',
-                items: [
-
-                    {
-                        label:'Bau & Handwerk',
-                        icon:'🏗️',
-                        keys:['Bau','Maurer','Holzbau']
-                    },
-
-                    {
-                        label:'Metallbau',
-                        icon:'🔩',
-                        keys:['Metallbau','Steel']
-                    },
-
-                    {
-                        label:'Elektriker',
-                        icon:'💡',
-                        keys:['Elektriker','Elektro']
-                    },
-
-                    {
-                        label:'Sanitär & Heizung',
-                        icon:'🚿',
-                        keys:['Sanitär','Heizung','HVAC']
-                    },
-
-                    {
-                        label:'Industrie',
-                        icon:'🏭',
-                        keys:['Industrie','Produktion']
-                    }
-
-                ]
-            },
-
-            {
-                category: '🍔 Gastronomie & Lifestyle',
-                items: [
-
-                    {
-                        label:'Gastronomie',
-                        icon:'🍽️',
-                        keys:['Restaurant','Bar','Café']
-                    },
-
-                    {
-                        label:'Tourismus',
-                        icon:'✈️',
-                        keys:['Hotel','Travel','Resort']
-                    },
-
-                    {
-                        label:'Fitness & Sport',
-                        icon:'🏋️',
-                        keys:['Fitness','Gym']
-                    },
-
-                    {
-                        label:'Coiffeur & Beauty',
-                        icon:'💇',
-                        keys:['Beauty','Kosmetik']
-                    },
-
-                    {
-                        label:'Mode & Kleidung',
-                        icon:'👕',
-                        keys:['Fashion','Mode']
-                    }
-
-                ]
-            },
-
-            {
-                category: '🎬 Medien & Kreativ',
-                items: [
-
-                    {
-                        label:'Gaming',
-                        icon:'🎮',
-                        keys:['Gaming','Games']
-                    },
-
-                    {
-                        label:'Streaming & Creator',
-                        icon:'📺',
-                        keys:['Streaming','Creator']
-                    },
-
-                    {
-                        label:'Fotografie',
-                        icon:'📸',
-                        keys:['Photography','Foto']
-                    },
-
-                    {
-                        label:'Videoproduktion',
-                        icon:'🎥',
-                        keys:['Video','Film']
-                    },
-
-                    {
-                        label:'Musik',
-                        icon:'🎵',
-                        keys:['Music','DJ']
-                    }
-
-                ]
-            }
-
-            ];
-
-            BRANCHEN.forEach(group => {
-
-                const wrapper = document.createElement('div');
-                wrapper.className = 'fs-group';
-
-                const header = document.createElement('div');
-                header.className = 'fs-group-header';
-
-                header.innerHTML = `
-                    <span>${group.category}</span>
-                    <span class="fs-group-arrow">⌄</span>
-                `;
-
-                const content = document.createElement('div');
-                content.className = 'fs-group-content';
-
-                header.onclick = () => {
-
-                    wrapper.classList.toggle('open');
-                };
-
-                group.items.forEach(branche => {
-
-                    const pill = document.createElement('div');
-
-                    pill.className = 'fs-branche-pill';
-
-                    pill.innerHTML = `
-                        <span>${branche.icon}</span>
-                        ${branche.label}
-                    `;
-
-                    pill.onclick = () => {
-
-                        pill.classList.toggle('selected');
-
-                        const exists = selected.find(
-                            b => b.label === branche.label
-                        );
-
-                        if(exists){
-
-                            selected = selected.filter(
-                                b => b.label !== branche.label
-                            );
-
-                        } else {
-
-                            selected.push(branche);
-                        }
-                    };
-
-                    content.appendChild(pill);
-                });
-
-                wrapper.appendChild(header);
-                wrapper.appendChild(content);
-
-                pillRow.appendChild(wrapper);
-            });
-
-
-            window.fsSearch = async function(page = 1){
-
-                fsClear();
-
-                document.getElementById('fsLoading').style.display = 'flex';
-
-                const canton =
-                    document.getElementById('fsCanton')
-                    .value
-                    .trim();
-
-                const extra =
-                    document.getElementById('fsQuery')
-                    .value
-                    .trim();
-
-                let searchTerms = [];
-
-                // SUCHLOGIK
-
-                if(extra){
-
-                    searchTerms = [extra];
-
-                } else if(selected.length > 0){
-
-                    selected.forEach(branche => {
-
-                        searchTerms.push(...branche.keys);
-
-                    });
-
-                } else {
-
-                    searchTerms = [
-                        'IT',
-                        'Software',
-                        'Restaurant',
-                        'Bau',
-                        'Digital',
-                        'Tech',
-                        'Elektro',
-                        'Consulting'
-                    ];
-                }
-
-                try {
-
-                    let merged = [];
-                    let seen = new Set();
-
-                    for(const term of searchTerms){
-
-                    const body = {
-
-                        name: term,
-
-                        activeOnly: true,
-
-                        languageKey: 'de',
-
-                        maxEntries: 4000,
-
-                    
-                    };
-
-                        const res = await fetch(
-                            'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
-                            {
-                                method: 'POST',
-
-                                headers: {
-                                    'Content-Type':'application/json',
-                                    'Accept':'application/json'
-                                },
-
-                                body: JSON.stringify(body)
-                            }
-                        );
-
-                        const data = await res.json();
-
-                        const list = Array.isArray(data)
-                            ? data
-                            : (data.list || []);
-
-
-                        const normalizedCanton =
-                canton.trim().toUpperCase();
-
-            const filteredList = list.filter(firm => {
-
-                if(!normalizedCanton) return true;
-
-                // ALLE möglichen Felder prüfen
-                const values = Object.values(firm)
-                    .join(' ')
-                    .toUpperCase();
-
-                return values.includes(normalizedCanton);
-            });
-                        // KANTON FILTER
-
-
-                        filteredList.forEach(firm => {
-
-                            const uid =
-                                firm.uid ||
-                                firm.name ||
-                                Math.random();
-
-                            if(!seen.has(uid)){
-
-                                seen.add(uid);
-
-                                merged.push(firm);
-                            }
-                        });
-                    }
-
-                    allResults = merged.filter((firm, index, self) =>
-
-                        index === self.findIndex(f =>
-
-                            (f.uid || f.name) ===
-                            (firm.uid || firm.name)
-                        )
-                    );
-
-                    document.getElementById('fsLoading').style.display = 'none';
-
-                    if(allResults.length === 0){
-
-                        document.getElementById('fsEmpty').style.display = 'block';
-
-                        return;
-                    }
-
-                    await renderPage(page);
-
-                } catch(err){
-
-                    console.error(err);
-
-                    fsShowError('Fehler beim Laden der Firmendaten.');
-                }
+<style>
+.fs-wrap { width: 100%; font-family: 'Roboto', sans-serif; color: #fff; }
+
+.fs-branche-label { font-size: 0.72rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+.fs-branche-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+.fs-branche-pill {
+    padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; cursor: pointer;
+    border: 1px solid rgba(168,85,247,0.25); background: rgba(128,0,255,0.08);
+    color: rgba(255,255,255,0.6); transition: all 0.18s; user-select: none;
+    display: flex; align-items: center; gap: 6px;
+}
+.fs-branche-pill:hover { border-color: rgba(168,85,247,0.55); color: #fff; background: rgba(128,0,255,0.18); }
+.fs-branche-pill.selected { background: rgba(128,0,255,0.35); border-color: #a855f7; color: #fff; box-shadow: 0 0 10px rgba(128,0,255,0.35); }
+
+.fs-filters { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 20px; }
+
+.fs-input {
+    padding: 11px 16px; border-radius: 12px;
+    border: 1px solid rgba(180,120,255,0.3); background: rgba(10,6,20,0.8);
+    color: #fff; font-size: 0.95rem; outline: none; font-family: 'Roboto', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+}
+.fs-input:focus { border-color: purple; box-shadow: 0 0 0 3px rgba(128,0,255,0.15); }
+.fs-input::placeholder { color: rgba(255,255,255,0.3); }
+
+.fs-select {
+    padding: 11px 14px; border-radius: 12px; height: 44px;
+    border: 1px solid rgba(180,120,255,0.25); background: rgba(10,6,20,0.8);
+    color: #fff; font-size: 0.9rem; font-family: 'Roboto', sans-serif;
+    outline: none; cursor: pointer;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+}
+.fs-select option { background: #1a0a2e; color: #fff; }
+
+.fs-btn {
+    padding: 11px 24px; border-radius: 12px; height: 44px;
+    background: linear-gradient(135deg, #8a2be2, #1e90ff);
+    border: none; color: #fff; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    box-shadow: 0 0 14px rgba(128,0,255,0.35); font-family: 'Roboto', sans-serif;
+}
+.fs-btn:hover { transform: scale(1.04); box-shadow: 0 0 24px rgba(128,0,255,0.6); }
+.fs-btn:active { transform: scale(0.97); }
+
+.fs-info-bar { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-bottom: 14px; min-height: 20px; }
+.fs-count { color: #c77dff; font-weight: 600; }
+
+.fs-loading { display: none; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); font-size: 0.9rem; padding: 30px 0; justify-content: center; }
+.fs-spinner { width: 22px; height: 22px; border: 2px solid rgba(128,0,255,0.2); border-top-color: purple; border-radius: 50%; animation: fs-spin 0.7s linear infinite; flex-shrink: 0; }
+@keyframes fs-spin { to { transform: rotate(360deg); } }
+
+.fs-error { display: none; padding: 12px 16px; border-radius: 12px; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25); color: #f87171; font-size: 0.88rem; margin-bottom: 14px; }
+.fs-empty { display: none; text-align: center; padding: 40px 0; color: rgba(255,255,255,0.35); font-size: 0.95rem; }
+
+.fs-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+/* ── CARD ── */
+.fs-card {
+    background: rgba(18,10,32,0.75); border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    animation: fs-fadein 0.3s ease both;
+}
+@keyframes fs-fadein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.fs-card:hover { border-color: rgba(168,85,247,0.45); }
+.fs-card.open { border-color: rgba(168,85,247,0.6); box-shadow: 0 0 22px rgba(128,0,255,0.2); }
+
+.fs-card-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px; cursor: pointer;
+    transition: background 0.15s;
+}
+.fs-card-header:hover { background: rgba(128,0,255,0.06); }
+
+.fs-card-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(128,0,255,0.2); border: 1px solid rgba(168,85,247,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2em; line-height: 1;
+}
+
+.fs-card-meta { flex: 1; min-width: 0; }
+.fs-card-name { font-size: 1rem; font-weight: 700; color: #d15cff; text-shadow: 0 0 8px rgba(128,0,255,0.35); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fs-card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+.fs-card-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.fs-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+.fs-badge.aktiv { background: rgba(22,163,74,0.15); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
+.fs-badge.geloescht { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); color: #f87171; }
+
+.fs-chevron { color: rgba(255,255,255,0.3); font-size: 0.85rem; transition: transform 0.25s; }
+.fs-card.open .fs-chevron { transform: rotate(180deg); }
+
+/* ── EXPANDED BODY ── */
+.fs-card-body { display: none; border-top: 1px solid rgba(255,255,255,0.06); padding: 0 20px 18px; }
+.fs-card.open .fs-card-body { display: block; }
+
+.fs-detail-loading { display: flex; align-items: center; gap: 8px; padding: 16px 0; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+
+/* Detail grid */
+.fs-dg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px 20px;
+    margin-top: 16px;
+}
+
+.fs-dg-item { display: flex; flex-direction: column; gap: 3px; }
+
+.fs-dg-label {
+    font-size: 0.65rem; color: rgba(255,255,255,0.3);
+    text-transform: uppercase; letter-spacing: 0.09em;
+}
+
+.fs-dg-val {
+    font-size: 0.88rem; color: rgba(255,255,255,0.88);
+    word-break: break-word; line-height: 1.4;
+}
+.fs-dg-val.hl { color: #a78bfa; font-family: monospace; }
+.fs-dg-val.addr { color: rgba(255,255,255,0.75); }
+.fs-dg-val.purpose { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+/* Address highlight block */
+.fs-addr-block {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(128,0,255,0.08);
+    border: 1px solid rgba(168,85,247,0.2);
+    display: flex; align-items: flex-start; gap: 10px;
+}
+.fs-addr-block svg { flex-shrink: 0; margin-top: 2px; }
+.fs-addr-text { display: flex; flex-direction: column; gap: 2px; }
+.fs-addr-line1 { font-size: 0.95rem; font-weight: 600; color: #e0c0ff; }
+.fs-addr-line2 { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+
+/* Action links */
+.fs-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.fs-action-link {
+    display: flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 20px;
+    border: 1px solid rgba(168,85,247,0.25); background: rgba(128,0,255,0.08);
+    font-size: 0.8rem; color: rgba(255,255,255,0.65); text-decoration: none;
+    transition: all 0.15s; cursor: pointer;
+}
+.fs-action-link:hover { background: rgba(128,0,255,0.22); border-color: rgba(168,85,247,0.55); color: #fff; }
+
+/* Pagination */
+.fs-pagination { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.fs-page-btn { padding: 7px 18px; border-radius: 20px; border: 1px solid rgba(168,85,247,0.3); background: rgba(10,6,20,0.7); color: rgba(255,255,255,0.6); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-family: 'Roboto', sans-serif; }
+.fs-page-btn:hover:not(:disabled) { background: rgba(128,0,255,0.2); color: #fff; }
+.fs-page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.fs-page-btn.active { background: rgba(128,0,255,0.35); color: #fff; border-color: purple; }
+
+.fs-hint { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.3); font-size: 0.9rem; line-height: 1.7; }
+.fs-hint span { color: #a78bfa; }
+
+.fs-purpose-block { margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: rgba(10,6,22,0.6); border: 1px solid rgba(255,255,255,0.07); }
+.fs-purpose-label { font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 5px; }
+.fs-purpose-text { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+@media (max-width: 640px) {
+    .fs-filters { grid-template-columns: 1fr; }
+    .fs-btn { width: 100%; }
+    .fs-dg { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) { .fs-dg { grid-template-columns: 1fr; } }
+</style>
+
+<div class="fs-wrap">
+        <h2 class="lernen-title" style="margin-bottom:6px;"></h2>
+                        <div class="lernen-text">
+                        <h2 class="lernen-title">Firmensuche in Handelsregister - Etwas sinnvolles mit KI</h2>
+                        <p class="lernen-description">
+                            Ich hatte echt Schwierigkeiten, nach Adressen von Unternehmen zu suchen. Mit der Hilfe von KI habe ich eine Möglichkeit erstellt, ohne Backend-Server im Zefix Index nach Branchen zu filtern.
+                        </p>
+                        </div>
+    <p class="lernen-description" style="margin-bottom:20px;font-size:.88rem;color:rgba(255,255,255,.4);">
+        Live-Suche im Handelsregister 
+    </p>
+
+    <div class="fs-branche-label">1. Branche wählen</div>
+    <div class="fs-branche-row" id="fsBranchePills"></div>
+
+    <div class="fs-branche-label" style="margin-top:4px;">2. Optional eingrenzen &amp; suchen</div>
+    <div class="fs-filters">
+        <select class="fs-select" id="fsCanton">
+            <option value="">🇨🇭 Alle Kantone</option>
+            <option value="AG">Aargau (AG)</option>
+            <option value="AI">Appenzell Innerrhoden (AI)</option>
+            <option value="AR">Appenzell Ausserrhoden (AR)</option>
+            <option value="BE">Bern (BE)</option>
+            <option value="BL">Basel-Landschaft (BL)</option>
+            <option value="BS">Basel-Stadt (BS)</option>
+            <option value="FR">Freiburg (FR)</option>
+            <option value="GE">Genf (GE)</option>
+            <option value="GL">Glarus (GL)</option>
+            <option value="GR">Graubünden (GR)</option>
+            <option value="JU">Jura (JU)</option>
+            <option value="LU">Luzern (LU)</option>
+            <option value="NE">Neuenburg (NE)</option>
+            <option value="NW">Nidwalden (NW)</option>
+            <option value="OW">Obwalden (OW)</option>
+            <option value="SG">St. Gallen (SG)</option>
+            <option value="SH">Schaffhausen (SH)</option>
+            <option value="SO">Solothurn (SO)</option>
+            <option value="SZ">Schwyz (SZ)</option>
+            <option value="TG">Thurgau (TG)</option>
+            <option value="TI">Tessin (TI)</option>
+            <option value="UR">Uri (UR)</option>
+            <option value="VD">Waadt (VD)</option>
+            <option value="VS">Wallis (VS)</option>
+            <option value="ZG">Zug (ZG)</option>
+            <option value="ZH">Zürich (ZH)</option>
+        </select>
+        <input class="fs-input" type="text" id="fsQuery" placeholder="Firmenname eingrenzen (optional)" />
+        <button class="fs-btn" onclick="fsSearch(1)">Suchen</button>
+    </div>
+
+    <div class="fs-info-bar">
+        <span id="fsResultCount"></span>
+        <span style="font-size:.75rem;opacity:.4;">Zefix / admin.ch</span>
+    </div>
+
+    <div class="fs-error" id="fsError"></div>
+    <div class="fs-loading" id="fsLoading"><div class="fs-spinner"></div><span>Suche läuft…</span></div>
+    <div class="fs-empty" id="fsEmpty">Keine Treffer. Andere Branche oder Kanton versuchen.</div>
+    <div class="fs-grid" id="fsGrid"></div>
+    <div class="fs-hint" id="fsHint">Wähle eine <span>Branche</span> aus, dann klicke <span>Suchen</span>.</div>
+    <div class="fs-pagination" id="fsPagination"></div>
+</div>
+
+<script>
+(function(){
+
+const BRANCHEN = [
+
+    {
+        label:'Gastronomie',
+        icon:'🍽️',
+        keys:['Restaurant','Gastro','Café','Bar','Bäckerei','Bistro','Pizzeria','Catering','Take Away','Food']
+    },
+
+    {
+        label:'Informatik / IT',
+        icon:'💻',
+        keys:['Informatik','Software','IT','Digital','Tech','Systems','Solutions','Data','Cloud','Web','Cyber','Hosting','Netzwerk']
+    },
+
+    {
+        label:'Bau & Handwerk',
+        icon:'🏗️',
+        keys:['Bau','Holzbau','Sanitär','Elektro','Maler','Dach','Gipser','Schreiner','Zimmermann','Tiefbau','Maurer']
+    },
+
+    {
+        label:'Handel & Retail',
+        icon:'🛒',
+        keys:['Handel','Markt','Import','Export','Trading','Vertrieb','Detailhandel','Shop','Store']
+    },
+
+    {
+        label:'Gesundheit',
+        icon:'🏥',
+        keys:['Arzt','Praxis','Klinik','Spital','Pflege','Therapie','Dental','Apotheke','Physio','Med']
+    },
+
+    {
+        label:'Finanzen',
+        icon:'💰',
+        keys:['Bank','Finanz','Invest','Treuhand','Revisions','Buchhaltung','Asset','Kapital','Versicherung']
+    },
+
+    {
+        label:'Immobilien',
+        icon:'🏠',
+        keys:['Immobilien','Liegenschaften','Real Estate','Wohnen','Hausverwaltung','Makler']
+    },
+
+    {
+        label:'Transport',
+        icon:'🚛',
+        keys:['Transport','Logistik','Spedition','Taxi','Cargo','Kurier','Umzug','Bus','Delivery']
+    },
+
+    {
+        label:'Bildung',
+        icon:'🎓',
+        keys:['Schule','Bildung','Akademie','Institut','Ausbildung','Kurse','Training','Lern']
+    },
+
+    {
+        label:'Marketing',
+        icon:'📢',
+        keys:['Marketing','Werbung','Media','Agentur','Kommunikation','PR','Design','Grafik','Social Media']
+    },
+
+    {
+        label:'Industrie',
+        icon:'🏭',
+        keys:['Industrie','Produktion','Fertigung','Maschinenbau','Mechanical','Automation','Metall']
+    },
+
+    {
+        label:'Reinigung',
+        icon:'🧹',
+        keys:['Reinigung','Cleaning','Gebäudereinigung','Unterhalt','Hygiene','Facility']
+    },
+
+    {
+        label:'Rechtsberatung',
+        icon:'⚖️',
+        keys:['Anwalt','Rechts','Legal','Kanzlei','Notar','Advokat']
+    },
+
+    {
+        label:'Tourismus',
+        icon:'✈️',
+        keys:['Hotel','Tourismus','Reise','Travel','Hostel','Resort','Pension','Ferien']
+    },
+
+    {
+        label:'Energie',
+        icon:'⚡',
+        keys:['Energie','Solar','Strom','Wärme','Gas','Heizung','Photovoltaik','Elektrotechnik']
+    },
+
+    {
+        label:'Landwirtschaft',
+        icon:'🌾',
+        keys:['Landwirtschaft','Bauernhof','Agrar','Gärtnerei','Forst']
+    },
+
+    {
+        label:'Automobil',
+        icon:'🚗',
+        keys:['Garage','Auto','Automobil','Car','KFZ','Fahrzeug','Tuning','Motors']
+    },
+
+    {
+        label:'Coiffeur & Beauty',
+        icon:'💇',
+        keys:['Coiffeur','Beauty','Kosmetik','Nails','Hair','Salon','Spa']
+    },
+
+    {
+        label:'Fitness & Sport',
+        icon:'🏋️',
+        keys:['Fitness','Gym','Sport','Personal Training','Crossfit','Wellness']
+    },
+
+    {
+        label:'Security',
+        icon:'🛡️',
+        keys:['Security','Sicherheit','Bewachung','Alarm','Surveillance','Guard']
+    },
+
+    {
+        label:'Telekommunikation',
+        icon:'📡',
+        keys:['Telecom','Telefon','Internet','Mobilfunk','ISP','Fiber','Netcom']
+    },
+
+    {
+        label:'Medien & Film',
+        icon:'🎬',
+        keys:['Film','Video','Produktion','Studio','Media','Streaming','Photography']
+    },
+
+    {
+        label:'Musik',
+        icon:'🎵',
+        keys:['Musik','Music','Studio','Label','DJ','Audio']
+    },
+
+    {
+        label:'Event & Veranstaltung',
+        icon:'🎉',
+        keys:['Event','Veranstaltung','Festival','Booking','Concert','Show']
+    },
+
+    {
+        label:'Mode & Kleidung',
+        icon:'👕',
+        keys:['Mode','Fashion','Clothing','Boutique','Kleider','Textil']
+    },
+
+    {
+        label:'Möbel & Einrichtung',
+        icon:'🛋️',
+        keys:['Möbel','Interior','Einrichtung','Küche','Wohnstudio']
+    },
+
+    {
+        label:'Tier & Veterinär',
+        icon:'🐾',
+        keys:['Tierarzt','Veterinär','Pet','Hund','Katze','Zoo']
+    },
+
+    {
+        label:'Chemie & Pharma',
+        icon:'🧪',
+        keys:['Pharma','Chemie','Labor','Biotech','Medical','Science']
+    },
+
+    {
+        label:'Elektronik',
+        icon:'🔌',
+        keys:['Elektronik','Electronic','PCB','Hardware','Microtech']
+    },
+
+    {
+        label:'Personalvermittlung',
+        icon:'👔',
+        keys:['Recruiting','Personal','HR','Jobs','Stellenvermittlung']
+    },
+
+    {
+        label:'Versicherung',
+        icon:'🧾',
+        keys:['Versicherung','Insurance','Assurance']
+    },
+
+    {
+        label:'Architektur',
+        icon:'📐',
+        keys:['Architektur','Architect','Planung','Bauplanung']
+    },
+
+    {
+        label:'Umwelt & Recycling',
+        icon:'♻️',
+        keys:['Recycling','Umwelt','Entsorgung','Waste','Eco']
+    },
+
+        {
+    label:'Gaming',
+    icon:'🎮',
+    keys:['Gaming','Games','Esports','Streamer','Game Studio']
+},
+
+{
+    label:'Blockchain & Crypto',
+    icon:'🪙',
+    keys:['Blockchain','Crypto','Bitcoin','Ethereum','Web3','NFT']
+},
+
+{
+    label:'KI & AI',
+    icon:'🤖',
+    keys:['AI','KI','Artificial Intelligence','Machine Learning','Neural','Automation']
+},
+
+{
+    label:'Drohnen',
+    icon:'🚁',
+    keys:['Drone','Drohne','UAV','Aerial']
+},
+
+{
+    label:'Luftfahrt',
+    icon:'🛩️',
+    keys:['Aviation','Air','Flight','Airport','Pilot']
+},
+
+{
+    label:'Schifffahrt',
+    icon:'🚢',
+    keys:['Marine','Ship','Shipping','Boat','Yacht']
+},
+
+{
+    label:'Bergbau',
+    icon:'⛏️',
+    keys:['Mining','Mine','Rohstoffe','Extraction']
+},
+
+{
+    label:'Goldschmied & Schmuck',
+    icon:'💎',
+    keys:['Jewelry','Schmuck','Goldschmied','Uhren','Luxury']
+},
+
+{
+    label:'Uhren',
+    icon:'⌚',
+    keys:['Watch','Uhr','Horlogerie','Swiss Watch']
+},
+
+{
+    label:'Druck & Print',
+    icon:'🖨️',
+    keys:['Print','Druck','Copy','Werbetechnik','Beschriftung']
+},
+
+{
+    label:'Messebau',
+    icon:'🏢',
+    keys:['Messebau','Exhibition','Standbau']
+},
+
+{
+    label:'Fotografie',
+    icon:'📸',
+    keys:['Fotografie','Photography','Photo','Fotostudio']
+},
+
+{
+    label:'Videoproduktion',
+    icon:'🎥',
+    keys:['Video','Videoproduktion','Filmproduktion','Cinematography']
+},
+
+{
+    label:'Tattoo',
+    icon:'🖋️',
+    keys:['Tattoo','Ink','Tattoo Studio']
+},
+
+{
+    label:'Cannabis / CBD',
+    icon:'🌿',
+    keys:['CBD','Cannabis','Hemp']
+},
+
+{
+    label:'E-Zigaretten / Vape',
+    icon:'💨',
+    keys:['Vape','E-Zigarette','Liquid']
+},
+
+{
+    label:'Brauerei & Getränke',
+    icon:'🍺',
+    keys:['Brauerei','Beer','Getränke','Drinks','Beverage']
+},
+
+{
+    label:'Bäckerei & Konditorei',
+    icon:'🥐',
+    keys:['Bäckerei','Konditorei','Confiserie','Bakery']
+},
+
+{
+    label:'Metallbau',
+    icon:'🔩',
+    keys:['Metallbau','Stahlbau','Metal','Steel']
+},
+
+{
+    label:'Schlosserei',
+    icon:'🔧',
+    keys:['Schlosserei','Schweiss','Welding','Mechanic']
+},
+
+{
+    label:'Elektriker',
+    icon:'💡',
+    keys:['Elektriker','Elektroinstallationen','Electric']
+},
+
+{
+    label:'Sanitär & Heizung',
+    icon:'🚿',
+    keys:['Sanitär','Heizung','HVAC','Klima']
+},
+
+{
+    label:'Solar & Photovoltaik',
+    icon:'☀️',
+    keys:['Solar','Photovoltaik','PV','Solartechnik']
+},
+
+{
+    label:'Kälte & Klima',
+    icon:'❄️',
+    keys:['Klima','Cooling','Kälte','Refrigeration']
+},
+
+{
+    label:'Ingenieurbüro',
+    icon:'🧠',
+    keys:['Ingenieur','Engineering','Consulting']
+},
+
+{
+    label:'Beratung',
+    icon:'📋',
+    keys:['Consulting','Beratung','Advisory']
+},
+
+{
+    label:'Treuhand',
+    icon:'📊',
+    keys:['Treuhand','Accounting','Audit']
+},
+
+{
+    label:'Callcenter',
+    icon:'📞',
+    keys:['Callcenter','Support','Customer Service']
+},
+
+{
+    label:'Pflegeheim',
+    icon:'🧓',
+    keys:['Pflegeheim','Senioren','Altersheim']
+},
+
+{
+    label:'Kinderbetreuung',
+    icon:'🧸',
+    keys:['Kita','Kinderbetreuung','Daycare']
+},
+
+{
+    label:'Kirche & Religion',
+    icon:'⛪',
+    keys:['Kirche','Religious','Mission']
+},
+
+{
+    label:'Stiftung & Verein',
+    icon:'🤝',
+    keys:['Stiftung','Verein','Association','Foundation']
+},
+
+{
+    label:'Öffentliche Verwaltung',
+    icon:'🏛️',
+    keys:['Gemeinde','Verwaltung','Public','Kanton']
+},
+
+{
+    label:'Polizei & Rettung',
+    icon:'🚓',
+    keys:['Police','Polizei','Rescue','Feuerwehr']
+},
+
+{
+    label:'Feuerwehr',
+    icon:'🚒',
+    keys:['Feuerwehr','Fire','Brand']
+},
+
+{
+    label:'Bestattung',
+    icon:'⚰️',
+    keys:['Bestattung','Funeral']
+},
+
+{
+    label:'Dating & Social',
+    icon:'❤️',
+    keys:['Dating','Social','Matchmaking']
+},
+
+{
+    label:'Streaming & Creator',
+    icon:'📺',
+    keys:['Streamer','Streaming','Creator','Content']
+},
+
+{
+    label:'3D Druck',
+    icon:'🖨️',
+    keys:['3D','3D Print','Additive']
+},
+
+{
+    label:'Robotik',
+    icon:'🦾',
+    keys:['Robotik','Robotics','Automation']
+},
+
+{
+    label:'Nanotechnologie',
+    icon:'⚛️',
+    keys:['Nano','Nanotech']
+},
+
+{
+    label:'Raumfahrt',
+    icon:'🚀',
+    keys:['Space','Aerospace','Rocket']
+},
+
+{
+    label:'Biotechnologie',
+    icon:'🧬',
+    keys:['Biotech','Biologie','Genetics']
+},
+
+{
+    label:'Forensik',
+    icon:'🕵️',
+    keys:['Forensic','Forensik','Investigation']
+},
+
+{
+    label:'Cybersecurity',
+    icon:'🔐',
+    keys:['Cybersecurity','Security','Pentest','SOC','Hacking']
+}
+    
+
+];
+
+const PER_PAGE = 8;
+
+let selected = [];
+let allResults = [];
+
+const pillRow = document.getElementById('fsBranchePills');
+
+BRANCHEN.forEach(branche => {
+
+    const pill = document.createElement('div');
+
+    pill.className = 'fs-branche-pill';
+
+    pill.innerHTML = `
+        <span>${branche.icon}</span>
+        ${branche.label}
+    `;
+
+    pill.onclick = () => {
+
+        pill.classList.toggle('selected');
+
+        const exists = selected.find(
+            b => b.label === branche.label
+        );
+
+        if(exists){
+
+            selected = selected.filter(
+                b => b.label !== branche.label
+            );
+
+        } else {
+
+            selected.push(branche);
+        }
+    };
+
+    pillRow.appendChild(pill);
+});
+
+
+window.fsSearch = async function(page = 1){
+
+    if(selected.length === 0){
+
+        fsShowError('Bitte zuerst eine Branche auswählen.');
+        return;
+    }
+
+    fsClear();
+
+    document.getElementById('fsLoading').style.display = 'flex';
+
+    const canton = document.getElementById('fsCanton').value.trim();
+
+    const extra =
+        document.getElementById('fsQuery')
+        .value
+        .trim();
+
+    let searchTerms = [];
+
+if(extra){
+
+    searchTerms = [extra];
+
+} else {
+
+    selected.forEach(branche => {
+
+        searchTerms.push(...branche.keys);
+
+    });
+}
+
+    try {
+
+        let merged = [];
+        let seen = new Set();
+
+        for(const term of searchTerms){
+
+            // WICHTIG:
+            // Suchbegriff MIT Kanton erweitern
+            // statt kaputten Zefix-Filter benutzen
+
+            const searchName = canton
+                ? `${term} ${canton}`
+                : term;
+
+            const body = {
+
+                name: searchName,
+
+                activeOnly: true,
+
+                languageKey: 'de',
+
+                maxEntries: 40
             };
 
+            const res = await fetch(
+                'https://www.zefix.ch/ZefixREST/api/v1/firm/search',
+                {
+                    method: 'POST',
 
+                    headers: {
+                        'Content-Type':'application/json',
+                        'Accept':'application/json'
+                    },
 
-
-            async function renderPage(page){
-
-                const grid = document.getElementById('fsGrid');
-
-                grid.innerHTML = '';
-
-                const start = (page - 1) * PER_PAGE;
-
-                const items = allResults.slice(start, start + PER_PAGE);
-
-                for(const [index, firm] of items.entries()){
-
-                    const card = await createCard(firm, index);
-
-                    grid.appendChild(card);
+                    body: JSON.stringify(body)
                 }
+            );
 
-                document.getElementById('fsResultCount').innerHTML = `
-                    <span class="fs-count">${allResults.length}</span>
-                    Firmen gefunden
-                `;
+            const data = await res.json();
 
-                renderPagination(page);
-            }
+            const list = Array.isArray(data)
+                ? data
+                : (data.list || []);
 
-            async function createCard(firm, index){
+            // KEIN CLIENT FILTER MEHR !!!
+            // Zefix macht das intern
 
-                const card = document.createElement('div');
+            list.forEach(firm => {
 
-                card.className = 'fs-card';
+                const uid =
+                    firm.uid ||
+                    firm.name ||
+                    Math.random();
 
-                const canton =
-                firm.canton ||
-                firm.cantonAbbreviation ||
-                'Schweiz';
+                if(!seen.has(uid)){
 
-                // Google Maps Suchquery
-                const mapsQuery = `
-                    ${firm.name}
-                    ${canton}
-                    Schweiz
-                `
-                .replace(/\s+/g, ' ')
-                .trim();
+                    seen.add(uid);
 
-                const mapsUrl =
-                    `https://www.google.com/maps/search/${encodeURIComponent(mapsQuery)}`;
-
-                card.innerHTML = `
-
-                    <div class="fs-card-header">
-
-                        <div class="fs-card-icon">
-                            ${selected[0]?.icon || '🏢'}
-                        </div>
-
-                        <div class="fs-card-meta">
-
-                            <div class="fs-card-name">
-                                ${escapeHtml(firm.name || 'Unbekannt')}
-                            </div>
-
-                            <div class="fs-card-sub">
-                                ${escapeHtml(canton)}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="fs-card-body" style="display:block;">
-
-                        <div class="fs-dg">
-
-                            ${buildItem('UID', firm.uid)}
-                            ${buildItem('CH-ID', firm.chid)}
-                            ${buildItem('Kanton', canton)}
-
-                        </div>
-
-                        <div class="fs-addr-block">
-
-                            <div class="fs-addr-text">
-
-                                <span class="fs-addr-line1">
-                                    Adresse über Google Maps suchen
-                                </span>
-
-                                <span class="fs-addr-line2">
-                                    ${escapeHtml(mapsQuery)}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="fs-actions">
-
-                            <a class="fs-action-link"
-                            href="${mapsUrl}"
-                            target="_blank">
-
-                                Google Maps öffnen
-
-                            </a>
-
-                            <span class="fs-action-link"
-                                onclick="navigator.clipboard.writeText('${escapeHtml(mapsQuery)}')">
-
-                                Suche kopieren
-
-                            </span>
-
-                        </div>
-
-                    </div>
-                `;
-
-                return card;
-            }
-
-            function buildItem(label, value){
-
-                if(!value) return '';
-
-                return `
-                    <div class="fs-dg-item">
-
-                        <span class="fs-dg-label">
-                            ${escapeHtml(label)}
-                        </span>
-
-                        <span class="fs-dg-val">
-                            ${escapeHtml(value)}
-                        </span>
-
-                    </div>
-                `;
-            }
-
-            function renderPagination(current){
-
-                const pg = document.getElementById('fsPagination');
-
-                pg.innerHTML = '';
-
-                const totalPages = Math.ceil(allResults.length / PER_PAGE);
-
-                if(totalPages <= 1) return;
-
-                for(let i = 1; i <= totalPages; i++){
-
-                    const btn = document.createElement('button');
-
-                    btn.className = 'fs-page-btn';
-
-                    if(i === current){
-                        btn.classList.add('active');
-                    }
-
-                    btn.textContent = i;
-
-                    btn.onclick = () => renderPage(i);
-
-                    pg.appendChild(btn);
-                }
-            }
-
-            function fsClear(){
-
-                document.getElementById('fsLoading').style.display = 'none';
-
-                document.getElementById('fsError').style.display = 'none';
-
-                document.getElementById('fsEmpty').style.display = 'none';
-
-                document.getElementById('fsGrid').innerHTML = '';
-
-                document.getElementById('fsPagination').innerHTML = '';
-
-                document.getElementById('fsResultCount').innerHTML = '';
-            }
-
-            function fsShowError(msg){
-
-                fsClear();
-
-                const err = document.getElementById('fsError');
-
-                err.style.display = 'block';
-
-                err.textContent = msg;
-            }
-
-            function escapeHtml(str){
-
-                return String(str || '')
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
-            }
-
-            document
-            .getElementById('fsQuery')
-            .addEventListener('keydown', e => {
-
-                if(e.key === 'Enter'){
-
-                    fsSearch(1);
+                    merged.push(firm);
                 }
             });
+        }
 
-            })();
-            </script>
+        // Doppelte Firmen entfernen
+        allResults = merged.filter((firm, index, self) =>
+
+            index === self.findIndex(f =>
+                (f.uid || f.name) ===
+                (firm.uid || firm.name)
+            )
+        );
+
+        document.getElementById('fsLoading').style.display = 'none';
+
+        if(allResults.length === 0){
+
+            document.getElementById('fsEmpty').style.display = 'block';
+
+            return;
+        }
+
+        await renderPage(page);
+
+    } catch(err){
+
+        console.error(err);
+
+        fsShowError('Fehler beim Laden der Firmendaten.');
+    }
+};
+
+
+
+async function renderPage(page){
+
+    const grid = document.getElementById('fsGrid');
+
+    grid.innerHTML = '';
+
+    const start = (page - 1) * PER_PAGE;
+
+    const items = allResults.slice(start, start + PER_PAGE);
+
+    for(const [index, firm] of items.entries()){
+
+        const card = await createCard(firm, index);
+
+        grid.appendChild(card);
+    }
+
+    document.getElementById('fsResultCount').innerHTML = `
+        <span class="fs-count">${allResults.length}</span>
+        Firmen gefunden
+    `;
+
+    renderPagination(page);
+}
+
+async function createCard(firm, index){
+
+    const card = document.createElement('div');
+
+    card.className = 'fs-card';
+
+    const canton =
+    firm.canton ||
+    firm.cantonAbbreviation ||
+    'Schweiz';
+
+    // Google Maps Suchquery
+    const mapsQuery = `
+        ${firm.name}
+        ${canton}
+        Schweiz
+    `
+    .replace(/\s+/g, ' ')
+    .trim();
+
+    const mapsUrl =
+        `https://www.google.com/maps/search/${encodeURIComponent(mapsQuery)}`;
+
+    card.innerHTML = `
+
+        <div class="fs-card-header">
+
+            <div class="fs-card-icon">
+                ${selected[0]?.icon || '🏢'}
+            </div>
+
+            <div class="fs-card-meta">
+
+                <div class="fs-card-name">
+                    ${escapeHtml(firm.name || 'Unbekannt')}
+                </div>
+
+                <div class="fs-card-sub">
+                    ${escapeHtml(canton)}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="fs-card-body" style="display:block;">
+
+            <div class="fs-dg">
+
+                ${buildItem('UID', firm.uid)}
+                ${buildItem('CH-ID', firm.chid)}
+                ${buildItem('Kanton', canton)}
+
+            </div>
+
+            <div class="fs-addr-block">
+
+                <div class="fs-addr-text">
+
+                    <span class="fs-addr-line1">
+                        Adresse über Google Maps suchen
+                    </span>
+
+                    <span class="fs-addr-line2">
+                        ${escapeHtml(mapsQuery)}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="fs-actions">
+
+                <a class="fs-action-link"
+                   href="${mapsUrl}"
+                   target="_blank">
+
+                    Google Maps öffnen
+
+                </a>
+
+                <span class="fs-action-link"
+                      onclick="navigator.clipboard.writeText('${escapeHtml(mapsQuery)}')">
+
+                    Suche kopieren
+
+                </span>
+
+            </div>
+
+        </div>
+    `;
+
+    return card;
+}
+
+function buildItem(label, value){
+
+    if(!value) return '';
+
+    return `
+        <div class="fs-dg-item">
+
+            <span class="fs-dg-label">
+                ${escapeHtml(label)}
+            </span>
+
+            <span class="fs-dg-val">
+                ${escapeHtml(value)}
+            </span>
+
+        </div>
+    `;
+}
+
+function renderPagination(current){
+
+    const pg = document.getElementById('fsPagination');
+
+    pg.innerHTML = '';
+
+    const totalPages = Math.ceil(allResults.length / PER_PAGE);
+
+    if(totalPages <= 1) return;
+
+    for(let i = 1; i <= totalPages; i++){
+
+        const btn = document.createElement('button');
+
+        btn.className = 'fs-page-btn';
+
+        if(i === current){
+            btn.classList.add('active');
+        }
+
+        btn.textContent = i;
+
+        btn.onclick = () => renderPage(i);
+
+        pg.appendChild(btn);
+    }
+}
+
+function fsClear(){
+
+    document.getElementById('fsLoading').style.display = 'none';
+
+    document.getElementById('fsError').style.display = 'none';
+
+    document.getElementById('fsEmpty').style.display = 'none';
+
+    document.getElementById('fsGrid').innerHTML = '';
+
+    document.getElementById('fsPagination').innerHTML = '';
+
+    document.getElementById('fsResultCount').innerHTML = '';
+}
+
+function fsShowError(msg){
+
+    fsClear();
+
+    const err = document.getElementById('fsError');
+
+    err.style.display = 'block';
+
+    err.textContent = msg;
+}
+
+function escapeHtml(str){
+
+    return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+document
+.getElementById('fsQuery')
+.addEventListener('keydown', e => {
+
+    if(e.key === 'Enter'){
+
+        fsSearch(1);
+    }
+});
+
+})();
+</script>
                 
 
 
             </div>
         </div>
 
-<!-- ===== TAB  SPOTIFY TESTING ===== -->
+        <!-- ===== TAB 2 SPOTIFY TESTING ===== -->
 
         <div class="tab-slide">
             <div class="lernen-box">
@@ -1113,7 +1338,9 @@
             </div>
         </div>
 
-<!-- ===== TAB: HTML ===== -->
+
+
+        <!-- ===== TAB: HTML ===== -->
 
         <div class="tab-slide">
             <div class="lernen-box">
@@ -1221,8 +1448,10 @@
             </div>
         </div>
 
-<!-- ===== TAB: CSS ===== -->
-        
+
+                <!-- ===== TAB: CSS ===== -->
+
+                
         <div class="tab-slide">
             <div class="lernen-box">
                 <h2 class="lernen-title">CSS SHEET</h2>
@@ -1314,122 +1543,123 @@
         </div>
         </div>
 
+
  <!-- ===== TAB: JAVASCRIPT ===== -->
 
-        <div class="tab-slide">
-            <div class="lernen-box">
-                <h2 class="lernen-title">JAVASCRIPT SHEET</h2>
+<div class="tab-slide">
+    <div class="lernen-box">
+        <h2 class="lernen-title">JAVASCRIPT SHEET</h2>
 
-                <!-- Intro Box -->
-                <div class="lernen-box glass-card" data-aos="fade-up">
-                    <div class="lernen-row">
-                        <div class="lernen-image">
-                            <img src="images/img_js.png" alt="JS Logo">
-                        </div>
-
-                        <div class="lernen-text">
-                            <h2 class="lernen-title lernen-title-highlight">JavaScript</h2>
-                            <p class="lernen-description">
-                                Was wäre also eine Fleischhülle ohne Reaktionen und Empfinden?
-                                JavaScript bringt die Webseite zum Leben. Es sorgt für Interaktivität
-                                und Reaktionen, beispielsweise bei Klicks oder Animationen.
-                                Ohne JS wäre eine Webseite statisch.
-                            </p>
-                        </div>
-                    </div>
+        <!-- Intro Box -->
+        <div class="lernen-box glass-card" data-aos="fade-up">
+            <div class="lernen-row">
+                <div class="lernen-image">
+                    <img src="images/img_js.png" alt="JS Logo">
                 </div>
 
-                <!-- Cheatsheet Grid -->
-                <div class="lernen-cheatsheet-grid">
-
-                    <!-- VARIABLEN -->
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>VARIABLEN</h2>
-                        <ul>
-                            <li><b>let</b> – veränderbare Variable</li>
-                            <li><b>const</b> – konstante Variable</li>
-                            <li><b>var</b> – alte Schreibweise</li>
-                        </ul>
-                    </div>
-
-                    <!-- DATENTYPEN -->
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>DATENTYPEN</h2>
-                        <ul>
-                            <li><b>string</b> – Text</li>
-                            <li><b>number</b> – Zahl</li>
-                            <li><b>boolean</b> – true / false</li>
-                            <li><b>array</b> – Liste</li>
-                            <li><b>object</b> – Objekt</li>
-                        </ul>
-                    </div>
-
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>FUNKTIONEN</h2>
-                        <ul>
-                            <li><b>function</b> – Funktion erstellen</li>
-                            <li><b>()</b> – Parameter</li>
-                            <li><b>return</b> – Wert zurückgeben</li>
-                            <li><b>=></b> – Arrow Function</li>
-                        </ul>
-                    </div>
-
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>EVENTS</h2>
-                        <ul>
-                            <li><b>onclick</b> – Klick</li>
-                            <li><b>addEventListener</b> – Event hinzufügen</li>
-                            <li><b>mouseover</b> – Maus darüber</li>
-                            <li><b>keydown</b> – Taste gedrückt</li>
-                        </ul>
-                    </div>
-
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>DOM</h2>
-                        <ul>
-                            <li><b>document.getElementById()</b></li>
-                            <li><b>querySelector()</b></li>
-                            <li><b>innerHTML</b> – Inhalt ändern</li>
-                            <li><b>style</b> – CSS ändern</li>
-                        </ul>
-                    </div>
-
-
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>BEDINGUNGEN</h2>
-                        <ul>
-                            <li><b>if</b> – Bedingung</li>
-                            <li><b>else</b> – sonst</li>
-                            <li><b>switch</b> – mehrere Fälle</li>
-                        </ul>
-                    </div>
-
-
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>SCHLEIFEN</h2>
-                        <ul>
-                            <li><b>for</b> – Schleife</li>
-                            <li><b>while</b> – solange</li>
-                            <li><b>forEach</b> – Array durchlaufen</li>
-                        </ul>
-                    </div>
-
-                    <div class="lernen-cheat-card glass-card">
-                        <h2>ARRAYS</h2>
-                        <ul>
-                            <li><b>push()</b> – hinzufügen</li>
-                            <li><b>pop()</b> – entfernen</li>
-                            <li><b>length</b> – Länge</li>
-                            <li><b>map()</b> – verändern</li>
-                        </ul>
-                    </div>
-
+                <div class="lernen-text">
+                    <h2 class="lernen-title lernen-title-highlight">JavaScript</h2>
+                    <p class="lernen-description">
+                        Was wäre also eine Fleischhülle ohne Reaktionen und Empfinden?
+                        JavaScript bringt die Webseite zum Leben. Es sorgt für Interaktivität
+                        und Reaktionen, beispielsweise bei Klicks oder Animationen.
+                        Ohne JS wäre eine Webseite statisch.
+                    </p>
                 </div>
             </div>
         </div>
 
-<!-- ===== TAB 3 CALCULATOR Paywall-Spass ===== -->
+        <!-- Cheatsheet Grid -->
+        <div class="lernen-cheatsheet-grid">
 
+            <!-- VARIABLEN -->
+            <div class="lernen-cheat-card glass-card">
+                <h2>VARIABLEN</h2>
+                <ul>
+                    <li><b>let</b> – veränderbare Variable</li>
+                    <li><b>const</b> – konstante Variable</li>
+                    <li><b>var</b> – alte Schreibweise</li>
+                </ul>
+            </div>
+
+            <!-- DATENTYPEN -->
+            <div class="lernen-cheat-card glass-card">
+                <h2>DATENTYPEN</h2>
+                <ul>
+                    <li><b>string</b> – Text</li>
+                    <li><b>number</b> – Zahl</li>
+                    <li><b>boolean</b> – true / false</li>
+                    <li><b>array</b> – Liste</li>
+                    <li><b>object</b> – Objekt</li>
+                </ul>
+            </div>
+
+            <div class="lernen-cheat-card glass-card">
+                <h2>FUNKTIONEN</h2>
+                <ul>
+                    <li><b>function</b> – Funktion erstellen</li>
+                    <li><b>()</b> – Parameter</li>
+                    <li><b>return</b> – Wert zurückgeben</li>
+                    <li><b>=></b> – Arrow Function</li>
+                </ul>
+            </div>
+
+            <div class="lernen-cheat-card glass-card">
+                <h2>EVENTS</h2>
+                <ul>
+                    <li><b>onclick</b> – Klick</li>
+                    <li><b>addEventListener</b> – Event hinzufügen</li>
+                    <li><b>mouseover</b> – Maus darüber</li>
+                    <li><b>keydown</b> – Taste gedrückt</li>
+                </ul>
+            </div>
+
+            <div class="lernen-cheat-card glass-card">
+                <h2>DOM</h2>
+                <ul>
+                    <li><b>document.getElementById()</b></li>
+                    <li><b>querySelector()</b></li>
+                    <li><b>innerHTML</b> – Inhalt ändern</li>
+                    <li><b>style</b> – CSS ändern</li>
+                </ul>
+            </div>
+
+
+            <div class="lernen-cheat-card glass-card">
+                <h2>BEDINGUNGEN</h2>
+                <ul>
+                    <li><b>if</b> – Bedingung</li>
+                    <li><b>else</b> – sonst</li>
+                    <li><b>switch</b> – mehrere Fälle</li>
+                </ul>
+            </div>
+
+
+            <div class="lernen-cheat-card glass-card">
+                <h2>SCHLEIFEN</h2>
+                <ul>
+                    <li><b>for</b> – Schleife</li>
+                    <li><b>while</b> – solange</li>
+                    <li><b>forEach</b> – Array durchlaufen</li>
+                </ul>
+            </div>
+
+            <div class="lernen-cheat-card glass-card">
+                <h2>ARRAYS</h2>
+                <ul>
+                    <li><b>push()</b> – hinzufügen</li>
+                    <li><b>pop()</b> – entfernen</li>
+                    <li><b>length</b> – Länge</li>
+                    <li><b>map()</b> – verändern</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+        <!-- ===== TAB 3 CALCULATOR Paywall-Spass ===== -->
         <div class="tab-slide">
             <div class="lernen-box">
                 <div class="lernen-text">
@@ -1492,8 +1722,7 @@
             </div>
         </div>
 
-<!-- ===== TAB 4 – SUBNET CALCULATOR ===== -->
-
+        <!-- ===== TAB 4 – SUBNET CALCULATOR ===== -->
         <div class="tab-slide">
             <div class="lernen-box subnet-calc-wrapper">
         
@@ -1590,7 +1819,7 @@
             </div>
         </div>
 
-<!-- TAB 5 -->
+        <!-- TAB 5 -->
 
         <div class="tab-slide">
             <div class="lernen-box">
@@ -1598,7 +1827,7 @@
             </div>
         </div>
 
-<!-- TAB OSI -->
+        <!-- TAB OSI -->
 
         <div class="tab-slide">
             <div class="lernen-box">
@@ -1696,8 +1925,8 @@
             </div>
         </div>
 
- <!-- ===== TAB ETHERNET KABEL ===== -->
 
+        <!-- ===== TAB ETHERNET KABEL ===== -->
         <div class="tab-slide">
             <div class="lernen-box">
             <div class="ethernet-text">
@@ -1711,10 +1940,11 @@
         </div>
 
     </div>
-        </div>
-        </section>
+</div>
+</section>
 
-<!-- ===== SCRIPTS ===== -->
+
+    <!-- ===== SCRIPTS ===== -->
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
