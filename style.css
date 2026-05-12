@@ -1948,13 +1948,17 @@ nav::before {
 
 .fs-group-content {
     display: none;
+
     padding: 14px;
-    gap: 10px;
-    flex-wrap: wrap;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+    gap: 12px;
 }
 
 .fs-group.open .fs-group-content {
-    display: flex;
+    display: grid;
 }
 
 .fs-group-arrow {
@@ -1964,6 +1968,11 @@ nav::before {
     align-items: center;
     justify-content: center;
     transition: transform 0.28s ease;
+}
+
+.fs-branche-pill {
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .fs-group-arrow svg {
